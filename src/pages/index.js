@@ -1,8 +1,7 @@
 
 import '../globals.css'
 
-export default function Index() {
-    
+export default function IndexPage() {
     return (
       <div>Index page</div>
     )
