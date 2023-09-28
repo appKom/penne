@@ -5,7 +5,8 @@ export default async function handler(req, res) {
     try {
     const data = await fetch(fetchlink).then(res => res.json());
     if (data){
-        res.status(200).json({message: data});
+        
+        res.status(200).json({message: data.y5});
     } else (
         res.status(404).json( {error: `Data not found`})
     )
