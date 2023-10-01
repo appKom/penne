@@ -1,8 +1,8 @@
+import styles from "./Title.module.css";
+
 const Title = () => {
     return (
-        <div>
-            <h1>Søke om støtte</h1>
-        </div>
+        <h1 id={styles.header}>Søke om støtte</h1>
     );
 }
 
