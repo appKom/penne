@@ -53,6 +53,8 @@ export default function PerformanceDisplay ()  {
     width={9/10}
     boxShadow={3}
     
+    className='performance_display_container'
+    
     padding={3}
     borderRadius={4}
     margin={"0 auto"}
