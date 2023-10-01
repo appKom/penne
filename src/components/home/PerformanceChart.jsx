@@ -1,11 +1,13 @@
 import React from "react";
 import dynamic from 'next/dynamic';
+
+
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 
 export default function PerformanceChart(props) {
   const onlineColor = "#0d5474";
-  const osebxColor = "#111111";
+  const osebxColor = "#00ff00";
 
   function getFormattedArray(data, period) {
 
@@ -88,6 +90,7 @@ export default function PerformanceChart(props) {
       stroke: {
         colors: [onlineColor, osebxColor],
       },
+      background: "#FFFFFFF",
       chart: {
         type: 'line',
        
@@ -111,6 +114,7 @@ export default function PerformanceChart(props) {
       fill: {
         colors: [onlineColor, osebxColor],
         type: "fill",
+      
         gradient: {
         
           shadeIntensity: 1,

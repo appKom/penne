@@ -1,8 +1,6 @@
-import Stack from '@mui/material/Stack';
+
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-
-
 
 export default function PeriodBar(props) {
     const buttons = [
@@ -20,15 +18,20 @@ export default function PeriodBar(props) {
 
     display={'flex'}
     flexDirection={'row'}
-    justifyContent={'space-between'}
+    justifyContent={'space-around'}
     padding={
-        "20px"
+        "10px"
     }
+    className='period_bar_container'
     width={1 - "20px"}
     >
      
        {buttons.map((button) => 
-       <Button onClick={() => props.setPeriod(button[1])}>{button[0]}</Button>)}
+       <Button
+       key={button[1]}
+       className='period_button'
+        
+       onClick={() => props.setPeriod(button[1])}>{button[0]}</Button>)}
 
     </Box>
 }
