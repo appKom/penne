@@ -1,7 +1,9 @@
-
+import PerformanceDisplay from "@/components/home/PerformanceDisplay"
 export default function IndexPage() {
     return (
-      <div>Index page</div>
+      <div>
+       
+      </div>
     )
   }
   
