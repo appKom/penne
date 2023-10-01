@@ -5,6 +5,16 @@ import Box from '@mui/material/Box';
 
 
 export default function PeriodBar(props) {
+    const buttons = [
+        ["5Y", "y5"],
+        ["3Y", "y3"],
+        ["1Y", "y1"],
+        ["TY", "ty"],
+        ["6M", "m6"],
+        ["3M", "m3"],
+        ["1M", "m1"],
+        ["1W", "w1"]
+    ]
     return <Box
     maxWidth={700}
 
@@ -17,15 +27,8 @@ export default function PeriodBar(props) {
     width={1 - "20px"}
     >
      
-        <Button variant="outlined" onClick={() => {props.setPeriod("y5")}} >5Y</Button>
-        <Button variant="outlined" onClick={() => {props.setPeriod("y3")}} >3Y</Button>
-        <Button variant="outlined" onClick={() => {props.setPeriod("y1")}} >1Y</Button>
-      <Button variant="outlined" onClick={() => {props.setPeriod("ty")}} >TY</Button>
-      <Button variant="outlined" onClick={() => {props.setPeriod("m6")}} >6M</Button>
-        <Button variant="outlined" onClick={() => {props.setPeriod("m3")}} >3M</Button>
-        <Button variant="outlined" onClick={() => {props.setPeriod("m1")}} >1M</Button>
-        <Button variant="outlined" onClick={() => {props.setPeriod("w1")}}  >1W</Button>
-     
+       {buttons.map((button) => 
+       <Button onClick={() => props.setPeriod(button[1])}>{button[0]}</Button>)}
 
     </Box>
 }
