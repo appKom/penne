@@ -1,0 +1,22 @@
+#titel {
+    color: rgb(152, 29, 124);
+    font-family:  Arial, Helvetica, sans-serif ;
+    font-size: 22px;
+    text-align: center;
+}
+
+#titel2 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(38, 38, 69);
+    font-size: 40px;
+    text-align: center;
+    
+}
+
+.circleimage {
+    border-radius: 80%;
+    max-width: 80%;
+    
+    
+    
+}
