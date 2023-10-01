@@ -1,0 +1,22 @@
+/*
+Performancegraph
+*/
+
+:root {
+
+}
+
+.performance_display_container {
+
+}
+.period_button { 
+    border: .5px solid black;
+     margin: 3px;
+
+}
+
+.period_bar_container {
+        display: flex;
+        flex-wrap: wrap;
+}
+ 
