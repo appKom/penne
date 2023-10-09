@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import styles from './ScrollDownIcon.module.css';
 
 const ScrollDownIcon = () => {
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
 
     const handleScroll = () => {
-        if (window.scrollY > 550) {
-            setIsVisible(false);
-        } else {
+        if (window.scrollY > 80 && window.scrollY <= 500) {
             setIsVisible(true);
+        } else {
+            setIsVisible(false);
         }
     };
+    
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
