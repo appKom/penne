@@ -1,12 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-}
+
+    --onlineblue: #0d5474;
+    --onlinebluedark: #072f41;
+    --onlineyellow: #f9b759;
+  }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -17,11 +25,7 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: 'Roboto';
+  color: white;
+  background-color: #131620;
 }
