@@ -7,7 +7,6 @@ export default function SoknadPage() {
         <Title />
         <HowToApply />
       </div>
-      
     )
   }
   
