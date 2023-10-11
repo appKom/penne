@@ -15,8 +15,34 @@
 
 .circleimage {
     border-radius: 80%;
-    max-width: 80%;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
     
     
     
 }
+
+.memberName {
+    color: white;
+    font-size: 20px;
+    margin-left:20px;
+}
+
+.memberWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: fit-content;
+}
+
+.styremedlemmer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 110px;
+    flex-grow: 1;
+    justify-content: center;
+
+    }
