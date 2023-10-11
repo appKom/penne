@@ -164,7 +164,7 @@ export default function PerformanceChart(props) {
 
         y: {
           formatter: function (val) {
-            return val.toString().slice(0, 4) + "%";
+            return val != undefined ? val.toString().slice(0, 4) + "%" : "";
           },
 
         },
