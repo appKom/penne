@@ -1,12 +1,13 @@
 import React from "react";
 import dynamic from 'next/dynamic';
+import styles from './PerformanceChart.module.css';
 
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 
 export default function PerformanceChart(props) {
-  const onlineColor = "#0d5474";
+  const onlineColor = "#ffffff";
   const osebxColor = "#00ff00";
 
   function getFormattedArray(data, period) {
@@ -98,6 +99,8 @@ export default function PerformanceChart(props) {
         toolbar: {
           show: false
         },
+
+        foreColor: '#ffffff',
       },
       colors:  [onlineColor, osebxColor],
       dataLabels: {
@@ -135,12 +138,15 @@ export default function PerformanceChart(props) {
         
 
       },
+      
       xaxis: {
         type: 'datetime',
         labels: {
           format: 'dd MMM yyyy'
         },
         tickAmount: 6,
+
+        
         
         
         
@@ -149,11 +155,15 @@ export default function PerformanceChart(props) {
       legend: {
         position: 'top',
         horizontalAlign: 'left',
-        offsetX: 40
+        offsetX: 40,
+        
+
+        
+        
       },
       tooltip: {
         shared: true,
-      
+        theme: "dark",
         x: {
           format: 'dd MMM yyyy'
         },
@@ -164,6 +174,8 @@ export default function PerformanceChart(props) {
           },
 
         },
+
+      
         
       }
     }} series={[{ name: "OnlineFondet", data: getFormattedArray(props.data, props.period) }, {
