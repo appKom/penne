@@ -1,16 +1,22 @@
 import Link from "next/link"
 import styles from "./Navbar.module.css"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useScrollDirection } from 'react';
+import debounce from 'lodash';
+
+
 
 export const Navbar = ({img}) => {
     const [showNavbar, setShowNavbar] = useState(styles.navbar_box);
     const [lastScroll, setLastScroll] = useState(0);
 
+
     const controlNavbar = () => {
         if (typeof window !== 'undefined') { 
-          if (window.scrollY > lastScroll) { // if scroll down hide the navbar
+          console.log(window.scrollY)
+          if (lastScroll - window.scrollY < 0) { // if scroll down hide the navbar
             setShowNavbar(styles.hidden); 
-          } else { // if scroll up show the navbar
+          } else if (lastScroll - window.scrollY > 0) { // if scroll up show the navbar
             setShowNavbar(styles.navbar_box);  
           }
 
