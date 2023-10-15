@@ -6,7 +6,7 @@
 
 
 .period_button {
-    color: #ffffff;
-    background-color: #0B5374;
-    margin-top: 5px;
+    color: #ffffff !important;
+    background-color: #0B5374 !important;
+    margin-top: 5px !important;
 }
