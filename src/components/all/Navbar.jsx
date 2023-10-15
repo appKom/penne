@@ -38,7 +38,7 @@ export const Navbar = ({img, bekk}) => {
       <div className={showNavbar}>
         <nav className='navbar'>
             <div className={styles.navbar}>
-                <img src={img} alt="Logo" className={styles.logo}/>
+                <Link href={"/"}><img src={img} alt="Logo" className={styles.logo}/></Link>
                 <div className={styles.menu}>
                     <Link href={"/omoss"} className={styles.menuItem}>Om oss</Link>
                     <Link href={"/soknad"} className={styles.menuItem}>Søknader</Link>
