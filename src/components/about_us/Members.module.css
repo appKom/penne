@@ -1,0 +1,126 @@
+
+
+#titel2 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(47, 72, 117);
+    font-size: 40px;
+    text-align: center;
+    background-color: white;
+    
+}
+
+.circleimage {
+    border-radius: 80%;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.memberName {
+    color: rgb(89, 89, 89);
+    font-size: 20px;
+    margin-left:20px;
+}
+
+.memberWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: fit-content;
+}
+
+.styremedlemmer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    flex-grow: 1;
+    justify-content: center;
+    padding: 100px;
+    background-color: #f9f9f9;
+    font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+.accordion {
+    margin-bottom: 8px;
+    width: 100%;
+    border: 1px solid rgb(115, 115, 115);
+    position: relative;
+    color: #33426f;
+}
+
+.accordionHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+
+}
+
+.accordionContent {
+    padding: 8px 16px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    background-color: #EDF6FF;
+}
+
+.accordionContent div {
+    width: 50%;
+    padding: 10px;
+}
+
+
+.omFondet {
+    background: #0B5374;
+    height: auto;
+    color: white;
+    text-align: left;
+    text-align: justify;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.omFondet h1 {
+    font-size: 40px;
+    z-index: 2;
+    
+}
+
+.omFondet p {
+    font-size: 16px;
+    z-index: 2;
+    overflow: hidden;
+    
+}
+
+.omOssWrapper {
+    width: 50%;
+    position: relative;
+    padding: 50px;
+}
+
+
+
+.ossBilde {
+    object-fit: cover;
+    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+    height: 500px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    
+    
+}
+
+.tidligereMedlemmerWrapper {
+    width: 60%;
+    left: 20%;
+    position: relative;
+}
