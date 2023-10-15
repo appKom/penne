@@ -1,5 +1,5 @@
 import Link from "next/link"
-import styles from "./Navbar.module.css"
+import styles from "./navbar.module.css"
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 
