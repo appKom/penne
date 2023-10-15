@@ -51,7 +51,8 @@ export default function PerformanceDisplay ()  {
    
     maxWidth={700}
     width={9/10}
-    boxShadow={3}
+    border={""}
+
     
     className='performance_display_container'
     
