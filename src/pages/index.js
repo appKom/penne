@@ -13,7 +13,7 @@ export default function IndexPage() {
   
         <Navbar img={onlineLogo.src} />
 
-      <div className="relative mb-[500px] w-full">
+      <div id={style.splash} className="relative mb-[500px] w-full">
         <Splash img={rf.src}/>
       </div>
       <div className="sticky bottom-10" id={style.scroll}>
