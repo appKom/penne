@@ -1,14 +1,47 @@
+import Link from "next/link"
 import styles from "./Navbar.module.css"
+import React, { useState, useEffect } from 'react';
 
 export const Navbar = ({img}) => {
+    const [showNavbar, setShowNavbar] = useState(styles.navbar_box);
+    const [lastScroll, setLastScroll] = useState(0);
+
+    const controlNavbar = () => {
+        if (typeof window !== 'undefined') { 
+          if (window.scrollY > lastScroll) { // if scroll down hide the navbar
+            setShowNavbar(styles.hidden); 
+          } else { // if scroll up show the navbar
+            setShowNavbar(styles.navbar_box);  
+          }
+
+          // remember current page location to use in the next move
+      setLastScroll(window.scrollY); 
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+
+      // cleanup function
+      return () => {
+        window.removeEventListener('scroll', controlNavbar);
+      };
+    }
+  }, [lastScroll]);
+
     return(
-        <div className={styles.navbar}>
-            <img src={img} alt="Logo" className={styles.logo}/>
-            <div className={styles.menu}>
-                <p className={styles.menuItem}>Om oss</p>
-                <p className={styles.menuItem}>Søknader</p>
+      <div className={showNavbar}>
+        <nav className='navbar'>
+            <div className={styles.navbar}>
+                <img src={img} alt="Logo" className={styles.logo}/>
+                <div className={styles.menu}>
+                    <Link href={"/omoss"} className={styles.menuItem}>Om oss</Link>
+                    <Link href={"/soknad"} className={styles.menuItem}>Søknader</Link>
+                </div>
+                <div className={styles.spacer}></div>
             </div>
-            <div className={styles.spacer}></div>
-        </div>
+        </nav>
+      </div>
     )
 }

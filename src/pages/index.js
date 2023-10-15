@@ -10,10 +10,10 @@ import style from "./index.module.css"
 export default function IndexPage() {
   return (
     <div className="h-full flex flex-col justify-center items-center">
-      <div className="w-full h-20 mb-5 sticky top-0 z-20 bg-[#131620]">
+  
         <Navbar img={onlineLogo.src} />
-      </div>
-      <div className="relative mb-[500px] w-full" id={style.splash}>
+
+      <div className="relative mb-[500px] w-full">
         <Splash img={rf.src}/>
       </div>
       <div className="sticky bottom-10" id={style.scroll}>
