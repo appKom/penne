@@ -1,0 +1,15 @@
+@media only screen and (max-width: 600px) {
+    #overskrift {
+        display: block !important;
+
+    }
+    #splash,#scroll {
+        display: none;
+
+    }
+
+}
+
+#overskrift {
+    display: none;
+}
