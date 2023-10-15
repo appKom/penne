@@ -1,4 +1,12 @@
+.period_bar_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
 .period_button {
     color: #ffffff;
     background-color: #0B5374;
+    margin-top: 5px;
 }

@@ -22,7 +22,7 @@ export default function PeriodBar(props) {
     padding={
         "10px"
     }
-    className='period_bar_container'
+    className={styles.period_bar_container}
     width={1 - "20px"}
     >
      
