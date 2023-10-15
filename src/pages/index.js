@@ -5,6 +5,7 @@ import onlineLogo from "../../public/resources/Online_hvit.png";
 import { Splash } from "@/components/home/Splash";
 import { Navbar } from "@/components/all/Navbar";
 import ScrollDownIcon from "@/components/home/ScrollDownIcon";
+import style from "./index.module.css"
 
 export default function IndexPage() {
   return (
