@@ -2,6 +2,7 @@ import PerformanceDisplay from "@/components/home/PerformanceDisplay";
 import Footer from "@/components/all/Footer";
 import rf from "../../public/resources/realfagsbygget.png";
 import onlineLogo from "../../public/resources/Online_hvit.png";
+import bekkLogo from "../../public/resources/Bekk_navnetrekk_hvit.svg";
 import { Splash } from "@/components/home/Splash";
 import { Navbar } from "@/components/all/Navbar";
 import ScrollDownIcon from "@/components/home/ScrollDownIcon";
@@ -11,7 +12,7 @@ export default function IndexPage() {
   return (
     <div className="h-full flex flex-col justify-center items-center">
   
-        <Navbar img={onlineLogo.src} />
+        <Navbar img={onlineLogo.src} bekk={bekkLogo.src}/>
 
       <div id={style.splash} className="relative mb-[500px] w-full">
         <Splash img={rf.src}/>
