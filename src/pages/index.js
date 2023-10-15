@@ -4,7 +4,6 @@ import rf from "../../public/resources/realfagsbygget.png";
 import onlineLogo from "../../public/resources/Online_hvit.png";
 import { Splash } from "@/components/home/Splash";
 import { Navbar } from "@/components/all/Navbar";
-import ScrollDownIcon from "@/components/home/ScrollDownIcon";
 
 export default function IndexPage() {
   return (

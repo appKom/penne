@@ -30,7 +30,6 @@ export default function PeriodBar(props) {
        <Button
        key={button[1]}
        className={styles.period_button}
-        
        onClick={() => props.setPeriod(button[1])}>{button[0]}</Button>)}
 
     </Box>
