@@ -2,7 +2,7 @@ import Footer from "@/components/all/Footer";
 import onlineLogo from "../../public/resources/Online_hvit.png";
 
 import { Navbar } from "@/components/all/Navbar";
-import Title from "@/components/appliance/title";
+import Title from "@/components/appliance/Title";
 import { HorizontalLine } from "@/components/appliance/HorizontalLine";
 import SubTitle from "@/components/appliance/SubTitle";
 import { Paragraph } from "@/components/appliance/Paragraph";
