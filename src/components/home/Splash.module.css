@@ -14,10 +14,33 @@
     }
 }
 
-.imgFadeIn {
+/* Legg til disse stilene i din CSS-fil */
+.img-container {
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    max-width: 100%;
+  }
+  
+  .imgFadeIn {
     animation: fadeIn 1s ease-out forwards;
-}
+    width: 90%; /* Forhindrer at bildet strekker seg for bredt */
+    height: auto; 
+  }
+  
 
 .textSlideUp {
     animation: slideUp 1s ease-out forwards;
 }
+
+/* Legg til disse stilene i din CSS-fil */
+#tekst {
+    font-size: 150px;
+    color: white;
+    letter-spacing: 0.05em;
+    font-family: "Playfair Display SC";
+    position: absolute;
+  }
+  
+
+  
