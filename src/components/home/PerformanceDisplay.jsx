@@ -21,8 +21,6 @@ export default function PerformanceDisplay ()  {
             setError(data.error);
         } else if (data.message) {
             setPerformanceData(data.message);
-            
-            
         }
     }
 
@@ -51,9 +49,10 @@ export default function PerformanceDisplay ()  {
    
     maxWidth={700}
     width={9/10}
-    boxShadow={3}
+    border={""}
+
     
-    className='performance_display_container'
+    
     
     padding={3}
     borderRadius={4}

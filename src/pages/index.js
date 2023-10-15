@@ -4,7 +4,6 @@ import rf from "../../public/resources/realfagsbygget.png";
 import onlineLogo from "../../public/resources/Online_hvit.png";
 import { Splash } from "@/components/home/Splash";
 import { Navbar } from "@/components/all/Navbar";
-import ScrollDownIcon from "@/components/home/ScrollDownIcon";
 
 export default function IndexPage() {
   return (
@@ -14,9 +13,6 @@ export default function IndexPage() {
       </div>
       <div className="relative mb-[500px] w-full">
         <Splash img={rf.src}/>
-      </div>
-      <div className="sticky bottom-10">
-          <ScrollDownIcon />
       </div>
       <div className="w-3/4 mb-10 text-lg">
         <p className="">
