@@ -3,15 +3,15 @@ import styles from "./Navbar.module.css"
 import React, { useState, useEffect } from 'react';
 
 export const Navbar = ({img}) => {
-    const [showNavbar, setShowNavbar] = useState("navbar");
+    const [showNavbar, setShowNavbar] = useState(styles.navbar_box);
     const [lastScroll, setLastScroll] = useState(0);
 
     const controlNavbar = () => {
         if (typeof window !== 'undefined') { 
           if (window.scrollY > lastScroll) { // if scroll down hide the navbar
-            setShowNavbar("navbar"); 
+            setShowNavbar(styles.hidden); 
           } else { // if scroll up show the navbar
-            setShowNavbar("hidden");  
+            setShowNavbar(styles.navbar_box);  
           }
 
           // remember current page location to use in the next move
@@ -31,7 +31,8 @@ export const Navbar = ({img}) => {
   }, [lastScroll]);
 
     return(
-        <nav className={showNavbar}>
+      <div className={showNavbar}>
+        <nav className='navbar'>
             <div className={styles.navbar}>
                 <img src={img} alt="Logo" className={styles.logo}/>
                 <div className={styles.menu}>
@@ -41,5 +42,6 @@ export const Navbar = ({img}) => {
                 <div className={styles.spacer}></div>
             </div>
         </nav>
+      </div>
     )
 }

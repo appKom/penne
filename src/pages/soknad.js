@@ -12,9 +12,9 @@ import  styles from "@/components/soknad/SoknadPage.module.css";
 export default function SoknadPage() {
   return (
     <div className="h-full flex flex-col justify-center items-center">
-    <div className="w-full h-20 mb-5 sticky top-0 z-20 bg-[#131620]">
+
       <Navbar img={onlineLogo.src} />
-    </div>
+
     <Title title="Søke om støtte" />
    <HorizontalLine />
    <SubTitle title="Hvordan søke om støtte?" />

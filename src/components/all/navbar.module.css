@@ -8,6 +8,15 @@
     align-items: center;
     padding: 20px;
 }
+.navbar_box{
+    width: 100%;
+    height: 5rem;
+    margin-bottom: 1.25rem;
+    position: sticky;
+    top: 0px;
+    --tw-bg-opacity: 1;
+    background-color: rgb(19 22 32 / var(--tw-bg-opacity));
+}
 
 .navbar img {
     width: 144px;
@@ -18,6 +27,7 @@
     display: flex;
     gap: 80px;
     margin: 0 auto;
+    color: white;
 }
 
 .navbar .menu p {
@@ -33,5 +43,6 @@
 }
 
 .hidden {
-    background: green;
+    visibility: collapse;
+    top: -100px;
 }
