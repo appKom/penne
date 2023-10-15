@@ -20,8 +20,7 @@ export default function PerformanceChart(props) {
     let y1 = new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), currentDate.getDate());
     let y3 = new Date(currentDate.getFullYear() - 3, currentDate.getMonth(), currentDate.getDate());
     let y5 = new Date(currentDate.getFullYear() - 5, currentDate.getMonth(), currentDate.getDate());
-    let ytd = new Date(currentDate.getFullYear(), 0, 1);
-
+   
     let periodDate = undefined;
    switch (period) {
       case "w1":
@@ -44,9 +43,6 @@ export default function PerformanceChart(props) {
         break;
       case "y5":
         periodDate = y5;
-        break;
-      case "ytd":
-        periodDate = ytd;
         break;
       default:
         periodDate = y5;

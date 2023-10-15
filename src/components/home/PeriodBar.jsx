@@ -7,7 +7,6 @@ export default function PeriodBar(props) {
         ["5Y", "y5"],
         ["3Y", "y3"],
         ["1Y", "y1"],
-        ["TY", "ty"],
         ["6M", "m6"],
         ["3M", "m3"],
         ["1M", "m1"],
