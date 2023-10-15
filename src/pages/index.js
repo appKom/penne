@@ -15,9 +15,6 @@ export default function IndexPage() {
       <div className="relative mb-[500px] w-full">
         <Splash img={rf.src}/>
       </div>
-      <div className="sticky bottom-10">
-          <ScrollDownIcon />
-      </div>
       <div className="w-3/4 mb-10 text-lg">
         <p className="">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
