@@ -1,102 +1,126 @@
-import  Member  from "../components/about_us/Members"
-import styles from "../components/about_us/Members.module.css"
+import Member from "../components/about_us/Members";
+import styles from "../components/about_us/Members.module.css";
 import { Navbar } from "@/components/all/Navbar";
 import onlineLogo from "../../public/resources/Online_hvit.png";
 import { useState } from "react";
 import Accordion from "@/components/about_us/Accordion";
 
-
 export default function OmOssPage() {
-    return (
-      <div id = { styles.titel2 } >
-        <div className="w-full h-20 mb-5 sticky top-0 z-20 bg-[#131620]">
+  return (
+    <div id={styles.titel2}>
+      <div className="w-full h-20 mb-5 sticky top-0 z-20 bg-[#131620]">
         <Navbar img={onlineLogo.src} />
       </div>
-        <div className = { styles.omFondet }>
+      <div className={styles.omFondet}>
+        <div className={styles.omOssWrapper}>
           <h1> Om oss </h1>
           <hr></hr>
-          
-          <p> Onlinefondet er en engasjert og livlig studentorganisasjon ved NTNU, dedikert til å fremme studentenes interesser og berike deres akademiske og sosiale opplevelser. Gjennom vårt fond, ledet av et dedikert fondstyre, gir vi økonomisk støtte til initiativer som sikrer at medlemmenes behov og interesser blir ivaretatt. Fra å finansiere nytt musikkutstyr for vårt linjeforeningsband, til å støtte surfeturer og sosiale arrangementer, streber vi etter å gi tilbake til vår studentkommunitet. Med en rik historie og et engasjert medlemskap, er vi stolte av vår evne til å kombinere det faglige med det sosiale, og skape varige minner for alle Onlinere.
+          <p>
+            Onlinefondet er en engasjert og livlig studentorganisasjon ved NTNU,
+            dedikert til å fremme studentenes interesser og berike deres
+            akademiske og sosiale opplevelser. Gjennom vårt fond, ledet av et
+            dedikert fondstyre, gir vi økonomisk støtte til initiativer som
+            sikrer at medlemmenes behov og interesser blir ivaretatt. Fra å
+            finansiere nytt musikkutstyr for vårt linjeforeningsband, til å
+            støtte surfeturer og sosiale arrangementer, streber vi etter å gi
+            tilbake til vår studentkommunitet. Med en rik historie og et
+            engasjert medlemskap, er vi stolte av vår evne til å kombinere det
+            faglige med det sosiale, og skape varige minner for alle Onlinere.
           </p>
-          </div>
-
-        <div class = {styles.styremedlemmer}>
-          <Member path={"resources/testbilde.jpg"} name={"Johanna Wilmers"}/>
-          <Member path={"resources/testbilde.jpg"} name={"Magnus Byrkjeland"}/>
-          <Member path={"resources/testbilde.jpg"} name={"Hilmir Straumland"}/>
-          <Member path={"resources/testbilde.jpg"} name={"Maiken Lie"}/>
-          <Member path={"resources/testbilde.jpg"} name={"William Andersson"}/>
-          <Member path={"resources/testbilde.jpg"} name={"Thea Karin Fladby"}/>
-          <Member path={"resources/testbilde.jpg"} name={"Johanne Tronstad"}/>
         </div>
-        <div className = {styles.tidligereMedlemmer}>
-          <h1> Tidligere medlemmer</h1>
-          <Accordion title="2022" content={[
-    "Henrik Horten Hegli",
-    "Anh-Kha Vo Nguyen (tok over for Jonathan)",
-    "Hilmir Straumland",
-    "Henrik Giil Liisberg (Leder)",
-    "William Andersson",
-    "Michael Johansen",
-    "Johanne Tronstad"
-]}/>
-
-<Accordion title="2021" content={[
-    "Milla Weium",
-    "Jonathan Brooks (Leder)",
-    "Jan Arild Brobak",
-    "Henrik Giil Liisberg",
-    "Kaja Sofie Lundgaard",
-    "Michael Johansen",
-    "Marius Enerly"
-]}/>
-
-<Accordion title="2020" content={[
-    "Christoffer Stensrud",
-    "Nicolai Andre Dalaaker (Leder)",
-    "Jan Arild Brobak",
-    "Christian Nyvoll",
-    "Kaja Sofie Lundgaard",
-    "Christoffer Skar Lofsberg",
-    "Marius Enerly"
-]}/>
-
-<Accordion title="2019" content={[
-    "Kaja Sofie Lundgaard",
-    "Nicolai Andre Dalaaker",
-    "Sigurd Oxaas Wie (Leder)",
-    "Christian Nyvoll",
-    "Martin Bjerke",
-    "Christoffer Skar Lofsberg",
-    "Sverre Bjørke"
-]}/>
-
-<Accordion title="2018" content={[
-    "Christian Nyvoll",
-    "Tord Standnes",
-    "Sigurd Oxaas Wie",
-    "Sondre Widmark",
-    "Taran Ruge",
-    "Henning Wold",
-    "Sverre Bjørke"
-]}/>
-
-<Accordion title="2017" content={[
-    "Christoffer Skar Lofsberg",
-    "Tord Standnes",
-    "Sondre Widmark",
-    "Henning Wold",
-]}/>
-
-
-        </div>
-    
-        <div className={styles.bliMed}>
-          <h1> Bli med !!!!!</h1>
-          <p>Aliqua amet ex officia aliquip dolore. Sunt qui do consectetur exercitation deserunt reprehenderit ullamco anim consequat et consectetur ut. Labore qui minim aliqua nulla fugiat. Velit excepteur ut mollit qui sit amet elit pariatur mollit aute mollit. Do sint culpa esse nisi ad ut. Elit consectetur enim ad aute.</p>
-
+        <div>
+          <img className={styles.ossBilde} src="resources/BILDE29.jpeg" />
         </div>
       </div>
-    )
-  }
-  
+
+      <div class={styles.styremedlemmer}>
+        <Member path={"resources/testbilde.jpg"} name={"Johanna Wilmers"} />
+        <Member path={"resources/testbilde.jpg"} name={"Magnus Byrkjeland"} />
+        <Member path={"resources/testbilde.jpg"} name={"Hilmir Straumland"} />
+        <Member path={"resources/testbilde.jpg"} name={"Maiken Lie"} />
+        <Member path={"resources/testbilde.jpg"} name={"William Andersson"} />
+        <Member path={"resources/testbilde.jpg"} name={"Thea Karin Fladby"} />
+        <Member path={"resources/testbilde.jpg"} name={"Johanne Tronstad"} />
+      </div>
+      <div className={styles.tidligereMedlemmer}>
+        <h1> Tidligere medlemmer</h1>
+        <div className={styles.tidligereMedlemmerWrapper}>
+          <Accordion
+            title="2022"
+            content={[
+              "Henrik Horten Hegli",
+              "Anh-Kha Vo Nguyen",
+              "Hilmir Straumland",
+              "Henrik Giil Liisberg (Leder)",
+              "William Andersson",
+              "Michael Johansen",
+              "Johanne Tronstad",
+            ]}
+          />
+
+          <Accordion
+            title="2021"
+            content={[
+              "Milla Weium",
+              "Jonathan Brooks (Leder)",
+              "Jan Arild Brobak",
+              "Henrik Giil Liisberg",
+              "Kaja Sofie Lundgaard",
+              "Michael Johansen",
+              "Marius Enerly",
+            ]}
+          />
+
+          <Accordion
+            title="2020"
+            content={[
+              "Christoffer Stensrud",
+              "Nicolai Andre Dalaaker (Leder)",
+              "Jan Arild Brobak",
+              "Christian Nyvoll",
+              "Kaja Sofie Lundgaard",
+              "Christoffer Skar Lofsberg",
+              "Marius Enerly",
+            ]}
+          />
+
+          <Accordion
+            title="2019"
+            content={[
+              "Kaja Sofie Lundgaard",
+              "Nicolai Andre Dalaaker",
+              "Sigurd Oxaas Wie (Leder)",
+              "Christian Nyvoll",
+              "Martin Bjerke",
+              "Christoffer Skar Lofsberg",
+              "Sverre Bjørke",
+            ]}
+          />
+
+          <Accordion
+            title="2018"
+            content={[
+              "Christian Nyvoll",
+              "Tord Standnes",
+              "Sigurd Oxaas Wie",
+              "Sondre Widmark",
+              "Taran Ruge",
+              "Henning Wold",
+              "Sverre Bjørke",
+            ]}
+          />
+
+          <Accordion
+            title="2017"
+            content={[
+              "Christoffer Skar Lofsberg",
+              "Tord Standnes",
+              "Sondre Widmark",
+              "Henning Wold",
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
