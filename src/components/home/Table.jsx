@@ -6,19 +6,49 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Card } from '@mui/material';
-import Box from '@mui/material/Box';
+import styles from './table.module.css';
+import TableSortLabel from '@mui/material/TableSortLabel';
 
-//need to add filter options
-//darker header 
+
 function createData(name, andel, type) {
   return { name, andel, type };
+}
+
+//sorting
+const useSortableData = (items, config = null) => {
+  const [sortConfig, setSortConfig] = React.useState(config);
+  
+  const sortedItems = React.useMemo(() => {
+    let sortableItems = [...items];
+    if (sortConfig !== null) {
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'asc' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'asc' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableItems;
+  }, [items, sortConfig]);
+
+  const requestSort = key => {
+    let direction = 'asc';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  }
+
+  return { items: sortedItems, requestSort, sortConfig };
 }
 
 
 export default function BasicTable(props) {
     const [tableData, setTableData] = useState([]);
+    const { items, requestSort, sortConfig } = useSortableData(tableData);
     const setError = (message) => {
     }
 
@@ -42,35 +72,48 @@ export default function BasicTable(props) {
     useEffect(() => {
         fetchOnlineFondData();
     }, [])
+    
+    const getClassNamesFor = (name) => {
+      if (!sortConfig) {
+        return;
+      }
+      return sortConfig.key === name ? sortConfig.direction : undefined;
+    };
+    
   return (
-    <Box
-
-        maxWidth={700}
-        width={9/10}
-        boxShadow={3}
-        
-        padding={3}
-        borderRadius={4}
-        margin={"0 auto"}
-        >
-    <TableContainer component={Card}
-    width={9/10}
-    padding={3}
-    margin={"0 auto"}>
-      <Table sx={{ minWidth: 250}} aria-label="simple table">
+    <div className={styles.table_main}>
+    <TableContainer>
+      <Table>
         <TableHead>
-          <TableRow>
-            <TableCell>Fond</TableCell>
-            <TableCell align="right">Andel</TableCell>
-            <TableCell align="right">Kategori</TableCell>
+          <TableRow className={styles.table_header }>
+            <TableCell ><TableSortLabel
+            active={sortConfig!==null && sortConfig.key=='name'}
+            direction={getClassNamesFor('name')}
+            onClick={()=> {requestSort('name')}}
+          >
+              Fond
+              </TableSortLabel>
+            </TableCell>
+            <TableCell align="right"><TableSortLabel
+            active={sortConfig!==null && sortConfig.key=='andel'}
+            direction={getClassNamesFor('andel')}
+            onClick={()=> {requestSort('andel')}}
+          >
+              Andel
+            </TableSortLabel></TableCell>
+            <TableCell align="right"><TableSortLabel
+            active={sortConfig!==null && sortConfig.key=='type'}
+            direction={getClassNamesFor('type')}
+            onClick={()=> {requestSort('type')}}
+          >
+              Kategori
+            </TableSortLabel></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableData.map((row) => (
+          {items.map((row) => (
             <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
+              key={row.name}>
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
@@ -81,6 +124,6 @@ export default function BasicTable(props) {
         </TableBody>
       </Table>
     </TableContainer>
-    </Box>
+    </div>
   );
 }
