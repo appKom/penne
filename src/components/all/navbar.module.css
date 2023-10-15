@@ -31,3 +31,7 @@
     width: 144px;
     height: 100%;
 }
+
+.hidden {
+    background: green;
+}
