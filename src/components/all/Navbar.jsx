@@ -1,12 +1,10 @@
 import Link from "next/link"
 import styles from "./Navbar.module.css"
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useScrollDirection } from 'react';
-import debounce from 'lodash';
 
 
 
-export const Navbar = ({img}) => {
+export const Navbar = ({img, bekk}) => {
     const [showNavbar, setShowNavbar] = useState(styles.navbar_box);
     const [lastScroll, setLastScroll] = useState(0);
 
@@ -44,8 +42,11 @@ export const Navbar = ({img}) => {
                 <div className={styles.menu}>
                     <Link href={"/omoss"} className={styles.menuItem}>Om oss</Link>
                     <Link href={"/soknad"} className={styles.menuItem}>Søknader</Link>
+                    <a href={"https://online.ntnu.no"} className={styles.menuItem}>Online.ntnu.no</a>
                 </div>
                 <div className={styles.spacer}></div>
+                <img src={bekk} alt="Bekk logo" className={styles.logo} />
+
             </div>
         </nav>
       </div>
