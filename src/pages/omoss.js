@@ -4,6 +4,7 @@ import { Navbar } from "@/components/all/Navbar";
 import onlineLogo from "../../public/resources/Online_hvit.png";
 import bekkLogo from "../../public/resources/Bekk_navnetrekk_hvit.svg";
 import Accordion from "@/components/about_us/Accordion";
+import Footer from "@/components/all/Footer";
 
 export default function OmOssPage() {
   return (
@@ -121,6 +122,7 @@ export default function OmOssPage() {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
