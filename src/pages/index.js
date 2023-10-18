@@ -4,9 +4,13 @@ import rf from "../../public/resources/realfagsbygget.png";
 import onlineLogo from "../../public/resources/Online_hvit.png";
 import { Splash } from "@/components/home/Splash";
 import { Navbar } from "@/components/all/Navbar";
+import { Provider } from "react-redux";
+import { store } from "@/services/Store";
+
 
 export default function IndexPage() {
   return (
+    <Provider store={store} >
     <div className="h-full flex flex-col justify-center items-center">
       <div className="w-full h-20 mb-5 sticky top-0 z-20 bg-[#131620]">
         <Navbar img={onlineLogo.src} />
@@ -26,5 +30,6 @@ export default function IndexPage() {
       <PerformanceDisplay />
       <Footer/>
     </div>
+    </Provider>
   );
 }

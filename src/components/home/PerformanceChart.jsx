@@ -168,9 +168,9 @@ export default function PerformanceChart(props) {
 
 
       }
-    }} series={[{ name: "OnlineFondet", data: getFormattedArray(props.data, props.period) }, {
+    }} series={[{ name: "OnlineFondet", data: getFormattedArray(props.data.fonddata.data, props.period) }, {
       name: "OSEBX",
-      data: getFormattedArray(props.osebxdata, props.period)
+      data: getFormattedArray(props.data.osebx.data, props.period)
     }]} />
   )
 }
