@@ -1,10 +1,12 @@
-#header{
-    text-align: center;
+.paragraph {
     color: #FFF;
+text-align: center;
 font-family: 'Inter', sans-serif;
-margin-top: 60px;
-font-size: 55px;
+font-size: 25px;
 font-style: normal;
 font-weight: 300;
 line-height: normal;
+
+margin-top: 40px;
+width: 80%;
 }
