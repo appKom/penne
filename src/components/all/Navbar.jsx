@@ -11,7 +11,6 @@ export const Navbar = ({img, bekk}) => {
 
     const controlNavbar = () => {
         if (typeof window !== 'undefined') { 
-          console.log(window.scrollY)
           if (lastScroll - window.scrollY < 0) { // if scroll down hide the navbar
             setShowNavbar(styles.hidden); 
           } else if (lastScroll - window.scrollY > 0) { // if scroll up show the navbar
