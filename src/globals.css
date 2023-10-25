@@ -13,7 +13,6 @@
     --onlineblue: #0d5474;
     --onlinebluedark: #072f41;
     --onlineyellow: #f9b759;
-    font-family: 'Roboto';
   }
 
 
@@ -26,9 +25,9 @@
 }
 
 body {
-  font-family: 'Roboto';
   color: white;
   background-color: #131620;
+  font-family: 'Inter', sans-serif;
 }
 
 .MuiCircularProgress-primary {
