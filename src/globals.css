@@ -30,3 +30,8 @@ body {
   color: white;
   background-color: #131620;
 }
+
+.MuiCircularProgress-primary {
+  color: green !important;
+
+}

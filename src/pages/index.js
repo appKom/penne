@@ -5,11 +5,14 @@ import onlineLogo from "../../public/resources/Online_hvit.png";
 import bekkLogo from "../../public/resources/Bekk_navnetrekk_hvit.svg";
 import { Splash } from "@/components/home/Splash";
 import { Navbar } from "@/components/all/Navbar";
+ import { Provider } from "react-redux";
+import { store } from "@/services/Store";
 import ScrollDownIcon from "@/components/home/ScrollDownIcon";
 import style from "./index.module.css"
 
 export default function IndexPage() {
   return (
+    <Provider store={store} >
     <div className="h-full flex flex-col justify-center items-center">
   
         <Navbar img={onlineLogo.src} bekk={bekkLogo.src}/>
@@ -33,5 +36,6 @@ export default function IndexPage() {
       <PerformanceDisplay />
       <Footer/>
     </div>
+    </Provider>
   );
 }
