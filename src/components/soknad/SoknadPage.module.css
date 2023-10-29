@@ -20,3 +20,15 @@
     margin-top: 40px;
     margin: 1rem 11rem;
 }
+
+@media only screen and (max-width: 1000px){
+    .ul li {
+        margin: 1rem 8rem;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .ul li {
+        margin: 1rem 6rem;
+    }
+}
