@@ -59,16 +59,29 @@
 }
 
 .accordionContent {
-    padding: 8px 16px;
+    height: 250px;
     font-size: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     flex-grow: 1;
+    transition: height 0.3s ease-in-out;
+    overflow: hidden;
     
 }
 
-.accordionContent div {
+.accordionContentClosed {
+    height: 0px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    transition: height 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.accordionContent div, .accordionContentClosed div {
     width: 50%;
     padding: 10px;
 }

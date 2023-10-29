@@ -11,7 +11,7 @@ export default function Accordion({ title, content }) {
                 {title}
                 <span>{isOpen ? '˄' : '˅'}</span>
             </div>
-            {isOpen && <div className={styles.accordionContent}>    {content.map((element) => {
+            {<div className={isOpen ? styles.accordionContent : styles.accordionContentClosed}>    {content.map((element) => {
         return <div key={element}>{element}</div>;
     })}</div>}
         </div>
