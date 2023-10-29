@@ -34,13 +34,13 @@ export default function OmOssPage() {
         </div>
 
         <div class={styles.styremedlemmer}>
-          <Member path={"resources/testbilde.jpg"} name={"Johanna Wilmers"} />
-          <Member path={"resources/testbilde.jpg"} name={"Magnus Byrkjeland"} />
-          <Member path={"resources/testbilde.jpg"} name={"Hilmir Straumland"} />
-          <Member path={"resources/testbilde.jpg"} name={"Maiken Lie"} />
-          <Member path={"resources/testbilde.jpg"} name={"William Andersson"} />
-          <Member path={"resources/testbilde.jpg"} name={"Thea Karin Fladby"} />
-          <Member path={"resources/testbilde.jpg"} name={"Johanne Tronstad"} />
+          <Member path={"resources/Fondmedlemmer/Johanna.jpg"} name={"Johanna Wilmers"} />
+          <Member path={"resources/Fondmedlemmer/Magnus.jpg"} name={"Magnus Byrkjeland"} />
+          <Member path={"resources/Fondmedlemmer/Hilmir.jpg"} name={"Hilmir Straumland"} />
+          <Member path={"resources/Fondmedlemmer/noimage.jpg"} name={"Maiken Lie"} />
+          <Member path={"resources/Fondmedlemmer/William.jpg"} name={"William Andersson"} />
+          <Member path={"resources/Fondmedlemmer/Thea.jpg"} name={"Thea Karin Fladby"} />
+          <Member path={"resources/Fondmedlemmer/noimage.jpg"} name={"Johanne Tronstad"} />
         </div>
         <div className={styles.tidligereMedlemmer}>
           <h1> Tidligere medlemmer</h1>
