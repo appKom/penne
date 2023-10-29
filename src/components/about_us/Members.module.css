@@ -47,7 +47,9 @@
     width: 100%;
     border: 1px solid rgb(115, 115, 115);
     position: relative;
-    color: #33426f;
+    color: #ffffff;
+    border-radius: 10px;
+    background-color: #232427;
 }
 
 .accordionHeader {
@@ -55,6 +57,7 @@
     justify-content: space-between;
     padding: 8px 16px;
     cursor: pointer;
+   
 
 }
 
@@ -67,6 +70,8 @@
     flex-grow: 1;
     transition: height 0.3s ease-in-out;
     overflow: hidden;
+    
+    
     
 }
 
@@ -131,4 +136,13 @@
     width: 60%;
     left: 20%;
     position: relative;
+    
+}
+
+.accordionHeader span {
+    margin-top: 1rem;
+}
+
+.accordionTitle {
+   margin-top: 0.5rem;
 }
