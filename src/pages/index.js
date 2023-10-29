@@ -25,19 +25,31 @@ export default function IndexPage() {
       <div className="sticky bottom-10" id={style.scroll}>
           <ScrollDownIcon />
       </div>
-      <h1 id={style.overskrift}> Halo </h1>
+      <h1 id={style.overskrift}> Online Fondet </h1>
       <div className="w-3/4 mb-10 text-lg text-justify">
         <p className="">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Et fond er en kollektiv invistering der flere går sammen å plasserer penger i verdipapirmarkede. Dette kalles ofte for kollektiv sparing, og man kan se for seg at et fond er en kurv med investeringer. Online har et slikt fond, dette betyr at ulike parter innvesterer i Online, noe vi setter stor pris på🤍
+            Under finner du en graf, denne grafen er en oversikt over utviklingen av Online sitt fond. 
         </p>
         <br></br>
-        <p className="">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        </p>
       </div>
       <PerformanceDisplay />
+      <br></br>
+      <div className="text-lg w-3/4 text-center mt-40 mb-10">
+        <p className="w-full">
+            Denne smultringen gir en oversikt over fondets sammensetning.  
+        </p>
+      </div>
       <PieChart/>
+      <br></br>
+      <br></br>
+      <div className="text-lg w-3/4 text-center mt-40 mb-10">
+        <p className="w-full">
+            Tabellen viser fond, andel og kategori.  
+        </p>
+      </div>
       <Table/>
+      <br></br>
       <Footer/>
     </div>
     </Provider>
