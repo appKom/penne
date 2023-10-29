@@ -29,9 +29,6 @@ export default function OmOssPage() {
               faglige med det sosiale, og skape varige minner for alle Onlinere.
             </p>
           </div>
-          <div>
-            
-          </div>
         </div>
 
         <div class={styles.styremedlemmer}>

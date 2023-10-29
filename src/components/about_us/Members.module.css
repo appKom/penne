@@ -45,11 +45,12 @@
 .accordion {
     margin-bottom: 8px;
     width: 100%;
-    border: 1px solid rgb(115, 115, 115);
+    border: 1px solid #333b54;
+    
     position: relative;
     color: #ffffff;
     border-radius: 10px;
-    background-color: #072e40;
+    background-color: #1c202d;
 }
 
 .accordionHeader {
@@ -96,8 +97,7 @@
     height: auto;
     color: rgb(255, 255, 255);
     text-align: center;
-    width: 80%;
-    margin: auto;
+    
    
     
 }
@@ -117,9 +117,10 @@
 }
 
 .omOssWrapper {
-    width: 100%;
+    width: 80%;
     position: relative;
     padding: 50px;
+    margin: auto;
 }
 
 
@@ -159,3 +160,10 @@
     margin-top: 50px;
     margin-bottom: 20px;
 }
+
+
+@media only screen and (max-width: 750px) {
+    .omOssWrapper {
+      width: 100%;
+    }
+  }
