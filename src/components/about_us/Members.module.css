@@ -78,7 +78,6 @@
 
 
 .omFondet {
-    background: #0B5374;
     height: auto;
     color: white;
     text-align: left;
@@ -124,3 +123,13 @@
     position: relative;
     
 }
+
+
+@media only screen and (max-width: 1050px) {
+    .ossBilde {
+      display: none;
+    }
+    .omOssWrapper {
+        width: 100%;
+    }
+  }
