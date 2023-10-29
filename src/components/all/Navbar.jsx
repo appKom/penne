@@ -42,13 +42,7 @@ export const Navbar = ({ img, bekk }) => {
     <div className={showNavbar}>
       <nav className='navbar'>
         <div className={styles.navbar}>
-          <Link href={"/"}><img src={img} alt="Logo" className={styles.logo} /></Link>
-          <div className={styles.menu}>
-            <Link href={"/omoss"} className={styles.menuItem}>Om oss</Link>
-            <Link href={"/soknad"} className={styles.menuItem}>Søknader</Link>
-            <a href={"https://online.ntnu.no"} className={styles.menuItem}>Online.ntnu.no</a>
-          </div>
-          <div className={styles.mobilemenucontainer}>
+        <div className={styles.mobilemenucontainer}>
             <MenuIcon onClick={() => handleToggleShowNavMenu()} className={styles.menuicon} />
 
             <div className={styles.mobilemenu} style={{ display: showNavMenu ? "flex" : "none" }}>
@@ -57,6 +51,13 @@ export const Navbar = ({ img, bekk }) => {
               <a href={"https://online.ntnu.no"} className={styles.menuItem}>Online.ntnu.no</a>
             </div>
           </div>
+          <Link href={"/"}><img src={img} alt="Logo" className={styles.logo} /></Link>
+          <div className={styles.menu}>
+            <Link href={"/omoss"} className={styles.menuItem}>Om oss</Link>
+            <Link href={"/soknad"} className={styles.menuItem}>Søknader</Link>
+            <a href={"https://online.ntnu.no"} className={styles.menuItem}>Online.ntnu.no</a>
+          </div>
+         
           <div className={styles.spacer}></div>
           <img src={bekk} alt="Bekk logo" className={styles.logo + " " + styles.bekklogo} />
 

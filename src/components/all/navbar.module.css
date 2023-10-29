@@ -72,13 +72,11 @@
 
 
 @media (max-width: 920px) {
-    .bekklogo {
-        display: none;
-    }
+
 
     .navbar {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         
     }
     .navbar .menu {
@@ -100,7 +98,7 @@
     .mobilemenucontainer .mobilemenu {
         border-radius: 5%;
         position: absolute;
-        right: 10px;
+        left: 10px;
         
         flex-direction: column;
         border: .5px solid #ffffff;
@@ -117,7 +115,15 @@
         color: #131620;
         
     }
+    .logo {
+        margin-left: 10px;
+    }
 
+    .bekklogo {
+       position: absolute;
+       right: 10px;
+       
+    }
 
    
 }
