@@ -7,6 +7,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+
 }
 .navbar_box{
     width: 100%;
@@ -29,6 +30,7 @@
     gap: 80px;
     margin: 0 auto;
     color: white;
+
 }
 
 .navbar .menu p {
@@ -55,3 +57,68 @@
     z-index: 2;
 
 }
+
+.mobilemenucontainer {
+    display: none;
+    float: right;
+}
+
+.mobilemenucontainer:hover {
+    cursor: pointer;
+}
+
+
+
+
+
+@media (max-width: 750px) {
+    .bekklogo {
+        display: none;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        
+    }
+    .navbar .menu {
+        display: none;
+    }
+
+    .mobilemenucontainer {
+        display: block;
+        padding-top: 4px;
+ 
+        
+    }
+
+    .spacer {
+        display: none;
+    }
+
+
+    .mobilemenucontainer .mobilemenu {
+        border-radius: 5%;
+        position: absolute;
+        right: 10px;
+        
+        flex-direction: column;
+        border: .5px solid #ffffff;
+        margin-top: 20px;
+        background-color: #131620;
+        
+    }
+    .mobilemenucontainer .mobilemenu .menuItem {
+        padding: 10px;
+        border: solid .5px white;
+    }
+    .mobilemenucontainer .mobilemenu .menuItem:hover {
+        background-color: #ffffff;
+        color: #131620;
+        
+    }
+
+
+   
+}
+    
