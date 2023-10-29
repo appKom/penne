@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -22,6 +25,12 @@
 }
 
 body {
-  
+  color: white;
+  background-color: #131620;
+  font-family: 'Inter', sans-serif;
 }
 
+.MuiCircularProgress-primary {
+  color: green !important;
+
+}

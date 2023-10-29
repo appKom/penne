@@ -6,12 +6,12 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 
 export default function PerformanceChart(props) {
-  const onlineColor = "#0d5474";
+  const onlineColor = "#ffffff";
   const osebxColor = "#00ff00";
 
   function getFormattedArray(data, period) {
 
-    
+
     let currentDate = new Date();
     let w1 = new Date(currentDate.getTime() - 1000 * 60 * 60 * 24 * 7);
     let m1 = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, currentDate.getDate());
@@ -20,10 +20,9 @@ export default function PerformanceChart(props) {
     let y1 = new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), currentDate.getDate());
     let y3 = new Date(currentDate.getFullYear() - 3, currentDate.getMonth(), currentDate.getDate());
     let y5 = new Date(currentDate.getFullYear() - 5, currentDate.getMonth(), currentDate.getDate());
-    let ytd = new Date(currentDate.getFullYear(), 0, 1);
 
     let periodDate = undefined;
-   switch (period) {
+    switch (period) {
       case "w1":
         periodDate = w1;
         break;
@@ -45,17 +44,14 @@ export default function PerformanceChart(props) {
       case "y5":
         periodDate = y5;
         break;
-      case "ytd":
-        periodDate = ytd;
-        break;
       default:
         periodDate = y5;
     }
 
     let filtered = [];
     if (data != undefined) {
-      
-      
+
+
       let start = undefined;
       for (let i = 0; i < data.length; i++) {
         if (new Date(data[i].date) >= periodDate) {
@@ -68,18 +64,18 @@ export default function PerformanceChart(props) {
           } else {
             filtered.push({
               x: data[i].date,
-              y: (((data[i].value / start)*100)-100),
+              y: (((data[i].value / start) * 100) - 100),
             });
           }
-          
-        } 
-      }
-    
 
-    
-  
-      
- }
+        }
+      }
+
+
+
+
+
+    }
 
     return filtered;
 
@@ -93,7 +89,7 @@ export default function PerformanceChart(props) {
       background: "#FFFFFFF",
       chart: {
         type: 'line',
-       
+
         stacked: false,
         height: 360,
         zoom: {
@@ -102,8 +98,10 @@ export default function PerformanceChart(props) {
         toolbar: {
           show: false
         },
+
+        foreColor: '#ffffff',
       },
-      colors:  [onlineColor, osebxColor],
+      colors: [onlineColor, osebxColor],
       dataLabels: {
 
         enabled: false
@@ -114,9 +112,9 @@ export default function PerformanceChart(props) {
       fill: {
         colors: [onlineColor, osebxColor],
         type: "fill",
-      
+
         gradient: {
-        
+
           shadeIntensity: 1,
           inverseColors: false,
           opacityFrom: 1,
@@ -126,53 +124,53 @@ export default function PerformanceChart(props) {
       },
       stroke: {
         curve: 'straight',
-        width: 2,
+        width: 1,
       },
       yaxis: {
 
         labels: {
           formatter: function (val) {
             return val;
-           
+
           },
         },
-        
+
 
       },
+
       xaxis: {
         type: 'datetime',
         labels: {
           format: 'dd MMM yyyy'
         },
         tickAmount: 6,
-        
-        
-        
-
       },
       legend: {
         position: 'top',
         horizontalAlign: 'left',
-        offsetX: 40
+        offsetX: 40,
+
       },
       tooltip: {
         shared: true,
-      
+        theme: "dark",
         x: {
           format: 'dd MMM yyyy'
         },
 
         y: {
           formatter: function (val) {
-            return val.toString().slice(0, 4) + "%";
+            return val != undefined ? val.toString().slice(0, 4) + "%" : "";
           },
 
         },
-        
+
+
+
       }
-    }} series={[{ name: "OnlineFondet", data: getFormattedArray(props.data, props.period) }, {
+    }} series={[{ name: "OnlineFondet", data: getFormattedArray(props.data.fonddata.data, props.period) }, {
       name: "OSEBX",
-      data: getFormattedArray(props.osebxdata, props.period)
+      data: getFormattedArray(props.data.osebx.data, props.period)
     }]} />
   )
 }

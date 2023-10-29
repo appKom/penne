@@ -59,9 +59,9 @@ export default function BasicTable(props) {
             setTableData([]);
             
             setError(data.error);
-        } else if (data.message) {
+        } else if (data.data) {
             const dataRow=[];
-            data.message.forEach((arr)=>{
+            data.data.forEach((arr)=>{
                 const val= arr.percent.toString().slice(0, 4);
                 dataRow.push(createData(arr.instrument.name, Number(val), arr.instrument.sector_group ));
                   
@@ -82,48 +82,50 @@ export default function BasicTable(props) {
     
   return (
     <div className={styles.table_main}>
-    <TableContainer>
-      <Table>
-        <TableHead>
-          <TableRow className={styles.table_header }>
-            <TableCell ><TableSortLabel
-            active={sortConfig!==null && sortConfig.key=='name'}
-            direction={getClassNamesFor('name')}
-            onClick={()=> {requestSort('name')}}
-          >
-              Fond
-              </TableSortLabel>
-            </TableCell>
-            <TableCell align="right"><TableSortLabel
-            active={sortConfig!==null && sortConfig.key=='andel'}
-            direction={getClassNamesFor('andel')}
-            onClick={()=> {requestSort('andel')}}
-          >
-              Andel
-            </TableSortLabel></TableCell>
-            <TableCell align="right"><TableSortLabel
-            active={sortConfig!==null && sortConfig.key=='type'}
-            direction={getClassNamesFor('type')}
-            onClick={()=> {requestSort('type')}}
-          >
-              Kategori
-            </TableSortLabel></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {items.map((row) => (
-            <TableRow
-              key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow className={styles.table_header}>
+              <TableCell style={{ color: 'white' }}><TableSortLabel
+              active={sortConfig!==null && sortConfig.key=='name'}
+              direction={getClassNamesFor('name')}
+              onClick={()=> {requestSort('name')}}
+            >
+                Fond
+                </TableSortLabel>
               </TableCell>
-              <TableCell align="right">{row.andel}</TableCell>
-              <TableCell align="right">{row.type}</TableCell>
+              <TableCell align="right" style={{ color: 'white' }}><TableSortLabel
+              active={sortConfig!==null && sortConfig.key=='andel'}
+              direction={getClassNamesFor('andel')}
+              onClick={()=> {requestSort('andel')}}
+            >
+                Andel
+              </TableSortLabel></TableCell>
+              <TableCell align="right" style={{ color: 'white' }}><TableSortLabel
+              active={sortConfig!==null && sortConfig.key=='type'}
+              direction={getClassNamesFor('type')}
+              onClick={()=> {requestSort('type')}}
+            >
+                Kategori
+              </TableSortLabel></TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {items.map((row) => (
+              <TableRow
+                key={row.name}
+                >
+                  
+                <TableCell component="th" scope="row" style={{ color: 'white' }}>
+                  {row.name}
+                </TableCell>
+                <TableCell align="right" style={{ color: 'white' }}>{row.andel}</TableCell>
+                <TableCell align="right" style={{ color: 'white' }}>{row.type}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
