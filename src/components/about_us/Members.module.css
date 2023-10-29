@@ -49,6 +49,8 @@
     border: 1px solid rgb(115, 115, 115);
     position: relative;
     color: #e1e1e1;
+    border-radius: 20px;
+    background-color: rgb(36, 56, 72);
 }
 
 .accordionHeader {
@@ -120,5 +122,5 @@
     width: 60%;
     left: 20%;
     position: relative;
-    background-color: rgb(32, 32, 32);
+    
 }
