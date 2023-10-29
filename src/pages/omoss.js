@@ -6,6 +6,7 @@ import bekkLogo from "../../public/resources/Bekk_navnetrekk_hvit.svg";
 import Accordion from "@/components/about_us/Accordion";
 import Footer from "@/components/all/Footer";
 
+
 export default function OmOssPage() {
   return (
     <div>
@@ -14,7 +15,7 @@ export default function OmOssPage() {
         <div className={styles.omFondet}>
           <div className={styles.omOssWrapper}>
             <h1> Om oss </h1>
-            <hr></hr>
+            <hr className = {styles.horizontalline}></hr>
             <p>
               Onlinefondet er en engasjert og livlig studentorganisasjon ved NTNU,
               dedikert til å fremme studentenes interesser og berike deres
@@ -28,19 +29,16 @@ export default function OmOssPage() {
               faglige med det sosiale, og skape varige minner for alle Onlinere.
             </p>
           </div>
-          <div>
-            <img className={styles.ossBilde} src="resources/BILDE29.jpeg" />
-          </div>
         </div>
 
         <div class={styles.styremedlemmer}>
-          <Member path={"resources/testbilde.jpg"} name={"Johanna Wilmers"} />
-          <Member path={"resources/testbilde.jpg"} name={"Magnus Byrkjeland"} />
-          <Member path={"resources/testbilde.jpg"} name={"Hilmir Straumland"} />
-          <Member path={"resources/testbilde.jpg"} name={"Maiken Lie"} />
-          <Member path={"resources/testbilde.jpg"} name={"William Andersson"} />
-          <Member path={"resources/testbilde.jpg"} name={"Thea Karin Fladby"} />
-          <Member path={"resources/testbilde.jpg"} name={"Johanne Tronstad"} />
+          <Member path={"resources/Fondmedlemmer/Johanna.jpg"} name={"Johanna Wilmers"} />
+          <Member path={"resources/Fondmedlemmer/Magnus.jpg"} name={"Magnus Byrkjeland"} />
+          <Member path={"resources/Fondmedlemmer/Hilmir.jpg"} name={"Hilmir Straumland"} />
+          <Member path={"resources/Fondmedlemmer/noimage.jpg"} name={"Maiken Lie"} />
+          <Member path={"resources/Fondmedlemmer/William.jpg"} name={"William Andersson"} />
+          <Member path={"resources/Fondmedlemmer/Thea.jpg"} name={"Thea Karin Fladby"} />
+          <Member path={"resources/Fondmedlemmer/noimage.jpg"} name={"Johanne Tronstad"} />
         </div>
         <div className={styles.tidligereMedlemmer}>
           <h1> Tidligere medlemmer</h1>
