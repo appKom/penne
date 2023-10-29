@@ -6,6 +6,7 @@ import bekkLogo from "../../public/resources/Bekk_navnetrekk_hvit.svg";
 import Accordion from "@/components/about_us/Accordion";
 import Footer from "@/components/all/Footer";
 
+
 export default function OmOssPage() {
   return (
     <div>
@@ -14,7 +15,7 @@ export default function OmOssPage() {
         <div className={styles.omFondet}>
           <div className={styles.omOssWrapper}>
             <h1> Om oss </h1>
-            <hr></hr>
+            <hr className = {styles.horizontalline}></hr>
             <p>
               Onlinefondet er en engasjert og livlig studentorganisasjon ved NTNU,
               dedikert til å fremme studentenes interesser og berike deres
@@ -29,7 +30,7 @@ export default function OmOssPage() {
             </p>
           </div>
           <div>
-            <img className={styles.ossBilde} src="resources/BILDE29.jpeg" />
+            
           </div>
         </div>
 
