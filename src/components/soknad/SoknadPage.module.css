@@ -32,3 +32,9 @@
         margin: 1rem 6rem;
     }
 }
+
+@media only screen and (max-width: 300px){
+    .ul li {
+        margin: 1rem 3rem;
+    }
+}
