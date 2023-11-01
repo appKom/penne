@@ -23,7 +23,9 @@
 .navbar img {
     width: 144px;
     height: 100%;
+    
 }
+
 
 .navbar .menu {
     display: flex;
@@ -43,6 +45,7 @@
 .navbar .spacer {
     width: 144px;
     height: 100%;
+    
 }
 
 .hidden {
@@ -67,11 +70,17 @@
     cursor: pointer;
 }
 
+#online {
+    margin-right: 10px;
+}
 
 
 
 
-@media (max-width: 920px) {
+
+
+
+@media (max-width: 640px) {
 
 
     .navbar {
@@ -117,11 +126,15 @@
     }
     .logo {
         margin-left: 10px;
+        
+
     }
 
     .bekklogo {
-       position: absolute;
+       position: absolute; 
+       top: 3px;
        right: 10px;
+       width: 100px !important;
        
     }
 

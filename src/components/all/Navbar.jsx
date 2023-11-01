@@ -51,7 +51,9 @@ export const Navbar = ({ img, bekk }) => {
               <a href={"https://online.ntnu.no"} className={styles.menuItem}>Online.ntnu.no</a>
             </div>
           </div>
+          <div id={styles.online}>
           <Link href={"/"}><img src={img} alt="Logo" className={styles.logo} /></Link>
+          </div>
           <div className={styles.menu}>
             <Link href={"/omoss"} className={styles.menuItem}>Om oss</Link>
             <Link href={"/soknad"} className={styles.menuItem}>Søknader</Link>
@@ -59,7 +61,9 @@ export const Navbar = ({ img, bekk }) => {
           </div>
          
           <div className={styles.spacer}></div>
+          <div id={styles.bekk}>
           <img src={bekk} alt="Bekk logo" className={styles.logo + " " + styles.bekklogo} />
+          </div>
 
         </div>
       </nav>
