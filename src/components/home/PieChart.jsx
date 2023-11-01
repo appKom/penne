@@ -54,6 +54,7 @@ export default function PieChart(props) {
             height: 360,
             width: 380,
             type: 'donut',
+            foreColor: '#ffffff',
             zoom: {
                 enabled: false
               },
