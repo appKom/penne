@@ -10,6 +10,8 @@ export const Navbar = ({ img, bekk }) => {
   const [showNavbar, setShowNavbar] = useState(styles.navbar_box);
   const [lastScroll, setLastScroll] = useState(0);
   const [showNavMenu, setShowNavMenu] = useState(false);
+
+  const dropdownRef = useRef(null)
   
 
 
@@ -25,7 +27,7 @@ export const Navbar = ({ img, bekk }) => {
       setLastScroll(window.scrollY);
     }
   };
-/*
+
   useEffect(() => {
     const handleClickOutside = (event) => {
         if (
@@ -39,7 +41,7 @@ export const Navbar = ({ img, bekk }) => {
     return () => {
         document.removeEventListener('mousedown', handleClickOutside)
     }
-}, [])*/
+}, [])
 
   
 
@@ -60,7 +62,7 @@ export const Navbar = ({ img, bekk }) => {
         <div className={styles.navbar}>
         <div className={styles.mobilemenucontainer}>
             <Hamburger toggled={showNavMenu} toggle={setShowNavMenu}></Hamburger>
-            <div className={styles.mobilemenu} style={{ display: showNavMenu ? "flex" : "none" }}>
+            <div ref={dropdownRef} className={styles.mobilemenu} style={{ display: showNavMenu ? "flex" : "none" }}>
               <Link href={"/omoss"} className={styles.menuItem}>OM OSS</Link>
               <Link href={"/soknad"} className={styles.menuItem}>SØKNAD</Link>
               <a href={"https://online.ntnu.no"} className={styles.menuItem}>OW</a>
