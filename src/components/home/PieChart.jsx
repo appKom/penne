@@ -51,10 +51,13 @@ export default function PieChart(props) {
         >
         <div className = {styles.chartContainer}>
           <ReactApexChart options={{
+              legend: {
+                position: 'right'
+              },
               chart: {
               stacked: false,
               height: 400,
-              width: 992,
+              width: 400,
               type: 'donut',
               zoom: {
                   enabled: false
@@ -69,13 +72,14 @@ export default function PieChart(props) {
              responsive: [{
               breakpoint: 480,
               options: {
-                chart: {
-                  width: 200,
-                  
-                },
                 legend: {
-                  position: "bottom"
-                }
+                  position: 'bottom'
+                },
+                chart: {
+                  width: 300,
+                  height: 300,
+                },
+                
               }
             }]
           }}series={pieData} type="donut"/>

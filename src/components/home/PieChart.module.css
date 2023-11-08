@@ -18,10 +18,5 @@
 
 
     @media only screen and (max-width: 600px) {
-      .chartContainer {
-        display: none;
-       }
-       .w-full {
-        display: none;
-       }
+      
     }
