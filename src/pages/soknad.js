@@ -27,7 +27,7 @@ export default function SoknadPage() {
           <li>Aktivitetsplan</li>
           <li>Budsjett</li>
         </ul>
-        <Footer/>
+      <Footer/>
   </div>
     );
   

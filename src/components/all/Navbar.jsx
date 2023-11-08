@@ -12,8 +12,6 @@ export const Navbar = ({ img, bekk }) => {
   const [showNavMenu, setShowNavMenu] = useState(false);
 
   const dropdownRef = useRef(null)
-  
-
 
   const controlNavbar = () => {
     if (typeof window !== 'undefined') {
@@ -60,7 +58,15 @@ export const Navbar = ({ img, bekk }) => {
     <div className={showNavbar}>
       <nav className='navbar'>
         <div className={styles.navbar}>
-        <div className={styles.mobilemenucontainer}>
+
+        
+
+
+        <div ref={dropdownRef} className={styles.mobilemenucontainer}>
+
+  
+
+
             <Hamburger toggled={showNavMenu} toggle={setShowNavMenu}></Hamburger>
             <div ref={dropdownRef} className={styles.mobilemenu} style={{ display: showNavMenu ? "flex" : "none" }}>
               <Link href={"/omoss"} className={styles.menuItem}>OM OSS</Link>
@@ -77,7 +83,7 @@ export const Navbar = ({ img, bekk }) => {
             <a href={"https://online.ntnu.no"} className={styles.menuItem}>OW</a>
           </div>
          
-          {/* <div className={styles.spacer}></div> */}
+
           <div id={styles.bekk}>
           <img src={bekk} alt="Bekk logo" className={styles.logo + " " + styles.bekklogo} />
           </div>

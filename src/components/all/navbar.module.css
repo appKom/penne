@@ -10,6 +10,7 @@
     font-size: 20px;
     justify-content: center;
 
+
 }
 .navbar_box{
     width: 100%;
@@ -31,7 +32,6 @@
 
 .navbar .menu {
     display: flex;
-    /* gap: 25%; */
     margin: 0 auto;
     color: white;
 
@@ -76,6 +76,7 @@
     margin-right: 10px;
 }
 
+
 .menuItem {
     padding: 30px;
 }
@@ -86,8 +87,6 @@
 
 
 @media (max-width: 775px) {
-
-
     .navbar {
         display: flex;
         justify-content: flex-start;
@@ -140,10 +139,8 @@
        position: absolute; 
        top: 3px;
        right: 10px;
-       /* width: 100px !important; */
        
     }
-
    
 }
 
@@ -152,4 +149,6 @@
         width: 100px;
     }
 }
-    
+
+      
+
