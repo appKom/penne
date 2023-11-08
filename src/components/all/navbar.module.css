@@ -7,6 +7,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    font-size: 20px;
+
 }
 .navbar_box{
     width: 100%;
@@ -22,13 +24,16 @@
 .navbar img {
     width: 144px;
     height: 100%;
+    
 }
+
 
 .navbar .menu {
     display: flex;
-    gap: 80px;
+    gap: 15%;
     margin: 0 auto;
     color: white;
+
 }
 
 .navbar .menu p {
@@ -41,6 +46,7 @@
 .navbar .spacer {
     width: 144px;
     height: 100%;
+    
 }
 
 .hidden {
@@ -55,3 +61,85 @@
     z-index: 2;
 
 }
+
+.mobilemenucontainer {
+    display: none;
+    float: right;
+}
+
+.mobilemenucontainer:hover {
+    cursor: pointer;
+}
+
+#online {
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+@media (max-width: 640px) {
+
+
+    .navbar {
+        display: flex;
+        justify-content: flex-start;
+        
+    }
+    .navbar .menu {
+        display: none;
+    }
+
+    .mobilemenucontainer {
+        display: block;
+        padding-top: 4px;
+ 
+        
+    }
+
+    .spacer {
+        display: none;
+    }
+
+
+    .mobilemenucontainer .mobilemenu {
+        display: flex;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: #191919;
+        z-index: 69;
+        border-bottom: 1px rgba(255,255,255, 0.2) solid;
+        border-top: 1px rgba(255,255,255, 0.2) solid;
+        
+    }
+    .mobilemenucontainer .mobilemenu .menuItem {
+        padding: 10px;
+    }
+    .mobilemenucontainer .mobilemenu .menuItem:hover {
+        background-color: #ffffff;
+        color: #131620;
+        
+    }
+    .logo {
+        margin-left: 10px;
+        
+
+    }
+
+    .bekklogo {
+       position: absolute; 
+       top: 3px;
+       right: 10px;
+       width: 100px !important;
+       
+    }
+
+   
+}
+    
