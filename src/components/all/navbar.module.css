@@ -4,10 +4,11 @@
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    /*  justify-content: space-between;*/
     align-items: center;
     padding: 20px;
     font-size: 20px;
+    justify-content: center;
 
 }
 .navbar_box{
@@ -30,7 +31,7 @@
 
 .navbar .menu {
     display: flex;
-    gap: 15%;
+    /* gap: 25%; */
     margin: 0 auto;
     color: white;
 
@@ -75,13 +76,16 @@
     margin-right: 10px;
 }
 
+.menuItem {
+    padding: 30px;
+}
 
 
 
 
 
 
-@media (max-width: 640px) {
+@media (max-width: 775px) {
 
 
     .navbar {

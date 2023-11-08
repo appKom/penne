@@ -60,7 +60,7 @@ export const Navbar = ({ img, bekk }) => {
             <a href={"https://online.ntnu.no"} className={styles.menuItem}>Online.ntnu.no</a>
           </div>
          
-          <div className={styles.spacer}></div>
+          {/* <div className={styles.spacer}></div> */}
           <div id={styles.bekk}>
           <img src={bekk} alt="Bekk logo" className={styles.logo + " " + styles.bekklogo} />
           </div>
