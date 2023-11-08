@@ -110,19 +110,20 @@
 
 
     .mobilemenucontainer .mobilemenu {
-        border-radius: 5%;
+        display: flex;
         position: absolute;
-        left: 10px;
-        
+        top: 100%;
+        left: 0;
+        right: 0;
         flex-direction: column;
-        border: .5px solid #ffffff;
-        margin-top: 20px;
-        background-color: #131620;
+        background-color: #191919;
+        z-index: 69;
+        border-bottom: 1px rgba(255,255,255, 0.2) solid;
+        border-top: 1px rgba(255,255,255, 0.2) solid;
         
     }
     .mobilemenucontainer .mobilemenu .menuItem {
         padding: 10px;
-        border: solid .5px white;
     }
     .mobilemenucontainer .mobilemenu .menuItem:hover {
         background-color: #ffffff;

@@ -2,6 +2,7 @@ import Link from "next/link"
 import styles from "./navbar.module.css"
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Spiral as Hamburger } from 'hamburger-react';
 
 
 
@@ -9,6 +10,9 @@ export const Navbar = ({ img, bekk }) => {
   const [showNavbar, setShowNavbar] = useState(styles.navbar_box);
   const [lastScroll, setLastScroll] = useState(0);
   const [showNavMenu, setShowNavMenu] = useState(false);
+
+  const dropdownRef = useRef(null)
+  
 
 
   const controlNavbar = () => {
@@ -23,9 +27,23 @@ export const Navbar = ({ img, bekk }) => {
       setLastScroll(window.scrollY);
     }
   };
-  const handleToggleShowNavMenu = () => {
-    setShowNavMenu(!showNavMenu);
-  }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+        ) {
+            setShowNavMenu(false)
+        }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside)
+    }
+}, [])
+
+  
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -43,21 +61,20 @@ export const Navbar = ({ img, bekk }) => {
       <nav className='navbar'>
         <div className={styles.navbar}>
         <div className={styles.mobilemenucontainer}>
-            <MenuIcon onClick={() => handleToggleShowNavMenu()} className={styles.menuicon} />
-
-            <div className={styles.mobilemenu} style={{ display: showNavMenu ? "flex" : "none" }}>
-              <Link href={"/omoss"} className={styles.menuItem}>Om oss</Link>
-              <Link href={"/soknad"} className={styles.menuItem}>Søknader</Link>
-              <a href={"https://online.ntnu.no"} className={styles.menuItem}>Online.ntnu.no</a>
+            <Hamburger toggled={showNavMenu} toggle={setShowNavMenu}></Hamburger>
+            <div ref={dropdownRef} className={styles.mobilemenu} style={{ display: showNavMenu ? "flex" : "none" }}>
+              <Link href={"/omoss"} className={styles.menuItem}>OM OSS</Link>
+              <Link href={"/soknad"} className={styles.menuItem}>SØKNAD</Link>
+              <a href={"https://online.ntnu.no"} className={styles.menuItem}>OW</a>
             </div>
           </div>
           <div id={styles.online}>
           <Link href={"/"}><img src={img} alt="Logo" className={styles.logo} /></Link>
           </div>
           <div className={styles.menu}>
-            <Link href={"/omoss"} className={styles.menuItem}>Om oss</Link>
-            <Link href={"/soknad"} className={styles.menuItem}>Søknader</Link>
-            <a href={"https://online.ntnu.no"} className={styles.menuItem}>Online.ntnu.no</a>
+            <Link href={"/omoss"} className={styles.menuItem}>OM OSS</Link>
+            <Link href={"/soknad"} className={styles.menuItem}>SØKNAD</Link>
+            <a href={"https://online.ntnu.no"} className={styles.menuItem}>OW</a>
           </div>
          
           {/* <div className={styles.spacer}></div> */}

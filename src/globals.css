@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -13,7 +14,6 @@
     --onlineblue: #0d5474;
     --onlinebluedark: #072f41;
     --onlineyellow: #f9b759;
-    font-family: 'Roboto';
   }
 
 
@@ -26,9 +26,9 @@
 }
 
 body {
-  font-family: 'Roboto';
   color: white;
   background-color: #131620;
+  font-family: 'Source Sans 3', sans-serif;
 }
 
 .MuiCircularProgress-primary {
