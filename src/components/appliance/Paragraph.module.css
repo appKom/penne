@@ -1,12 +1,11 @@
 .paragraph {
     color: #FFF;
-text-align: center;
-font-family: 'Inter', sans-serif;
-font-size: 25px;
-font-style: normal;
-font-weight: 300;
-line-height: normal;
-
-margin-top: 40px;
-width: 80%;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    line-height: normal;
+    margin-top: 40px;
+    width: 80%;
+    line-height: 2.2rem;
 }

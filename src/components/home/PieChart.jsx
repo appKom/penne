@@ -17,12 +17,13 @@ export default function PieChart(props) {
         if (data.error) {
             
             setPieData([]);
-            
+            console.log("data error")
             setError(data.error);
-        } else if (data.message) {
+        } else if (data.data) {
             const labelData=[];
             const dataPie=[];
-            data.message.forEach((arr)=>{
+            console.log("data: " + data)
+            data.data.forEach((arr)=>{
                 labelData.push(arr.instrument.name);
                 const val= arr.percent.toString().slice(0, 4);
                 dataPie.push(Number(val));
@@ -53,6 +54,7 @@ export default function PieChart(props) {
             height: 360,
             width: 380,
             type: 'donut',
+            foreColor: '#ffffff',
             zoom: {
                 enabled: false
               },
