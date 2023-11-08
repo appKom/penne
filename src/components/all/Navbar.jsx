@@ -12,7 +12,7 @@ export const Navbar = ({ img, bekk }) => {
   const [showNavMenu, setShowNavMenu] = useState(false);
 
   const dropdownRef = useRef(null)
-  
+  const menuiconRef = useRef(null)
 
 
   const controlNavbar = () => {
@@ -60,7 +60,7 @@ export const Navbar = ({ img, bekk }) => {
     <div className={showNavbar}>
       <nav className='navbar'>
         <div className={styles.navbar}>
-        <div className={styles.mobilemenucontainer}>
+        <div ref={dropdownRef} className={styles.mobilemenucontainer}>
             <Hamburger toggled={showNavMenu} toggle={setShowNavMenu}></Hamburger>
             <div ref={dropdownRef} className={styles.mobilemenu} style={{ display: showNavMenu ? "flex" : "none" }}>
               <Link href={"/omoss"} className={styles.menuItem}>OM OSS</Link>
