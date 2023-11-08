@@ -140,10 +140,16 @@
        position: absolute; 
        top: 3px;
        right: 10px;
-       width: 100px !important;
+       /* width: 100px !important; */
        
     }
 
    
+}
+
+@media (max-width: 400px) {
+    .navbar img {
+        width: 100px;
+    }
 }
     
