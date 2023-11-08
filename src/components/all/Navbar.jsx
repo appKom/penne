@@ -13,9 +13,6 @@ export const Navbar = ({ img, bekk }) => {
 
   const dropdownRef = useRef(null)
 
- 
-
-
   const controlNavbar = () => {
     if (typeof window !== 'undefined') {
       if (lastScroll - window.scrollY < 0) { // if scroll down hide the navbar
@@ -62,9 +59,13 @@ export const Navbar = ({ img, bekk }) => {
       <nav className='navbar'>
         <div className={styles.navbar}>
 
+        
+
+
         <div ref={dropdownRef} className={styles.mobilemenucontainer}>
 
   
+
 
             <Hamburger toggled={showNavMenu} toggle={setShowNavMenu}></Hamburger>
             <div ref={dropdownRef} className={styles.mobilemenu} style={{ display: showNavMenu ? "flex" : "none" }}>
@@ -82,7 +83,7 @@ export const Navbar = ({ img, bekk }) => {
             <a href={"https://online.ntnu.no"} className={styles.menuItem}>OW</a>
           </div>
          
-          <div className={styles.spacer}></div>
+
           <div id={styles.bekk}>
           <img src={bekk} alt="Bekk logo" className={styles.logo + " " + styles.bekklogo} />
           </div>
