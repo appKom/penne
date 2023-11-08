@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react"
 import dynamic from 'next/dynamic';
 import Box from '@mui/material/Box';
+import styles from "./PieChart.module.css"
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -48,38 +49,37 @@ export default function PieChart(props) {
         borderRadius={4}
         margin={"0 auto"}
         >
-        <ReactApexChart options={{
-            legend: {
-              position: 'right'
-            },
-            chart: {
-            stacked: false,
-            height: 360,
-            width: 380,
-            type: 'donut',
-            zoom: {
-                enabled: false
-              },
-              toolbar: {
-                show: false
-              },
-          },
-          colors: ["#e60049", "#0bb4ff", "#50e991", "#e6d800", "#9b19f5", "#ffa300", "#dc0ab4", "#b3d4ff", "#00bfa0"],
-          labels: pieLabel,
-          responsive: [{
-            breakpoint: 500,
-            options: {
-              legend: {
-                position: 'bottom'
-              },
+        <div className = {styles.chartContainer}>
+          <ReactApexChart options={{
               chart: {
-                width: 300,
-                height: 300,
-              },
-              
-            }
-          }]
-        }}series={pieData} type="donut"/>
+              stacked: false,
+              height: 400,
+              width: 992,
+              type: 'donut',
+              zoom: {
+                  enabled: false
+                },
+                toolbar: {
+                  show: false
+                },
+            },
+            
+            colors: ["#e60049", "#0bb4ff", "#50e991", "#e6d800", "#9b19f5", "#ffa300", "#dc0ab4", "#b3d4ff", "#00bfa0"],
+            labels: pieLabel,
+             responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200,
+                  
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }]
+          }}series={pieData} type="donut"/>
+        </div>
         </Box>
       )
 }

@@ -1,0 +1,27 @@
+.chartContainer {
+    position: bottom;
+    
+  }
+  
+  
+  @media (max-width: 480px) {
+    .chartContainer {
+      flex-direction: column;
+      margin-left: 0;
+      margin-top: 10px; 
+    }
+
+    .chartContainer > div { /* Target the chart container */
+        width: 80%; /* Adjust the chart width as needed */
+      }
+    }
+
+
+    @media only screen and (max-width: 600px) {
+      .chartContainer {
+        display: none;
+       }
+       .w-full {
+        display: none;
+       }
+    }
