@@ -49,6 +49,9 @@ export default function PieChart(props) {
         margin={"0 auto"}
         >
         <ReactApexChart options={{
+            legend: {
+              position: 'right'
+            },
             chart: {
             stacked: false,
             height: 360,
@@ -64,15 +67,16 @@ export default function PieChart(props) {
           colors: ["#e60049", "#0bb4ff", "#50e991", "#e6d800", "#9b19f5", "#ffa300", "#dc0ab4", "#b3d4ff", "#00bfa0"],
           labels: pieLabel,
           responsive: [{
-            breakpoint: 480,
+            breakpoint: 500,
             options: {
-              chart: {
-                width: 200,
-                
-              },
               legend: {
                 position: 'bottom'
-              }
+              },
+              chart: {
+                width: 300,
+                height: 300,
+              },
+              
             }
           }]
         }}series={pieData} type="donut"/>
