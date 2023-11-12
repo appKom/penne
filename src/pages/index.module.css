@@ -22,3 +22,9 @@
     margin: 0%;
     font-size: 18px;
 }
+@media only screen and (max-width: 570px) {
+    #donut {
+        display: none !important;
+    }
+
+}
