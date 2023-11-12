@@ -80,7 +80,7 @@ export const Navbar = ({ img, bekk }) => {
           <div className={styles.menu}>
             <Link href={"/omoss"} className={styles.menuItem}>OM OSS</Link>
             <Link href={"/soknad"} className={styles.menuItem}>SØKNAD</Link>
-            <a href={"https://online.ntnu.no"} className={styles.menuItem}>OW</a>
+            <Link href={"https://online.ntnu.no"} className={styles.menuItem}>OW</Link>
           </div>
          
 

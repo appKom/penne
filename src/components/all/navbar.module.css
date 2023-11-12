@@ -1,5 +1,6 @@
 /* CSS file: styles.css */
 
+    
 .navbar {
     height: 100%;
     width: 100%;
@@ -9,7 +10,8 @@
     padding: 20px;
     font-size: 20px;
     justify-content: center;
-
+    background-color: #131620;
+    
 
 }
 .navbar_box{
@@ -22,6 +24,7 @@
     --tw-bg-opacity: 1;
     background-color: rgb(19 22 32 / var(--tw-bg-opacity));
     z-index: 2;
+   
 }
 
 .navbar img {
@@ -50,6 +53,12 @@
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     padding-top: 4px;
+
+}
+
+.navbar .menu a:hover {
+    color: #cccccc;
+    
 }
 
 
@@ -73,6 +82,8 @@
     --tw-bg-opacity: 1;
     background-color: rgb(19 22 32 / var(--tw-bg-opacity));
     z-index: 2;
+    visibility: hidden;
+    
 
 }
 
@@ -93,11 +104,10 @@
 .menuItem {
     padding: 10px 40px 20px;
     transition: 0.05s ease-in-out;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
-
-
-
-
 
 
 @media (max-width: 775px) {
