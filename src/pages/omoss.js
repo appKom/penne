@@ -31,7 +31,7 @@ export default function OmOssPage() {
           </div>
         </div>
 
-        <div class={styles.styremedlemmer}>
+        <div className={styles.styremedlemmer}>
           <Member path={"resources/Fondmedlemmer/Johanna.jpg"} name={"Johanna Wilmers"} />
           <Member path={"resources/Fondmedlemmer/Magnus.jpg"} name={"Magnus Byrkjeland"} />
           <Member path={"resources/Fondmedlemmer/Hilmir.jpg"} name={"Hilmir Straumland"} />
