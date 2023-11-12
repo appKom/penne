@@ -2,10 +2,10 @@ import styles from "./Members.module.css"
 
 const Member = ({path, name}) => {
     return (
-        <div class = {styles.memberWrapper}>
+        <div className={styles.memberWrapper}>
             
-            <img src={path} class = { styles.circleimage}/>
-            <p class = { styles.memberName} > {name}</p>
+            <img src={path} className={ styles.circleimage}/>
+            <p className={ styles.memberName} > {name}</p>
             
         </div>
     );
