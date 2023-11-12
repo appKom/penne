@@ -29,8 +29,8 @@ export default function IndexPage() {
       <div className="w-3/4 mb-10 text-lg text-justify">
         <p className="">
             Et fond er en kollektiv invistering der flere går sammen og plasserer penger i verdipapirmarkedet. Dette kalles ofte for kollektiv sparing, og man kan se for seg at et fond er en kurv med investeringer. Linjeforeningen Online har et slikt fond og dette betyr at Online investerer i ulike aksjer 🤍<br/><br/><br/><br/>
-            <div id={style.under}>Under finner du en graf, denne grafen er en oversikt over den relative utviklingen av Online sitt fond.</div> 
         </p>
+        <div id={style.under}>Under finner du en graf, denne grafen er en oversikt over den relative utviklingen av Online sitt fond.</div> 
         <br></br>
       </div>
       <PerformanceDisplay />
