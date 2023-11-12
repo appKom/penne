@@ -35,12 +35,14 @@ export default function IndexPage() {
       </div>
       <PerformanceDisplay />
       <br></br>
-      <div className="text-lg w-3/4 text-center mt-40 mb-10">
-        <p className="w-full">
+      <div id={style.donut} className="w-full">
+        <div className="text-lg w-full text-center mt-40 mb-10">
+          <p className="w-full">
             Denne smultringen gir en oversikt over fondets sammensetning.  
-        </p>
+          </p>
+        </div>
+        <PieChart />
       </div>
-      <PieChart/>
       <br></br>
       <br></br>
       <div className="text-lg w-3/4 text-center mt-40 mb-10">
@@ -48,7 +50,9 @@ export default function IndexPage() {
             Tabellen viser fond, andel og kategori.  
         </p>
       </div>
-      <Table/>
+      <div className="w-3/4">
+        <Table/>
+      </div>
       <br></br>
       <Footer/>
     </div>
