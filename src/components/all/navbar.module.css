@@ -75,7 +75,6 @@
     visibility: hidden;
     
 
-
 }
 
 .mobilemenucontainer {
@@ -93,12 +92,10 @@
 
 
 .menuItem {
-    padding: 30px;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
-
-
-
-
 
 
 @media (max-width: 775px) {
