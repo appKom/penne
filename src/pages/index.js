@@ -30,7 +30,7 @@ export default function IndexPage() {
         <p className="">
             Et fond er en kollektiv invistering der flere går sammen og plasserer penger i verdipapirmarkedet. Dette kalles ofte for kollektiv sparing, og man kan se for seg at et fond er en kurv med investeringer. Linjeforeningen Online har et slikt fond og dette betyr at Online investerer i ulike aksjer 🤍<br/><br/><br/><br/>
         </p>
-        <div id={style.under}>Under finner du en graf, denne grafen er en oversikt over den relative utviklingen av Online sitt fond.</div> 
+        <div id={style.under}>Under finner du en graf, denne grafen er en oversikt over den relative utviklingen av Online sitt fond</div> 
         <br></br>
       </div>
       <PerformanceDisplay />
@@ -38,7 +38,7 @@ export default function IndexPage() {
       <div id={style.donut} className="w-full">
         <div className="text-lg w-full text-center mt-40 mb-10">
           <p className="w-full">
-            Denne smultringen gir en oversikt over fondets sammensetning.  
+            Denne smultringen gir en oversikt over fondets sammensetning  
           </p>
         </div>
         <PieChart />
