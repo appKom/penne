@@ -11,7 +11,9 @@
     border-radius: 80%;
     width: 250px;
     height: 250px;
+ 
     object-fit: cover;
+  
 }
 
 .memberName {

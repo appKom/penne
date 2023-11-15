@@ -28,8 +28,8 @@ export default function IndexPage() {
       <h1 id={style.overskrift}> Online Fondet </h1>
       <div className="w-3/4 mb-10 text-lg text-justify">
         <p className="">
-            Et fond er en kollektiv invistering der flere går sammen å plasserer penger i verdipapirmarkede. Dette kalles ofte for kollektiv sparing, og man kan se for seg at et fond er en kurv med investeringer. Online har et slikt fond, dette betyr at ulike parter innvesterer i Online, noe vi setter stor pris på🤍
-            Under finner du en graf, denne grafen er en oversikt over utviklingen av Online sitt fond. 
+            Et fond er en kollektiv invistering der flere går sammen å plasserer penger i verdipapirmarkede. Dette kalles ofte for kollektiv sparing, og man kan se for seg at et fond er en kurv med investeringer. Online har et slikt fond, dette betyr at ulike parter innvesterer i Online, noe vi setter stor pris på.
+            Under finner du en graf, denne grafen er en oversikt over utviklingen av Online sitt fond. Grafen inkluderer også en graf for OSEBX, som er hovedindeksen på Oslo Børs. Disse grafene kan sammenlignes for å se hvordan Online sitt fond har utviklet seg i forhold til hovedindeksen på Oslo Børs.
         </p>
         <br></br>
       </div>
