@@ -1,32 +1,50 @@
-@media only screen and (max-width: 775px) {
-    #overskrift {
-        display: block !important;
+#soknadWrapper {
+    width: 80%;
+    padding: 50px;
+    /* background-color: aqua !important; */
+}
 
+.ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+}
+
+.ul li {
+    list-style-type: disc;
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    line-height: normal;
+    margin-top: 40px;
+    margin: 1rem 4rem;
+}
+
+@media only screen and (max-width: 1000px){
+    .ul li {
+        margin: 1rem 3rem;
     }
-    #splash,#scroll {
-        display: none;
+}
 
+@media only screen and (max-width: 500px){
+    #soknadWrapper {
+        width: 100%;
+    }
+    .ul li {
+        margin: 1rem 2rem;
     }
 
 }
 
-#overskrift {
-    display: none;
-    font-size:x-large;
-    margin-bottom: 10px;
-}
-
-#under {
-    text-align: center;
-}
-
-.tekst-to {
-    margin: 0%;
-    font-size: 18px;
-}
-@media only screen and (max-width: 570px) {
-    #donut {
-        display: none !important;
+@media only screen and (max-width: 300px){
+    .ul li {
+        margin: 1rem 1rem;
     }
-
 }
