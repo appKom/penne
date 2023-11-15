@@ -7,14 +7,13 @@ import { HorizontalLine } from "@/components/appliance/HorizontalLine";
 import SubTitle from "@/components/appliance/SubTitle";
 import { Paragraph } from "@/components/appliance/Paragraph";
 
-import  styles from "@/components/soknad/SoknadPage.module.css";
+import  styles from "../components/soknad/SoknadPage.module.css";
 
 export default function SoknadPage() {
   return (
-    <div className="h-full flex flex-col justify-center items-center">
+    <div className="h-full flex flex-col justify-center items-center w-full">
 
       <Navbar img={onlineLogo.src} bekk={bekkLogo.src}/>
-
       <Title title="Søke om støtte" />
       <HorizontalLine />
       <SubTitle title="Hvordan søke om støtte?" />
