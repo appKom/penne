@@ -69,21 +69,20 @@ export const Navbar = ({ img, bekk }) => {
 
             <Hamburger toggled={showNavMenu} toggle={setShowNavMenu}></Hamburger>
             <div ref={dropdownRef} className={styles.mobilemenu} style={{ display: showNavMenu ? "flex" : "none" }}>
+              <Link href={"/"} className={styles.menuItem}>HJEM</Link>
               <Link href={"/omoss"} className={styles.menuItem}>OM OSS</Link>
               <Link href={"/soknad"} className={styles.menuItem}>SØKNAD</Link>
-              <a href={"https://online.ntnu.no"} className={styles.menuItem}>OW</a>
-            </div>
+                 </div>
           </div>
           <div id={styles.online}>
           <Link href={"/"}><img src={img} alt="Logo" className={styles.logo} /></Link>
           </div>
           <div className={styles.menu}>
+            <Link href={"/"} className={styles.menuItem}>HJEM</Link>
             <Link href={"/omoss"} className={styles.menuItem}>OM OSS</Link>
             <Link href={"/soknad"} className={styles.menuItem}>SØKNAD</Link>
-            <Link href={"https://online.ntnu.no"} className={styles.menuItem}>OW</Link>
           </div>
-         
-
+        
           <div id={styles.bekk}>
           <img src={bekk} alt="Bekk logo" className={styles.logo + " " + styles.bekklogo} />
           </div>

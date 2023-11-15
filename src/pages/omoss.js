@@ -32,9 +32,10 @@ export default function OmOssPage() {
         </div>
 
         <div className={styles.styremedlemmer}>
+        <Member path={"resources/Fondmedlemmer/Hilmir.jpg"} name={"Hilmir Straumland (Leder)"} />
+      
           <Member path={"resources/Fondmedlemmer/Johanna.jpg"} name={"Johanna Wilmers"} />
           <Member path={"resources/Fondmedlemmer/Magnus.jpg"} name={"Magnus Byrkjeland"} />
-          <Member path={"resources/Fondmedlemmer/Hilmir.jpg"} name={"Hilmir Straumland"} />
           <Member path={"resources/Fondmedlemmer/noimage.jpg"} name={"Maiken Lie"} />
           <Member path={"resources/Fondmedlemmer/William.jpg"} name={"William Andersson"} />
           <Member path={"resources/Fondmedlemmer/Thea.jpg"} name={"Thea Karin Fladby"} />
