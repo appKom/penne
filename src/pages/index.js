@@ -36,7 +36,7 @@ export default function IndexPage() {
       <div id={style.donut} className="w-full">
         <div className="text-lg w-full text-center mt-40 mb-10">
           <p className="w-full">
-            Denne smultringen gir en oversikt over fondets sammensetning  
+            Denne smultringen gir en oversikt over fondets sammensetning (FAKE DATA)
           </p>
         </div>
         <PieChart />
@@ -45,7 +45,7 @@ export default function IndexPage() {
       <br></br>
       <div className="text-lg w-3/4 text-center mt-40 mb-10">
         <p className="w-full">
-            Tabellen viser fond, andel og kategori  
+            Tabellen viser fond, andel og kategori (FAKE DATA)
         </p>
       </div>
       <div className="w-3/4">
