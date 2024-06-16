@@ -1,7 +1,9 @@
-import styles from "./SubTitle.module.css";
-
-const SubTitle = (props) => {
-  return <h1 id={styles.header}>{props.title}</h1>;
+const SubTitle = ({ title }) => {
+  return (
+    <h1 className="text-3xl font-light text-center text-white">
+      {title}
+    </h1>
+  );
 };
 
 export default SubTitle;

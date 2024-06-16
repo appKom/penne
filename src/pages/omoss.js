@@ -1,5 +1,4 @@
 import Member from "../components/about_us/Members";
-import styles from "../components/about_us/Members.module.css";
 import { Navbar } from "@/components/all/Navbar";
 import onlineLogo from "../../public/resources/Online_hvit.png";
 import bekkLogo from "../../public/resources/Bekk_navnetrekk_hvit.svg";
@@ -10,27 +9,16 @@ export default function OmOssPage() {
   return (
     <div>
       <Navbar img={onlineLogo.src} bekk={bekkLogo.src} />
-      <div id={styles.titel2}>
-        <div className={styles.omFondet}>
-          <div className={styles.omOssWrapper}>
-            <h1> Om oss </h1>
-            <hr className={styles.horizontalline}></hr>
-            <p>
-              Onlinefondet er en engasjert og livlig studentorganisasjon ved
-              NTNU, dedikert til å fremme studentenes interesser og berike deres
-              akademiske og sosiale opplevelser. Gjennom vårt fond, ledet av et
-              dedikert fondstyre, gir vi økonomisk støtte til initiativer som
-              sikrer at medlemmenes behov og interesser blir ivaretatt. Fra å
-              finansiere nytt musikkutstyr for vårt linjeforeningsband, til å
-              støtte surfeturer og sosiale arrangementer, streber vi etter å gi
-              tilbake til vår studentkommunitet. Med en rik historie og et
-              engasjert medlemskap, er vi stolte av vår evne til å kombinere det
-              faglige med det sosiale, og skape varige minner for alle Onlinere.
-            </p>
-          </div>
+      <div className="text-5xl text-center text-white">
+        <div className="w-4/5 p-12 mx-auto text-center text-white">
+          <h1>Om oss</h1>
+          <hr className="w-full h-px mt-12 mb-5 bg-gray-300"></hr>
+          <p className="text-base leading-9 text-left">
+            Onlinefondet er en engasjert og livlig studentorganisasjon ved NTNU, dedikert til å fremme studentenes interesser og berike deres akademiske og sosiale opplevelser. Gjennom vårt fond, ledet av et dedikert fondstyre, gir vi økonomisk støtte til initiativer som sikrer at medlemmenes behov og interesser blir ivaretatt. Fra å finansiere nytt musikkutstyr for vårt linjeforeningsband, til å støtte surfeturer og sosiale arrangementer, streber vi etter å gi tilbake til vår studentkommunitet. Med en rik historie og et engasjert medlemskap, er vi stolte av vår evne til å kombinere det faglige med det sosiale, og skape varige minner for alle Onlinere.
+          </p>
         </div>
 
-        <div className={styles.styremedlemmer}>
+        <div className="flex flex-wrap justify-center gap-12 p-12">
           <Member
             path={"resources/Fondmedlemmer/Hilmir.jpg"}
             name={"Hilmir Straumland (Leder)"}
@@ -61,9 +49,9 @@ export default function OmOssPage() {
             name={"Johanne Tronstad"}
           />
         </div>
-        <div className={styles.tidligereMedlemmer}>
+        <div className="text-3xl text-white">
           <h1> Tidligere medlemmer</h1>
-          <div className={styles.tidligereMedlemmerWrapper}>
+          <div className="mx-auto w-7/10">
             <Accordion
               title="2022"
               content={[

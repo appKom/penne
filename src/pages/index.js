@@ -15,9 +15,8 @@ import style from "./index.module.css";
 export default function IndexPage() {
   return (
     <Provider store={store}>
-      <div className="h-full flex flex-col justify-center items-center">
+      <div className="flex flex-col items-center justify-center h-full">
         <Navbar img={onlineLogo.src} bekk={bekkLogo.src} />
-
         <div id={style.splash} className="relative mb-[500px] w-full">
           <Splash img={rf.src} />
         </div>
@@ -44,7 +43,7 @@ export default function IndexPage() {
         <PerformanceDisplay />
         <br></br>
         <div id={style.donut} className="w-full">
-          <div className="text-lg w-full text-center mt-40 mb-10">
+          <div className="w-full mt-40 mb-10 text-lg text-center">
             <p className="w-full">
               Denne smultringen gir en oversikt over fondets sammensetning (FAKE
               DATA)
@@ -54,7 +53,7 @@ export default function IndexPage() {
         </div>
         <br></br>
         <br></br>
-        <div className="text-lg w-3/4 text-center mt-40 mb-10">
+        <div className="w-3/4 mt-40 mb-10 text-lg text-center">
           <p className="w-full">
             Tabellen viser fond, andel og kategori (FAKE DATA)
           </p>

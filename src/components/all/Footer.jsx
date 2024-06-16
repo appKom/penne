@@ -1,7 +1,4 @@
-import styles from "./footer.module.css";
-
 import React from "react";
-
 import { BsSlack, BsFacebook, BsInstagram, BsGithub } from "react-icons/bs";
 
 const Footer = () => {
@@ -28,26 +25,26 @@ const Footer = () => {
       link: "https://github.com/appKom",
     },
   ];
+
   return (
-    <div className={styles.footer_main}>
-      <div className={styles.footer_links}>
-        {footerLinks.map((link) => {
-          return (
-            <a
-              href={link.link}
-              key={link.name}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {link.icon}
-            </a>
-          );
-        })}
+    <div className="mt-20 w-full h-48 bg-[#0d5474] text-white py-8 flex flex-col items-center justify-center gap-8">
+      <div className="flex items-center justify-center gap-8">
+        {footerLinks.map((link) => (
+          <a
+            href={link.link}
+            key={link.name}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white no-underline transition duration-200 hover:text-[#F9B759]"
+          >
+            {link.icon}
+          </a>
+        ))}
       </div>
-      <div className={styles.footer_bottom}>
+      <div className="flex flex-col items-center justify-center gap-2">
         <div>Feil på siden?</div>
         <div>
-          Ta kontakt med <a href="mailto:appkom@online.ntnu.no">Appkom</a>
+          Ta kontakt med <a href="mailto:appkom@online.ntnu.no" className="font-medium transition duration-200 hover:text-[#F9B759]">Appkom</a>
         </div>
       </div>
     </div>

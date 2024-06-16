@@ -1,10 +1,8 @@
-import styles from "./Members.module.css";
-
 const Member = ({ path, name }) => {
   return (
-    <div className={styles.memberWrapper}>
-      <img src={path} className={styles.circleimage} />
-      <p className={styles.memberName}> {name}</p>
+    <div className="flex flex-col items-center justify-center text-center">
+      <img src={path} alt={name} className="object-cover w-64 h-64 rounded-full" />
+      <p className="mt-5 text-lg text-white">{name}</p>
     </div>
   );
 };

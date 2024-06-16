@@ -1,7 +1,9 @@
-import styles from "./Title.module.css";
-
-const Title = (props) => {
-  return <h1 id={styles.header}>{props.title}</h1>;
+const Title = ({ title }) => {
+  return (
+    <h1 className="font-sans text-4xl text-center text-white">
+      {title}
+    </h1>
+  );
 };
 
 export default Title;

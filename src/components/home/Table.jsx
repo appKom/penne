@@ -81,6 +81,7 @@ export default function BasicTable(props) {
       setTableData(dataRow);
     }
   };
+
   useEffect(() => {
     fetchOnlineFondData();
   }, []);
