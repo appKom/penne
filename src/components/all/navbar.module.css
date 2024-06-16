@@ -1,178 +1,145 @@
 /* CSS file: styles.css */
 
-    
 .navbar {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    /*  justify-content: space-between;*/
-    align-items: center;
-    padding: 20px;
-    font-size: 20px;
-    justify-content: center;
-    background-color: #131620;
-    
-
+  height: 100%;
+  width: 100%;
+  display: flex;
+  /*  justify-content: space-between;*/
+  align-items: center;
+  padding: 20px;
+  font-size: 20px;
+  justify-content: center;
+  background-color: #131620;
 }
-.navbar_box{
-    transition: 0.2s;
-    width: 100%;
-    height: 5rem;
-    margin-bottom: 1.25rem;
-    position: sticky;
-    top: 0px;
-    --tw-bg-opacity: 1;
-    background-color: rgb(19 22 32 / var(--tw-bg-opacity));
-    z-index: 2;
-   
+.navbar_box {
+  transition: 0.2s;
+  width: 100%;
+  height: 5rem;
+  margin-bottom: 1.25rem;
+  position: sticky;
+  top: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(19 22 32 / var(--tw-bg-opacity));
+  z-index: 2;
 }
 
 .navbar img {
-    width: 144px;
-    height: 100%;
-    
+  width: 144px;
+  height: 100%;
 }
-
 
 .navbar .menu {
-    display: flex;
-    margin: 0 auto;
-    color: rgb(255, 255, 255);
-
+  display: flex;
+  margin: 0 auto;
+  color: rgb(255, 255, 255);
 }
-
 
 .menuItem:hover {
-   color: #FAB759;
-    
+  color: #fab759;
 }
 
-
 .navbar .menu p {
-    color: rgb(255, 255, 255);
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    padding-top: 4px;
-
+  color: rgb(255, 255, 255);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  padding-top: 4px;
 }
 
 .navbar .menu a:hover {
-    color: #cccccc;
-    
+  color: #cccccc;
 }
-
 
 .navbar .spacer {
-    width: 144px;
-    height: 100%;
-    
+  width: 144px;
+  height: 100%;
 }
 
-
-
 .hidden {
-    transition: 0.2s;
-    overflow: hidden;
-    opacity: 0;
-    height: 5rem;
-    width: 100%;
-    margin-bottom: 1.25rem;
-    position: sticky;
-    top: 0px;
-    --tw-bg-opacity: 1;
-    background-color: rgb(19 22 32 / var(--tw-bg-opacity));
-    z-index: 2;
-    visibility: hidden;
-    
-
+  transition: 0.2s;
+  overflow: hidden;
+  opacity: 0;
+  height: 5rem;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  position: sticky;
+  top: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(19 22 32 / var(--tw-bg-opacity));
+  z-index: 2;
+  visibility: hidden;
 }
 
 .mobilemenucontainer {
-    display: none;
-    float: right;
+  display: none;
+  float: right;
 }
 
 .mobilemenucontainer:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #online {
-    margin-right: 10px;
+  margin-right: 10px;
 }
-
 
 .menuItem {
-    padding: 10px 40px 20px;
-    transition: 0.05s ease-in-out;
-    padding: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
+  padding: 10px 40px 20px;
+  transition: 0.05s ease-in-out;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-
 @media (max-width: 775px) {
-    .navbar {
-        display: flex;
-        justify-content: flex-start;
-        
-    }
-    .navbar .menu {
-        display: none;
-    }
+  .navbar {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .navbar .menu {
+    display: none;
+  }
 
-    .mobilemenucontainer {
-        display: block;
-        padding-top: 4px;
- 
-        
-    }
+  .mobilemenucontainer {
+    display: block;
+    padding-top: 4px;
+  }
 
-    .spacer {
-        display: none;
-    }
+  .spacer {
+    display: none;
+  }
 
+  .mobilemenucontainer .mobilemenu {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: #191919;
+    z-index: 69;
+    border-bottom: 1px rgba(255, 255, 255, 0.2) solid;
+    border-top: 1px rgba(255, 255, 255, 0.2) solid;
+  }
+  .mobilemenucontainer .mobilemenu .menuItem {
+    padding: 10px;
+  }
+  .mobilemenucontainer .mobilemenu .menuItem:hover {
+    background-color: #ffffff;
+    color: #131620;
+  }
+  .logo {
+    margin-left: 10px;
+  }
 
-    .mobilemenucontainer .mobilemenu {
-        display: flex;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        background-color: #191919;
-        z-index: 69;
-        border-bottom: 1px rgba(255,255,255, 0.2) solid;
-        border-top: 1px rgba(255,255,255, 0.2) solid;
-        
-    }
-    .mobilemenucontainer .mobilemenu .menuItem {
-        padding: 10px;
-    }
-    .mobilemenucontainer .mobilemenu .menuItem:hover {
-        background-color: #ffffff;
-        color: #131620;
-        
-    }
-    .logo {
-        margin-left: 10px;
-        
-
-    }
-
-    .bekklogo {
-       position: absolute; 
-       top: 3px;
-       right: 10px;
-       
-    }
-   
+  .bekklogo {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+  }
 }
 
 @media (max-width: 400px) {
-    .navbar img {
-        width: 100px;
-    }
+  .navbar img {
+    width: 100px;
+  }
 }
-
-      
-

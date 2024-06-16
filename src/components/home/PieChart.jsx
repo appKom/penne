@@ -1,19 +1,17 @@
 import React from "react";
-import dynamic from 'next/dynamic';
-import Box from '@mui/material/Box';
+import dynamic from "next/dynamic";
+import Box from "@mui/material/Box";
 import { useGetPositionsQuery } from "@/services/ApiService";
-import CircularProgress from '@mui/joy/CircularProgress';
+import CircularProgress from "@mui/joy/CircularProgress";
 
-
-const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
-
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 export default function PieChart(props) {
-
   const { data, isLoading, error } = useGetPositionsQuery();
 
-  const setError = (message) => {
-  }
+  const setError = (message) => {};
 
   const getPieData = (data) => {
     const dataPie = [];
@@ -22,7 +20,7 @@ export default function PieChart(props) {
       dataPie.push(Number(val));
     });
     return dataPie;
-  }
+  };
 
   const getPieLabels = (data) => {
     const labelData = [];
@@ -30,64 +28,69 @@ export default function PieChart(props) {
       labelData.push(arr.instrument.name);
     });
     return labelData;
-  }
+  };
 
   return (
     <Box
-
       maxWidth={700}
       width={9 / 10}
       boxShadow={3}
-
       padding={3}
       borderRadius={4}
       margin={"0 auto"}
     >
-      {isLoading ? <Box
-        width={"100%"}
-        display={"flex"}
-        justifyContent={"center"}
-      >
-        <CircularProgress
-
-          size="lg"
-          variant="plain"
-
-        />
-      </Box> : data ?
-
-        <ReactApexChart options={{
-          chart: {
-            stacked: false,
-            height: 360,
-            width: 380,
-            type: 'donut',
-            foreColor: '#ffffff',
-            zoom: {
-              enabled: false
-            },
-            toolbar: {
-              show: false
-            },
-          },
-          colors: ["#e60049", "#0bb4ff", "#50e991", "#e6d800", "#9b19f5", "#ffa300", "#dc0ab4", "#b3d4ff", "#00bfa0"],
-          labels: getPieLabels(data),
-          responsive: [{
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200,
-
+      {isLoading ? (
+        <Box width={"100%"} display={"flex"} justifyContent={"center"}>
+          <CircularProgress size="lg" variant="plain" />
+        </Box>
+      ) : data ? (
+        <ReactApexChart
+          options={{
+            chart: {
+              stacked: false,
+              height: 360,
+              width: 380,
+              type: "donut",
+              foreColor: "#ffffff",
+              zoom: {
+                enabled: false,
               },
-              legend: {
-                position: 'bottom'
-              }
-            }
-          }]
-        }} series={
-          getPieData(data)
-        } type="donut" />
-        : <p>error</p>}
+              toolbar: {
+                show: false,
+              },
+            },
+            colors: [
+              "#e60049",
+              "#0bb4ff",
+              "#50e991",
+              "#e6d800",
+              "#9b19f5",
+              "#ffa300",
+              "#dc0ab4",
+              "#b3d4ff",
+              "#00bfa0",
+            ],
+            labels: getPieLabels(data),
+            responsive: [
+              {
+                breakpoint: 480,
+                options: {
+                  chart: {
+                    width: 200,
+                  },
+                  legend: {
+                    position: "bottom",
+                  },
+                },
+              },
+            ],
+          }}
+          series={getPieData(data)}
+          type="donut"
+        />
+      ) : (
+        <p>error</p>
+      )}
     </Box>
-  )
+  );
 }

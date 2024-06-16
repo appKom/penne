@@ -6,19 +6,18 @@ import bekkLogo from "../../public/resources/Bekk_navnetrekk_hvit.svg";
 import Accordion from "@/components/about_us/Accordion";
 import Footer from "@/components/all/Footer";
 
-
 export default function OmOssPage() {
   return (
     <div>
-      <Navbar img={onlineLogo.src} bekk={bekkLogo.src}/>
+      <Navbar img={onlineLogo.src} bekk={bekkLogo.src} />
       <div id={styles.titel2}>
         <div className={styles.omFondet}>
           <div className={styles.omOssWrapper}>
             <h1> Om oss </h1>
-            <hr className = {styles.horizontalline}></hr>
+            <hr className={styles.horizontalline}></hr>
             <p>
-              Onlinefondet er en engasjert og livlig studentorganisasjon ved NTNU,
-              dedikert til å fremme studentenes interesser og berike deres
+              Onlinefondet er en engasjert og livlig studentorganisasjon ved
+              NTNU, dedikert til å fremme studentenes interesser og berike deres
               akademiske og sosiale opplevelser. Gjennom vårt fond, ledet av et
               dedikert fondstyre, gir vi økonomisk støtte til initiativer som
               sikrer at medlemmenes behov og interesser blir ivaretatt. Fra å
@@ -32,14 +31,35 @@ export default function OmOssPage() {
         </div>
 
         <div className={styles.styremedlemmer}>
-        <Member path={"resources/Fondmedlemmer/Hilmir.jpg"} name={"Hilmir Straumland (Leder)"} />
-      
-          <Member path={"resources/Fondmedlemmer/Johanna.jpg"} name={"Johanna Wilmers"} />
-          <Member path={"resources/Fondmedlemmer/Magnus.jpg"} name={"Magnus Byrkjeland"} />
-          <Member path={"resources/Fondmedlemmer/noimage.jpg"} name={"Maiken Lie"} />
-          <Member path={"resources/Fondmedlemmer/William.jpg"} name={"William Andersson"} />
-          <Member path={"resources/Fondmedlemmer/Thea.jpg"} name={"Thea Karin Fladby"} />
-          <Member path={"resources/Fondmedlemmer/noimage.jpg"} name={"Johanne Tronstad"} />
+          <Member
+            path={"resources/Fondmedlemmer/Hilmir.jpg"}
+            name={"Hilmir Straumland (Leder)"}
+          />
+
+          <Member
+            path={"resources/Fondmedlemmer/Johanna.jpg"}
+            name={"Johanna Wilmers"}
+          />
+          <Member
+            path={"resources/Fondmedlemmer/Magnus.jpg"}
+            name={"Magnus Byrkjeland"}
+          />
+          <Member
+            path={"resources/Fondmedlemmer/noimage.jpg"}
+            name={"Maiken Lie"}
+          />
+          <Member
+            path={"resources/Fondmedlemmer/William.jpg"}
+            name={"William Andersson"}
+          />
+          <Member
+            path={"resources/Fondmedlemmer/Thea.jpg"}
+            name={"Thea Karin Fladby"}
+          />
+          <Member
+            path={"resources/Fondmedlemmer/noimage.jpg"}
+            name={"Johanne Tronstad"}
+          />
         </div>
         <div className={styles.tidligereMedlemmer}>
           <h1> Tidligere medlemmer</h1>
@@ -121,7 +141,7 @@ export default function OmOssPage() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

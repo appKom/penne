@@ -1,46 +1,46 @@
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Legg til disse stilene i din CSS-fil */
 .img-container {
-    display: flex;
-    justify-content: center !important;
-    align-items: center !important;
-    max-width: 100%;
-  }
-  
-  .imgFadeIn {
-    animation: fadeIn 1s ease-out forwards;
-    width: 90%; /* Forhindrer at bildet strekker seg for bredt */
-    height: auto; 
-  }
-  
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  max-width: 100%;
+}
+
+.imgFadeIn {
+  animation: fadeIn 1s ease-out forwards;
+  width: 90%; /* Forhindrer at bildet strekker seg for bredt */
+  height: auto;
+}
 
 .textSlideUp {
-    animation: slideUp 1s ease-out forwards;
+  animation: slideUp 1s ease-out forwards;
 }
 
 /* Legg til disse stilene i din CSS-fil */
 #tekst {
-    font-size: 150px;
-    color: white;
-    letter-spacing: 0.05em;
-    font-family: "Playfair Display SC";
-    position: absolute;
-  }
-  
-
-  
+  font-size: 150px;
+  color: white;
+  letter-spacing: 0.05em;
+  font-family: "Playfair Display SC";
+  position: absolute;
+}
