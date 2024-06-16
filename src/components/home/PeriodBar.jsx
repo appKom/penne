@@ -19,13 +19,13 @@ export default function PeriodBar(props) {
       flexDirection={"row"}
       justifyContent={"space-around"}
       padding={"10px"}
-      className={styles.period_bar_container}
+      className="flex flex-wrap"
       width={1 - "20px"}
     >
       {buttons.map((button) => (
         <Button
           key={button[1]}
-          className={styles.period_button}
+          className="text-white bg-[#0b5374] mt-[5px]"
           onClick={() => props.setPeriod(button[1])}
         >
           {button[0]}

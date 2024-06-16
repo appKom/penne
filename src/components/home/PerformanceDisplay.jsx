@@ -11,8 +11,6 @@ export default function PerformanceDisplay() {
 
   const [period, setPeriod] = useState("y5");
 
-  const setError = (message) => {};
-
   return (
     <Box
       maxWidth={700}
