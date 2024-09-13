@@ -36,7 +36,7 @@ const Footer = () => {
               key={link.name}
               target="_blank"
               rel="noopener noreferrer"
-              className='transition-all hover:text-onlineyellow'
+              className="transition-all hover:text-onlineyellow"
             >
               {link.icon}
             </a>
@@ -46,7 +46,13 @@ const Footer = () => {
       <div className="flex flex-col items-center gap-2">
         <div>Feil på siden?</div>
         <div>
-          Ta kontakt med <a href="mailto:appkom@online.ntnu.no" className='font-medium transition-all hover:text-onlineyellow'>Appkom</a>
+          Ta kontakt med{' '}
+          <a
+            href="mailto:appkom@online.ntnu.no"
+            className="font-medium transition-all hover:text-onlineyellow"
+          >
+            Appkom
+          </a>
         </div>
       </div>
     </div>

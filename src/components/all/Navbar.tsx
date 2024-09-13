@@ -75,11 +75,7 @@ const Navbar = () => {
           </div>
           <div id={styles.online}>
             <Link to={'/'}>
-              <img
-                src="Online_hvit.png"
-                alt="Logo"
-                className={styles.logo}
-              />
+              <img src="Online_hvit.png" alt="Logo" className={styles.logo} />
             </Link>
           </div>
           <div className={styles.menu}>
