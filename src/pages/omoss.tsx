@@ -1,7 +1,6 @@
 import Member from '../components/about_us/Members';
 import styles from '../components/about_us/Members.module.css';
 import Accordion from '../components/about_us/Accordion';
-import Footer from '../components/all/Footer';
 
 export default function OmOssPage() {
   return (
@@ -127,7 +126,6 @@ export default function OmOssPage() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

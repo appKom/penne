@@ -1,4 +1,3 @@
-import Footer from '../components/all/Footer';
 import Title from '../components/appliance/Title';
 import { HorizontalLine } from '../components/appliance/HorizontalLine';
 import SubTitle from '../components/appliance/SubTitle';
@@ -8,7 +7,7 @@ import styles from '../components/soknad/SoknadPage.module.css';
 
 export default function SoknadPage() {
   return (
-    <div className="h-full flex flex-col justify-center items-center w-full">
+    <div className="flex flex-col items-center justify-center w-full h-full">
       <div id={styles.soknadWrapper}>
         <Title title="Søke om støtte" />
         <HorizontalLine />
@@ -24,8 +23,6 @@ export default function SoknadPage() {
           <li>Budsjett</li>
         </ul>
       </div>
-
-      <Footer />
     </div>
   );
 }

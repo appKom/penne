@@ -5,6 +5,7 @@ import IndexPage from './pages/hjem';
 import Navbar from './components/all/Navbar';
 import { Provider } from 'react-redux';
 import { store } from './services/Store';
+import Footer from './components/all/Footer';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/omoss" element={<OmOssPage />} />
           <Route path="/soknad" element={<SoknadPage />} />
         </Routes>
+        <Footer />
       </Router>
     </Provider>
   );

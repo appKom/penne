@@ -1,4 +1,3 @@
-import Footer from '../components/all/Footer';
 import Table from '../components/home/Table';
 import { Splash } from '../components/home/Splash';
 import ScrollDownIcon from '../components/home/ScrollDownIcon';
@@ -8,16 +7,16 @@ import PerformanceDisplay from '../components/home/PerformanceDisplay';
 
 export default function IndexPage() {
   return (
-    <div className="h-full flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center justify-center h-full">
       <div id={style.splash} className="relative mb-[500px] w-full">
         <Splash />
       </div>
       <div className="sticky bottom-10" id={style.scroll}>
         <ScrollDownIcon />
       </div>
-      <h1 id={style.overskrift}> Online Fondet </h1>
+      <h1 id={style.overskrift}>Online Fondet</h1>
       <div className="w-3/4 mb-10 text-lg text-justify">
-        <p className="">
+        <p>
           Et fond er en kollektiv invistering der flere går sammen å plasserer
           penger i verdipapirmarkedet. Dette kalles ofte for kollektiv sparing,
           og man kan se for seg at et fond er en kurv med investeringer. Online
@@ -35,7 +34,7 @@ export default function IndexPage() {
       <PerformanceDisplay />
       <br></br>
       <div id={style.donut} className="w-full">
-        <div className="text-lg w-full text-center mt-40 mb-10">
+        <div className="w-full mt-40 mb-10 text-lg text-center">
           <p className="w-full">
             Denne smultringen gir en oversikt over fondets sammensetning (FAKE
             DATA)
@@ -45,7 +44,7 @@ export default function IndexPage() {
       </div>
       <br></br>
       <br></br>
-      <div className="text-lg w-3/4 text-center mt-40 mb-10">
+      <div className="w-3/4 mt-40 mb-10 text-lg text-center">
         <p className="w-full">
           Tabellen viser fond, andel og kategori (FAKE DATA)
         </p>
@@ -53,8 +52,6 @@ export default function IndexPage() {
       <div className="w-3/4">
         <Table />
       </div>
-      <br></br>
-      <Footer />
     </div>
   );
 }

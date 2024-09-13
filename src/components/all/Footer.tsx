@@ -27,8 +27,8 @@ const Footer = () => {
     },
   ];
   return (
-    <div className={styles.footer_main}>
-      <div className={styles.footer_links}>
+    <div className="flex flex-col gap-8 py-8 bg-onlineblue mt-28">
+      <div className="flex justify-center gap-8">
         {footerLinks.map((link) => {
           return (
             <a
@@ -36,16 +36,17 @@ const Footer = () => {
               key={link.name}
               target="_blank"
               rel="noopener noreferrer"
+              className='transition-all hover:text-onlineyellow'
             >
               {link.icon}
             </a>
           );
         })}
       </div>
-      <div className={styles.footer_bottom}>
+      <div className="flex flex-col items-center gap-2">
         <div>Feil på siden?</div>
         <div>
-          Ta kontakt med <a href="mailto:appkom@online.ntnu.no">Appkom</a>
+          Ta kontakt med <a href="mailto:appkom@online.ntnu.no" className='font-medium transition-all hover:text-onlineyellow'>Appkom</a>
         </div>
       </div>
     </div>

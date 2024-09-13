@@ -7,6 +7,11 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        'onlineblue': '#0d5474',
+        'onlinebluedark': '#072f41',
+        'onlineyellow': '#f9b759',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
