@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+
+    --onlineblue: #0d5474;
+    --onlinebluedark: #072f41;
+    --onlineyellow: #f9b759;
+  }
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: white;
+  background-color: #131620;
+  font-family: 'Source Sans 3', sans-serif;
+  overflow-x: hidden;
+}
+
+.MuiCircularProgress-primary {
+  color: green !important;
+
+}
+
+@media only screen and (max-width: 775px) {
+  #overskrift {
+      display: block !important;
+
+  }
+  #splash,#scroll {
+      display: none;
+
+  }
+
+}
+
+#overskrift {
+  display: none;
+  font-size:x-large;
+  margin-bottom: 10px;
+}
+
+#under {
+  text-align: center;
+}
+
+.tekst-to {
+  margin: 0%;
+  font-size: 18px;
+}
+@media only screen and (max-width: 570px) {
+  #donut {
+      display: none !important;
+  }
+
+}

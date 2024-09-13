@@ -1,32 +1,32 @@
 @media only screen and (max-width: 775px) {
-    #overskrift {
-        display: block !important;
+  #overskrift {
+      display: block !important;
 
-    }
-    #splash,#scroll {
-        display: none;
+  }
+  #splash,#scroll {
+      display: none;
 
-    }
+  }
 
 }
 
 #overskrift {
-    display: none;
-    font-size:x-large;
-    margin-bottom: 10px;
+  display: none;
+  font-size:x-large;
+  margin-bottom: 10px;
 }
 
 #under {
-    text-align: center;
+  text-align: center;
 }
 
 .tekst-to {
-    margin: 0%;
-    font-size: 18px;
+  margin: 0%;
+  font-size: 18px;
 }
 @media only screen and (max-width: 570px) {
-    #donut {
-        display: none !important;
-    }
+  #donut {
+      display: none !important;
+  }
 
 }
