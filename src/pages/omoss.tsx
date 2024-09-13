@@ -1,6 +1,7 @@
 import Member from '../components/about_us/Members';
 import styles from '../components/about_us/Members.module.css';
 import Accordion from '../components/about_us/Accordion';
+import Title from '../components/appliance/Title';
 
 export default function OmOssPage() {
   return (
@@ -8,7 +9,7 @@ export default function OmOssPage() {
       <div id={styles.titel2}>
         <div className={styles.omFondet}>
           <div className={styles.omOssWrapper}>
-            <h1> Om oss </h1>
+            <Title title="Om Oss" />
             <hr className={styles.horizontalline}></hr>
             <p>
               Onlinefondet er en engasjert og livlig studentorganisasjon ved
