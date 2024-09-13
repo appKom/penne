@@ -7,7 +7,7 @@ export const Splash = () => {
     >
       <div className="img-container">
         <img
-          src="../../public/realfagsbygget.png"
+          src="realfagsbygget.png"
           alt="Realfagsbygget"
           className={styles.imgFadeIn}
         />

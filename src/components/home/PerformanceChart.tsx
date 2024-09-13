@@ -96,6 +96,8 @@ export default function PerformanceChart(props) {
       options={{
         stroke: {
           colors: [onlineColor, osebxColor],
+          curve: 'straight',
+          width: 1,
         },
         background: '#FFFFFFF',
         chart: {
@@ -130,10 +132,6 @@ export default function PerformanceChart(props) {
             opacityTo: 0,
             stops: [0, 90, 100],
           },
-        },
-        stroke: {
-          curve: 'straight',
-          width: 1,
         },
         yaxis: {
           labels: {

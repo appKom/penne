@@ -76,7 +76,7 @@ const Navbar = () => {
           <div id={styles.online}>
             <Link to={'/'}>
               <img
-                src="../../public/Online_hvit.png"
+                src="Online_hvit.png"
                 alt="Logo"
                 className={styles.logo}
               />
@@ -95,7 +95,7 @@ const Navbar = () => {
           </div>
           <div id={styles.bekk}>
             <img
-              src="../../public/Bekk_navnetrekk_hvit.svg"
+              src="Bekk_navnetrekk_hvit.svg"
               alt="Bekk logo"
               className={styles.logo + ' ' + styles.bekklogo}
             />
