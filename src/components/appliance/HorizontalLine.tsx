@@ -1,5 +1,3 @@
-import styles from './HorizontalLine.module.css';
-
-export const HorizontalLine = () => {
-  return <hr className={styles.line}></hr>;
-};
+export const HorizontalLine = () => (
+  <hr className="h-[1px] bg-[#E5E5E5] mt-12 mb-5" />
+);
