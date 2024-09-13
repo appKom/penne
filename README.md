@@ -48,3 +48,9 @@ export default tseslint.config({
   },
 })
 ```
+
+## ENV
+
+Id of portfolio to be used for performance and positions:
+
+- SHAREVILLE_PORTFILIO_ID=""
