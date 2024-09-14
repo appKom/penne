@@ -10,31 +10,31 @@ export const aboutUsText =
 export const currentMembers = [
   {
     name: 'Hilmir Straumland (Leder)',
-    image: 'Fondmedlemmer/Hilmir.jpg',
+    image: 'members/hilmir-straumland.jpg',
   },
   {
     name: 'Johanna Wilmers',
-    image: 'Fondmedlemmer/Johanna.jpg',
+    image: 'members/johanna-wilmers.jpg',
   },
   {
     name: 'Magnus Byrkjeland',
-    image: 'Fondmedlemmer/Magnus.jpg',
+    image: 'members/magnus-byrkjeland.jpg',
   },
   {
     name: 'Maiken Lie',
-    image: 'Fondmedlemmer/noimage.jpg',
+    image: 'members/female.jpg',
   },
   {
     name: 'William Andersson',
-    image: 'Fondmedlemmer/William.jpg',
+    image: 'members/william-andersson.jpg',
   },
   {
     name: 'Thea Karin Fladby',
-    image: 'Fondmedlemmer/Thea.jpg',
+    image: 'members/thea-karin-fladby.jpg',
   },
   {
     name: 'Johanne Tronstad',
-    image: 'Fondmedlemmer/noimage.jpg',
+    image: 'members/female.jpg',
   },
 ];
 
