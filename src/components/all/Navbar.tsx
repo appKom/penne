@@ -58,7 +58,7 @@ const Navbar = () => {
       </Link>
 
       {/* DESKTOP NAVBAR */}
-      <div className="justify-center flex-grow hidden gap-8 md:flex">
+      <div className="absolute left-0 right-0 justify-center hidden gap-8 m-auto mx-auto transform -translate-y-1/2 top-1/2 md:flex">
         {navLinks.map((link) => (
           <Link
             to={link.path}
