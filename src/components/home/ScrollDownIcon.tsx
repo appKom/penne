@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import styles from './ScrollDownIcon.module.css';
+import clsx from 'clsx';
 
 const ScrollDownIcon = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -21,8 +21,13 @@ const ScrollDownIcon = () => {
   }, []); // Tom dependency array betyr at effekten kjøres ved mount og cleanup ved unmount
 
   return (
-    <div className={`${styles.scrollDown} ${isVisible ? '' : styles.hidden}`}>
-      <span className={styles.arrow}></span>
+    <div
+      className={clsx(
+        'flex justify-center items-center h-[10px]',
+        !isVisible && 'hidden',
+      )}
+    >
+      <span className="border-solid border-white border-r-[5px] border-b-[5px] border-l-0 border-t-0 inline-block p-[6px] animate-bounceArrow"></span>
     </div>
   );
 };
