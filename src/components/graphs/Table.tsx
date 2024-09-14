@@ -92,7 +92,7 @@ export default function BasicTable(props) {
   };
 
   return (
-    <div className={styles.table_main}>
+    <div className="flex justify-center">
       {isLoading ? (
         <Box width={'100%'} display={'flex'} justifyContent={'center'}>
           <CircularProgress size="lg" variant="plain" />
@@ -101,7 +101,7 @@ export default function BasicTable(props) {
         <TableContainer>
           <Table>
             <TableHead>
-              <TableRow className={styles.table_header}>
+              <TableRow className="bg-onlineblue">
                 <TableCell style={{ color: 'white' }}>
                   <TableSortLabel
                     active={sortConfig !== null && sortConfig.key == 'name'}

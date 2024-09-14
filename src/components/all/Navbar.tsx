@@ -63,7 +63,7 @@ const Navbar = () => {
               style={{ display: showNavMenu ? 'flex' : 'none' }}
             >
               <Link to={'/'} className={styles.menuItem}>
-                HJEM
+                FONDET
               </Link>
               <Link to={'/omoss'} className={styles.menuItem}>
                 OM OSS
@@ -75,16 +75,12 @@ const Navbar = () => {
           </div>
           <div id={styles.online}>
             <Link to={'/'}>
-              <img
-                src="Online_hvit.png"
-                alt="Logo"
-                className={styles.logo}
-              />
+              <img src="Online_hvit.png" alt="Logo" className={styles.logo} />
             </Link>
           </div>
           <div className={styles.menu}>
             <Link to={'/'} className={styles.menuItem}>
-              HJEM
+              FONDET
             </Link>
             <Link to={'/omoss'} className={styles.menuItem}>
               OM OSS
