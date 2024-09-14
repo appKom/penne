@@ -27,7 +27,7 @@ const ScrollDownIcon = () => {
         !isVisible && 'hidden',
       )}
     >
-      <span className="border-solid border-white border-r-[5px] border-b-[5px] border-l-0 border-t-0 inline-block p-[6px] animate-bounceArrow"></span>
+      <span className="border-solid border-white border-r-[5px] border-b-[5px] p-[6px] animate-bounceArrow"></span>
     </div>
   );
 };
