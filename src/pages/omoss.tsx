@@ -2,6 +2,7 @@ import Member from '../components/about_us/Members';
 import styles from '../components/about_us/Members.module.css';
 import Accordion from '../components/about_us/Accordion';
 import Footer from '../components/all/Footer';
+import { currentMembers } from '../content';
 
 export default function OmOssPage() {
   return (
@@ -27,25 +28,9 @@ export default function OmOssPage() {
         </div>
 
         <div className={styles.styremedlemmer}>
-          <Member
-            path={'Fondmedlemmer/Hilmir.jpg'}
-            name={'Hilmir Straumland (Leder)'}
-          />
-          <Member path={'Fondmedlemmer/Johanna.jpg'} name={'Johanna Wilmers'} />
-          <Member
-            path={'Fondmedlemmer/Magnus.jpg'}
-            name={'Magnus Byrkjeland'}
-          />
-          <Member path={'Fondmedlemmer/noimage.jpg'} name={'Maiken Lie'} />
-          <Member
-            path={'Fondmedlemmer/William.jpg'}
-            name={'William Andersson'}
-          />
-          <Member path={'Fondmedlemmer/Thea.jpg'} name={'Thea Karin Fladby'} />
-          <Member
-            path={'Fondmedlemmer/noimage.jpg'}
-            name={'Johanne Tronstad'}
-          />
+          {currentMembers.map((member) => (
+            <Member path={member.image} name={member.name} />
+          ))}
         </div>
         <div className={styles.tidligereMedlemmer}>
           <h1> Tidligere medlemmer</h1>
