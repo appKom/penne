@@ -53,7 +53,10 @@ const Navbar = () => {
       <div ref={dropdownRef} className="md:hidden">
         <Hamburger toggled={showNavMenu} toggle={setShowNavMenu} />
         <div
-          className={`absolute top-full left-0 right-0 flex flex-col bg-[#191919] border-t border-b border-gray-200 ${showNavMenu ? 'block' : 'hidden'}`}
+          className={clsx(
+            'absolute top-full left-0 right-0 flex flex-col bg-[#191919] border-t border-b border-gray-200',
+            showNavMenu ? 'block' : 'hidden',
+          )}
         >
           {navLinks.map((link) => (
             <Link
