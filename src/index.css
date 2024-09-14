@@ -12,11 +12,10 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
-    --onlineblue: #0d5474;
-    --onlinebluedark: #072f41;
-    --onlineyellow: #f9b759;
-  }
-
+  --onlineblue: #0d5474;
+  --onlinebluedark: #072f41;
+  --onlineyellow: #f9b759;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -35,19 +34,15 @@ body {
 
 .MuiCircularProgress-primary {
   color: green !important;
-
 }
 
 @media only screen and (max-width: 775px) {
   #overskrift {
-      display: block !important;
-
+    display: block !important;
   }
   #splash,#scroll {
-      display: none;
-
+    display: none;
   }
-
 }
 
 #overskrift {
@@ -56,17 +51,13 @@ body {
   margin-bottom: 10px;
 }
 
-#under {
-  text-align: center;
-}
-
 .tekst-to {
   margin: 0%;
   font-size: 18px;
 }
+
 @media only screen and (max-width: 570px) {
   #donut {
-      display: none !important;
+    display: none !important;
   }
-
 }

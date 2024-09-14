@@ -30,7 +30,7 @@ export const currentMembers = [
     name: 'Johanne Tronstad',
     image: 'Fondmedlemmer/noimage.jpg',
   },
-]
+];
 
 export const pastMembers = [
   {
@@ -43,7 +43,7 @@ export const pastMembers = [
       'William Andersson',
       'Michael Johansen',
       'Johanne Tronstad',
-    ]
+    ],
   },
   {
     year: '2021',
@@ -55,7 +55,7 @@ export const pastMembers = [
       'Kaja Sofie Lundgaard',
       'Michael Johansen',
       'Marius Enerly',
-    ]
+    ],
   },
   {
     year: '2020',
@@ -67,7 +67,7 @@ export const pastMembers = [
       'Kaja Sofie Lundgaard',
       'Christoffer Skar Lofsberg',
       'Marius Enerly',
-    ]
+    ],
   },
   {
     year: '2019',
@@ -79,7 +79,7 @@ export const pastMembers = [
       'Martin Bjerke',
       'Christoffer Skar Lofsberg',
       'Sverre Bjørke',
-    ]
+    ],
   },
   {
     year: '2018',
@@ -91,7 +91,7 @@ export const pastMembers = [
       'Taran Ruge',
       'Henning Wold',
       'Sverre Bjørke',
-    ]
+    ],
   },
   {
     year: '2017',
@@ -100,6 +100,6 @@ export const pastMembers = [
       'Tord Standnes',
       'Sondre Widmark',
       'Henning Wold',
-    ]
-  }
-]
+    ],
+  },
+];

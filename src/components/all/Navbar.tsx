@@ -63,7 +63,7 @@ const Navbar = () => {
               style={{ display: showNavMenu ? 'flex' : 'none' }}
             >
               <Link to={'/'} className={styles.menuItem}>
-                HJEM
+                FONDET
               </Link>
               <Link to={'/omoss'} className={styles.menuItem}>
                 OM OSS
@@ -80,7 +80,7 @@ const Navbar = () => {
           </div>
           <div className={styles.menu}>
             <Link to={'/'} className={styles.menuItem}>
-              HJEM
+              FONDET
             </Link>
             <Link to={'/omoss'} className={styles.menuItem}>
               OM OSS

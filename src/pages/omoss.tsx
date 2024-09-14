@@ -17,20 +17,16 @@ export default function OmOssPage() {
         </div>
 
         <div className="flex flex-col items-center justify-center flex-grow gap-12 p-0 md:flex-row flex-nowrap md:flex-wrap md:p-12">
-          {
-            currentMembers.map((member) => (
-              <Member path={member.image} name={member.name} />
-            ))
-          }
+          {currentMembers.map((member) => (
+            <Member path={member.image} name={member.name} />
+          ))}
         </div>
         <div className="relative w-4/6 m-auto">
           <h1>Tidligere medlemmer</h1>
           <div>
-            {
-              pastMembers.map((member) => (
-                <Accordion title={member.year} content={member.members} />
-              ))
-            }
+            {pastMembers.map((member) => (
+              <Accordion title={member.year} content={member.members} />
+            ))}
           </div>
         </div>
       </div>

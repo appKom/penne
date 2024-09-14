@@ -8,11 +8,13 @@ import PerformanceDisplay from '../components/home/PerformanceDisplay';
 export default function IndexPage() {
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      <Splash />
-      <div className="sticky bottom-10" id={style.scroll}>
-        <ScrollDownIcon />
+      <div className="hidden md:block">
+        <Splash />
+        <div className="sticky bottom-10" id={style.scroll}>
+          <ScrollDownIcon />
+        </div>
       </div>
-      <h1 id={style.overskrift}>Online Fondet</h1>
+      <h1 className="mb-2 text-2xl md:hidden">Online Fondet</h1>
       <div className="w-3/4 mb-10 text-lg text-justify">
         <p>
           Et fond er en kollektiv invistering der flere går sammen å plasserer
