@@ -4,29 +4,6 @@
   text-align: center;
 }
 
-.circleimage {
-  border-radius: 50%;
-  width: 250px;
-  max-height: 250px;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
-
-.memberName {
-  color: rgb(255, 255, 255);
-  font-size: 20px;
-  margin-left:20px;
-}
-
-.memberWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: fit-content;
-}
-
 .styremedlemmer {
   display: flex;
   flex-wrap: wrap;
