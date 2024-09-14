@@ -35,29 +35,3 @@ body {
 .MuiCircularProgress-primary {
   color: green !important;
 }
-
-@media only screen and (max-width: 775px) {
-  #overskrift {
-    display: block !important;
-  }
-  #splash,#scroll {
-    display: none;
-  }
-}
-
-#overskrift {
-  display: none;
-  font-size:x-large;
-  margin-bottom: 10px;
-}
-
-.tekst-to {
-  margin: 0%;
-  font-size: 18px;
-}
-
-@media only screen and (max-width: 570px) {
-  #donut {
-    display: none !important;
-  }
-}

@@ -1,7 +1,6 @@
 import Table from '../components/home/Table';
 import { Splash } from '../components/home/Splash';
 import ScrollDownIcon from '../components/home/ScrollDownIcon';
-import style from './index.module.css';
 import PieChart from '../components/home/PieChart';
 import PerformanceDisplay from '../components/home/PerformanceDisplay';
 
@@ -10,7 +9,7 @@ export default function IndexPage() {
     <div className="flex flex-col items-center justify-center h-full">
       <div className="hidden md:block">
         <Splash />
-        <div className="sticky bottom-10" id={style.scroll}>
+        <div className="sticky bottom-10">
           <ScrollDownIcon />
         </div>
       </div>
@@ -33,7 +32,7 @@ export default function IndexPage() {
       </div>
       <PerformanceDisplay />
       <br></br>
-      <div id={style.donut} className="w-full">
+      <div className="hidden w-full md:block">
         <div className="w-full mt-40 mb-10 text-lg text-center">
           <p className="w-full">
             Denne smultringen gir en oversikt over fondets sammensetning (FAKE
