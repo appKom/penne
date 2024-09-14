@@ -1,5 +1,3 @@
-import styles from './footer.module.css';
-
 import { BsSlack, BsFacebook, BsInstagram, BsGithub } from 'react-icons/bs';
 
 const Footer = () => {

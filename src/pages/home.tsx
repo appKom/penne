@@ -1,8 +1,8 @@
-import Table from '../components/home/Table';
+import Table from '../components/graphs/Table';
 import { Splash } from '../components/home/Splash';
 import ScrollDownIcon from '../components/home/ScrollDownIcon';
-import PieChart from '../components/home/PieChart';
-import PerformanceDisplay from '../components/home/PerformanceDisplay';
+import PieChart from '../components/graphs/PieChart';
+import PerformanceDisplay from '../components/graphs/PerformanceDisplay';
 import { homeText } from '../content';
 
 export default function IndexPage() {

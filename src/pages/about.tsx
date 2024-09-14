@@ -1,7 +1,7 @@
 import Member from '../components/about_us/Members';
 import Accordion from '../components/about_us/Accordion';
-import Title from '../components/appliance/Title';
-import { HorizontalLine } from '../components/appliance/HorizontalLine';
+import Title from '../components/all/Title';
+import { HorizontalLine } from '../components/all/HorizontalLine';
 import { aboutUsText, currentMembers, pastMembers } from '../content';
 
 export default function OmOssPage() {
