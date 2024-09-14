@@ -23,7 +23,7 @@ const ScrollDownIcon = () => {
   return (
     <div
       className={clsx(
-        'flex justify-center items-center h-[10px]',
+        'flex justify-center items-center h-[10px] sticky bottom-10',
         !isVisible && 'hidden',
       )}
     >

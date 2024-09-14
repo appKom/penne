@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import OmOssPage from './pages/omoss';
-import SoknadPage from './pages/soknad';
-import IndexPage from './pages/hjem';
+import OmOssPage from './pages/about';
+import SoknadPage from './pages/application';
+import IndexPage from './pages/home';
 import Navbar from './components/all/Navbar';
 import { Provider } from 'react-redux';
 import { store } from './services/Store';
