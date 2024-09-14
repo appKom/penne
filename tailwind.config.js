@@ -20,6 +20,19 @@ export default {
       fontFamily: {
         'playfair': ['Playfair Display SC', 'serif'],
         'roboto': ['Roboto', 'sans-serif']
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0 }, '100%': { opacity: 1 },
+        },
+        spashSlideUp: {
+          '0%': { transform: 'translateY(150px)', opacity: 0 },
+          '100%': { transform: 'translateY(0)', opacity: 1 },
+        }
+      },
+      animation: {
+        fadeIn: 'fadeIn 2s ease-out forwards',
+        spashSlideUp: 'spashSlideUp 1.5s ease-out forwards',
       }
     },
   },

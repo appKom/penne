@@ -8,9 +8,7 @@ import PerformanceDisplay from '../components/home/PerformanceDisplay';
 export default function IndexPage() {
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      <div id={style.splash} className="relative mb-[500px] w-full">
-        <Splash />
-      </div>
+      <Splash />
       <div className="sticky bottom-10" id={style.scroll}>
         <ScrollDownIcon />
       </div>
