@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { Spiral as Hamburger } from 'hamburger-react';
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 
 const navLinks = [
-  { title: 'FONDET', path: '/' },
-  { title: 'OM OSS', path: '/omoss' },
-  { title: 'SØKNAD', path: '/soknad' },
+  { title: 'fondet', path: '/' },
+  { title: 'om oss', path: '/omoss' },
+  { title: 'søknad', path: '/soknad' },
 ];
 
 const Navbar = () => {
@@ -46,40 +47,22 @@ const Navbar = () => {
     <div
       className={clsx(
         showNavbar ? 'opacity-100' : 'opacity-0 pointer-events-none',
-        'bg-[#131620] top-0 sticky w-full h-20 transition z-20 flex items-center justify-between p-5 text-xl',
+        'bg-[#131620] top-0 sticky w-full h-20 transition z-20 flex items-center justify-between p-5 border-b border-[#293046] shadow-md',
       )}
     >
-      {/* MOBILE HAMBURGER MENU */}
-      <div ref={dropdownRef} className="md:hidden">
-        <Hamburger toggled={showNavMenu} toggle={setShowNavMenu} />
-        <div
-          className={clsx(
-            'absolute top-full left-0 right-0 flex flex-col bg-[#191919] border-t border-b border-gray-200',
-            showNavMenu ? 'block' : 'hidden',
-          )}
-        >
-          {navLinks.map((link) => (
-            <Link
-              to={link.path}
-              className="block px-8 py-4 hover:bg-white transition hover:text-[#131620]"
-              key={link.title}
-            >
-              {link.title}
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      <Link to="/">
-        <img src="Online_hvit.png" alt="Logo" className="h-auto w-36" />
+      <Link
+        to="/"
+        className="p-2 text-2xl font-bold transition hover:opacity-50"
+      >
+        Onlinefondet
       </Link>
 
       {/* DESKTOP NAVBAR */}
-      <div className="justify-center flex-grow hidden md:flex">
+      <div className="justify-center flex-grow hidden gap-8 md:flex">
         {navLinks.map((link) => (
           <Link
             to={link.path}
-            className="px-8 py-4 hover:text-[#FAB759] transition"
+            className="px-4 py-2 transition hover:bg-[#1e2334] text-lg rounded-md border hover:border hover:border-[#293046] border-[#131620]"
             key={link.title}
           >
             {link.title}
@@ -87,16 +70,35 @@ const Navbar = () => {
         ))}
       </div>
 
+      {/* MOBILE HAMBURGER MENU */}
+      <div ref={dropdownRef} className="md:hidden">
+        <Hamburger toggled={showNavMenu} toggle={setShowNavMenu} />
+        {showNavMenu && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 right-0 bg-[#131620] border-y border-[#293046] divide-y divide-[#293046]"
+          >
+            {navLinks.map((link) => (
+              <Link
+                key={link.title}
+                to={link.path}
+                className="block py-2 px-4 hover:bg-[#1e2334] transition text-lg"
+              >
+                {link.title}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </div>
+
       <Link
         to="https://www.bekk.no/"
         target="_blank"
-        className="hidden md:block"
+        className="hidden p-2 transition md:block hover:opacity-50"
       >
-        <img
-          src="Bekk_navnetrekk_hvit.svg"
-          alt="Bekk logo"
-          className="h-auto w-36"
-        />
+        <img src="Bekk_navnetrekk_hvit.svg" alt="Bekk logo" className="h-10" />
       </Link>
     </div>
   );
