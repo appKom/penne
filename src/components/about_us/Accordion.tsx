@@ -1,32 +1,41 @@
 import { useState } from 'react';
-import styles from '../../components/about_us/Members.module.css';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import clsx from 'clsx';
 
-export default function Accordion(props: { title: string; content: string[] }) {
+const Accordion = (props: { title: string; content: string[] }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={styles.accordion}>
+    <div className="mb-2 w-full relative rounded-lg bg-[#1c202d] border border-solid border-[#333b54]">
       <div
-        className={styles.accordionHeader}
+        className="flex justify-between px-4 py-2 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className={styles.accordionTitle}>{props.title}</div>
-        <span>{isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}</span>
+        <div className="mt-2">{props.title}</div>
+        <span className="flex items-center m-0 mt-4 text-4xl">
+          {isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </span>
       </div>
       {
         <div
-          className={
-            isOpen ? styles.accordionContent : styles.accordionContentClosed
-          }
+          className={clsx(
+            'text-xl flex flex-wrap flex-grow overflow-hidden transition-all duration-500 ease-in-out',
+            isOpen ? 'h-64 ' : 'h-0 ',
+          )}
         >
           {' '}
           {props.content.map((element) => {
-            return <div key={element}>{element}</div>;
+            return (
+              <div key={element} className="w-1/2 p-3">
+                {element}
+              </div>
+            );
           })}
         </div>
       }
     </div>
   );
-}
+};
+
+export default Accordion;
