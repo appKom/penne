@@ -7,7 +7,7 @@ const Accordion = (props: { title: string; content: string[] }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="mb-2 w.full relative rounded-lg bg-[#1c202d] border border-solid border-[#333b54]">
+    <div className="mb-2 w-full relative rounded-lg bg-[#1c202d] border border-solid border-[#333b54]">
       <div
         className="flex justify-between px-4 py-2 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
