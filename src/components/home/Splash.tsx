@@ -1,4 +1,4 @@
-export const Splash = () => (
+const Splash = () => (
   <div className="relative flex items-center justify-center mb-[500px] w-full">
     <div className="flex items-center justify-center max-w-full">
       <img
@@ -12,3 +12,5 @@ export const Splash = () => (
     </h1>
   </div>
 );
+
+export default Splash;

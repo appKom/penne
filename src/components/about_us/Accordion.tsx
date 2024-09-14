@@ -3,7 +3,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import clsx from 'clsx';
 
-export default function Accordion(props: { title: string; content: string[] }) {
+const Accordion = (props: { title: string; content: string[] }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -36,4 +36,6 @@ export default function Accordion(props: { title: string; content: string[] }) {
       }
     </div>
   );
-}
+};
+
+export default Accordion;

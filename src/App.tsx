@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import OmOssPage from './pages/about';
-import SoknadPage from './pages/application';
-import IndexPage from './pages/home';
+import AboutPage from './pages/about';
+import ApplicationPage from './pages/application';
+import HomePage from './pages/home';
 import Navbar from './components/all/Navbar';
 import { Provider } from 'react-redux';
 import { store } from './services/Store';
@@ -13,9 +13,9 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<IndexPage />} />
-          <Route path="/omoss" element={<OmOssPage />} />
-          <Route path="/soknad" element={<SoknadPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/omoss" element={<AboutPage />} />
+          <Route path="/soknad" element={<ApplicationPage />} />
         </Routes>
         <Footer />
       </Router>
