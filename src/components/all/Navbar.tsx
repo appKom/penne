@@ -5,9 +5,9 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
 const navLinks = [
-  { title: 'fondet', path: '/' },
-  { title: 'om oss', path: '/omoss' },
-  { title: 'søknad', path: '/soknad' },
+  { title: 'Fondet', path: '/' },
+  { title: 'Styret', path: '/styret' },
+  { title: 'Søknad', path: '/soknad' },
 ];
 
 const Navbar = () => {
@@ -62,7 +62,7 @@ const Navbar = () => {
         {navLinks.map((link) => (
           <Link
             to={link.path}
-            className="px-4 py-2 transition hover:bg-[#1e2334] text-lg rounded-md border hover:border hover:border-[#293046] border-[#131620]"
+            className="px-4 py-2 transition hover:bg-[#1e2334] text-lg rounded-md border hover:border hover:border-[#293046] border-[#131620] tracking-wide"
             key={link.title}
           >
             {link.title}

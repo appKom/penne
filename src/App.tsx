@@ -14,7 +14,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/omoss" element={<AboutPage />} />
+          <Route path="/styret" element={<AboutPage />} />
           <Route path="/soknad" element={<ApplicationPage />} />
         </Routes>
         <Footer />
