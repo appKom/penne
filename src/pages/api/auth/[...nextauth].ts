@@ -66,7 +66,7 @@ export const authOptions: NextAuthOptions = {
         token.subId = user.subId;
         token.committees = user.committees;
         token.isCommittee = user.isCommittee;
-        token.role = committees.some((element) => element === 'Fond')
+        token.role = user.committees.some((element) => element === 'Fond')
           ? 'admin'
           : 'user';
       }
@@ -75,13 +75,15 @@ export const authOptions: NextAuthOptions = {
     // client side
     async session({ session, token }) {
       if (session.user) {
-        session.accessToken = token.accessToken;
+        session.accessToken = token.accessToken as string;
 
-        session.user.role = token.role;
-        session.user.owId = token.subId;
-        session.user.phone = token.phone;
-        session.user.grade = token.grade;
-        session.user.id = token.id;
+        session.user.role = token.role as 'admin' | 'user';
+        session.user.owId = token.subId as string;
+        session.user.phone = token.phone as string;
+        session.user.grade = token.grade as number;
+        session.user.id = token.id as string;
+        session.user.committees = token.committees as string[];
+        session.user.isCommittee = token.isCommittee as boolean;
       }
       return session;
     },

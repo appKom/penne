@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 export default function AdminPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { data: session } = useSession();
 
-  if (!isAuthenticated) {
+  if (!session) {
     return (
-      <div className="flex flex-col">
+      <div className="flex flex-col min-h-screen">
         <div className="flex items-center justify-center px-6">
           <h1 className="text-3xl">Vennligst logg inn</h1>
         </div>
@@ -14,7 +13,7 @@ export default function AdminPage() {
     );
   }
 
-  if (isAuthenticated && !isAdmin) {
+  if (session?.user?.role !== 'admin') {
     return (
       <div className="flex flex-col px-6">
         <div className="flex items-center justify-center">
