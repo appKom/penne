@@ -50,6 +50,15 @@ const Navbar = () => {
       )}
     >
       {/* MOBILE HAMBURGER MENU */}
+
+      <Link to="/">
+        <img src="Online_hvit_o.svg" alt="Online Logo" className="h-10 w-10" />
+      </Link>
+
+      <Link to="/Bekk.no">
+        <img src="bekk_white.svg" alt="Bekk Logo" className="h-auto w-24" />
+      </Link>
+
       <div ref={dropdownRef} className="md:hidden">
         <Hamburger toggled={showNavMenu} toggle={setShowNavMenu} />
         <div
@@ -69,10 +78,6 @@ const Navbar = () => {
           ))}
         </div>
       </div>
-
-      <Link to="/">
-        <img src="Online_hvit.png" alt="Logo" className="h-auto w-36" />
-      </Link>
 
       {/* DESKTOP NAVBAR */}
       <div className="justify-center flex-grow hidden md:flex">
