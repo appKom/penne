@@ -13,16 +13,39 @@ const navLinks = [
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
+
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScroll = window.scrollY;
+
+      setShowNavbar(currentScroll <= lastScroll);
+      setLastScroll(currentScroll);
+    };
+    window.addEventListener('scroll', controlNavbar);
+
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScroll]);
+
+  return (
+    <div
+      className={clsx(
+        showNavbar ? 'opacity-100' : 'opacity-0 pointer-events-none',
+        'bg-[#131620] top-0 sticky w-full md:h-20 transition z-20 flex items-center justify-between py-2 md:p-5 border-b border-[#293046] shadow-md',
+      )}
+    >
+      <MobileNavbar />
+      <DesktopNavbar />
+    </div>
+  );
+};
+
+export default Navbar;
+
+const MobileNavbar = () => {
   const [showNavMenu, setShowNavMenu] = useState(false);
-
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const controlNavbar = () => {
-    const currentScroll = window.scrollY;
-
-    setShowNavbar(currentScroll <= lastScroll);
-    setLastScroll(currentScroll);
-  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,45 +58,31 @@ const Navbar = () => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('scroll', controlNavbar);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('scroll', controlNavbar);
     };
-  }, [lastScroll]);
+  }, []);
 
   return (
-    <div
-      className={clsx(
-        showNavbar ? 'opacity-100' : 'opacity-0 pointer-events-none',
-        'bg-[#131620] top-0 sticky w-full h-20 transition z-20 flex items-center justify-between p-5 border-b border-[#293046] shadow-md',
-      )}
-    >
-      {/* MOBILE HAMBURGER MENU */}
+    <div className="flex items-center justify-between w-full md:hidden">
+      <Link
+        to="https://www.bekk.no/"
+        target="_blank"
+        className="p-2 transition hover:opacity-50"
+      >
+        <img src="bekk_white.svg" alt="Bekk logo" className="h-8" />
+      </Link>
 
       <Link
         to="/"
-        className="p-2 text-2xl font-bold transition hover:opacity-50"
+        className="absolute left-0 right-0 flex justify-center gap-8 p-2 m-auto mx-auto text-xl font-bold transition transform -translate-y-1/2 w-max top-1/2 hover:opacity-50"
       >
         Onlinefondet
       </Link>
 
-      {/* DESKTOP NAVBAR */}
-      <div className="absolute left-0 right-0 justify-center hidden gap-8 m-auto mx-auto transform -translate-y-1/2 top-1/2 md:flex">
-        {navLinks.map((link) => (
-          <Link
-            to={link.path}
-            className="px-4 py-2 transition hover:bg-[#1e2334] text-lg rounded-md border hover:border hover:border-[#293046] border-[#131620] tracking-wide"
-            key={link.title}
-          >
-            {link.title}
-          </Link>
-        ))}
-      </div>
-
-      {/* MOBILE HAMBURGER MENU */}
-      <div ref={dropdownRef} className="md:hidden">
+      {/* HAMBURGER MENU */}
+      <div ref={dropdownRef} className="pr-2">
         <Hamburger toggled={showNavMenu} toggle={setShowNavMenu} />
         {showNavMenu && (
           <motion.div
@@ -95,16 +104,35 @@ const Navbar = () => {
           </motion.div>
         )}
       </div>
-
-      <Link
-        to="https://www.bekk.no/"
-        target="_blank"
-        className="hidden p-2 transition md:block hover:opacity-50"
-      >
-        <img src="bekk_white.svg" alt="Bekk logo" className="h-10" />
-      </Link>
     </div>
   );
 };
 
-export default Navbar;
+const DesktopNavbar = () => (
+  <div className="items-center justify-between hidden w-full md:flex">
+    <Link to="/" className="p-2 text-2xl font-bold transition hover:opacity-50">
+      Onlinefondet
+    </Link>
+
+    {/* NAV-ITEMS */}
+    <div className="absolute left-0 right-0 flex justify-center gap-8 m-auto mx-auto transform -translate-y-1/2 top-1/2">
+      {navLinks.map((link) => (
+        <Link
+          to={link.path}
+          className="px-4 py-2 transition hover:bg-[#1e2334] text-lg rounded-md border hover:border hover:border-[#293046] border-[#131620] tracking-wide"
+          key={link.title}
+        >
+          {link.title}
+        </Link>
+      ))}
+    </div>
+
+    <Link
+      to="https://www.bekk.no/"
+      target="_blank"
+      className="hidden p-2 transition md:block hover:opacity-50"
+    >
+      <img src="bekk_white.svg" alt="Bekk logo" className="h-10" />
+    </Link>
+  </div>
+);
