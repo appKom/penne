@@ -41,7 +41,7 @@ const ApplicationPage = () => (
       </section>
 
       <section>
-        <SemiTitle text="Søknaded må inneholde:" />
+        <SemiTitle text="Søknaden må inneholde:" />
         <ul className="space-y-4 text-gray-300">
           {applicationContent.map((item, index) => (
             <li key={index} className="flex items-center text-lg">
