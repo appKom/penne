@@ -51,27 +51,12 @@ const Navbar = () => {
       )}
     >
       {/* MOBILE HAMBURGER MENU */}
-      <div>
-        <Link
-          to="/"
-          className="p-2 text-2xl font-bold transition hover:opacity-50 hidden md:block"
-        >
-          Onlinefondet
-        </Link>
-        <Link to="/">
-          <img
-            src="Online_hvit_o.svg"
-            alt="Online Logo"
-            className="h-10 w-10 md:hidden"
-          />
-        </Link>
-      </div>
-      <Link to="/Bekk.no">
-        <img
-          src="bekk_white.svg"
-          alt="Bekk Logo"
-          className="h-auto w-24 md:hidden"
-        />
+
+      <Link
+        to="/"
+        className="p-2 text-2xl font-bold transition hover:opacity-50"
+      >
+        Onlinefondet
       </Link>
 
       {/* DESKTOP NAVBAR */}
