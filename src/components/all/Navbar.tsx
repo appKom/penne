@@ -98,7 +98,7 @@ const Navbar = () => {
         target="_blank"
         className="hidden p-2 transition md:block hover:opacity-50"
       >
-        <img src="Bekk_navnetrekk_hvit.svg" alt="Bekk logo" className="h-10" />
+        <img src="bekk_white.svg" alt="Bekk logo" className="h-10" />
       </Link>
     </div>
   );
