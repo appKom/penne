@@ -1,13 +1,14 @@
-import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
-import { Spiral as Hamburger } from 'hamburger-react';
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import Link from "next/link";
+
+import { Spiral as Hamburger } from "hamburger-react";
+import clsx from "clsx";
+import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 
 const navLinks = [
-  { title: 'Fondet', path: '/' },
-  { title: 'Styret', path: '/about' },
-  { title: 'Søknad', path: '/application' },
+  { title: "Fondet", path: "/" },
+  { title: "Styret", path: "/about" },
+  { title: "Søknad", path: "/application" },
 ];
 
 const Navbar = () => {
@@ -34,20 +35,20 @@ const Navbar = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('scroll', controlNavbar);
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", controlNavbar);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('scroll', controlNavbar);
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", controlNavbar);
     };
   }, [lastScroll]);
 
   return (
     <div
       className={clsx(
-        showNavbar ? 'opacity-100' : 'opacity-0 pointer-events-none',
-        'bg-[#131620] top-0 sticky w-full h-20 transition z-20 flex items-center justify-between p-5 border-b border-[#293046] shadow-md',
+        showNavbar ? "opacity-100" : "opacity-0 pointer-events-none",
+        "bg-[#131620] top-0 sticky w-full h-20 transition z-20 flex items-center justify-between p-5 border-b border-[#293046] shadow-md"
       )}
     >
       <Link
