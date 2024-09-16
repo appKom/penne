@@ -32,7 +32,7 @@ const Navbar = () => {
     <div
       className={clsx(
         showNavbar ? 'opacity-100' : 'opacity-0 pointer-events-none',
-        'bg-[#131620] top-0 sticky w-full md:h-20 transition z-20 flex items-center justify-between py-2 md:p-5 border-b border-[#293046] shadow-md',
+        'bg-[#131620] top-0 sticky w-full transition z-20 flex items-center justify-between px-4 py-2 md:py-5 md:px-8 border-b border-[#293046] shadow-md',
       )}
     >
       <MobileNavbar />
@@ -67,22 +67,14 @@ const MobileNavbar = () => {
   return (
     <div className="flex items-center justify-between w-full md:hidden">
       <Link
-        to="https://www.bekk.no/"
-        target="_blank"
-        className="p-2 transition hover:opacity-50"
-      >
-        <img src="bekk_white.svg" alt="Bekk logo" className="h-8" />
-      </Link>
-
-      <Link
         to="/"
-        className="absolute left-0 right-0 flex justify-center gap-8 p-2 m-auto mx-auto text-xl font-bold transition transform -translate-y-1/2 w-max top-1/2 hover:opacity-50"
+        className="p-2 text-2xl font-bold transition hover:opacity-50"
       >
         Onlinefondet
       </Link>
 
       {/* HAMBURGER MENU */}
-      <div ref={dropdownRef} className="pr-2">
+      <div ref={dropdownRef}>
         <Hamburger toggled={showNavMenu} toggle={setShowNavMenu} />
         {showNavMenu && (
           <motion.div
