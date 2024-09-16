@@ -88,6 +88,7 @@ const Navbar = () => {
                 key={link.title}
                 to={link.path}
                 className="block py-2 px-4 hover:bg-[#1e2334] transition text-lg"
+                onClick={() => setShowNavMenu(false)}
               >
                 {link.title}
               </Link>
