@@ -10,10 +10,7 @@ export default function PastMembers() {
   };
 
   return (
-    <div className="max-w-[48rem] my-8 mx-auto p-4 sm:p-6 rounded-lg shadow-md">
-      <h2 className="mb-6 text-2xl font-bold text-center text-white">
-        Tidligere medlemmer
-      </h2>
+    <div className="py-4 mx-auto shadow-md sm:py-4">
       <div className="flex flex-col gap-2">
         {pastMembers.map((yearData) => (
           <div
@@ -51,7 +48,7 @@ export default function PastMembers() {
                   animate="expanded"
                   exit="collapsed"
                   variants={{
-                    expanded: { height: 'auto', },
+                    expanded: { height: 'auto' },
                     collapsed: { height: 0 },
                   }}
                   transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
