@@ -54,7 +54,7 @@ const Navbar = () => {
       <div>
         <Link
           to="/"
-          className="p-2 text-2xl font-bold transition hover:opacity-50"
+          className="p-2 text-2xl font-bold transition hover:opacity-50 hidden md:block"
         >
           Onlinefondet
         </Link>
@@ -116,7 +116,7 @@ const Navbar = () => {
         target="_blank"
         className="hidden p-2 transition md:block hover:opacity-50"
       >
-        <img src="Bekk_navnetrekk_hvit.svg" alt="Bekk logo" className="h-10" />
+        <img src="bekk_white.svg" alt="Bekk logo" className="h-10" />
       </Link>
     </div>
   );
