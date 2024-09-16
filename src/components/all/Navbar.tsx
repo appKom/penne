@@ -52,12 +52,11 @@ const Navbar = () => {
     >
       {/* MOBILE HAMBURGER MENU */}
       <div>
-        <Link to="/">
-          <img
-            src="Online_hvit.svg"
-            alt="Online Logo"
-            className="h-auto w-32 hidden md:block"
-          />
+        <Link
+          to="/"
+          className="p-2 text-2xl font-bold transition hover:opacity-50"
+        >
+          Onlinefondet
         </Link>
         <Link to="/">
           <img
