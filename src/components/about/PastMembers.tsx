@@ -68,7 +68,7 @@ export default function PastMembers() {
                               <span className="font-semibold">
                                 {member.replace(' (Leder)', '')}
                               </span>
-                              <span className="ml-1 text-xs text-blue-400">
+                              <span className="ml-1 text-xs text-onlineyellow">
                                 (Leder)
                               </span>
                             </>
