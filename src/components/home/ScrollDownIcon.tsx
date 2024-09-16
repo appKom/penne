@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import clsx from 'clsx';
+import { useState, useEffect } from "react";
+import clsx from "clsx";
 
 const ScrollDownIcon = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -13,18 +13,18 @@ const ScrollDownIcon = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     // Rens opp event listener når komponenten fjernes
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []); // Tom dependency array betyr at effekten kjøres ved mount og cleanup ved unmount
 
   return (
     <div
       className={clsx(
-        'flex justify-center items-center h-[10px] sticky bottom-10',
-        !isVisible && 'hidden',
+        "flex justify-center items-center h-[10px] sticky bottom-10",
+        !isVisible && "hidden"
       )}
     >
       <span className="border-solid border-white border-r-[5px] border-b-[5px] p-[6px] animate-bounceArrow"></span>

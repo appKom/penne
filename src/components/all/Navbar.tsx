@@ -14,6 +14,7 @@ const navLinks = [
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
+  
   const [showNavMenu, setShowNavMenu] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
