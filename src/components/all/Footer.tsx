@@ -65,14 +65,20 @@ const Footer = () => (
 
       <div className="flex flex-col items-center justify-between py-8 space-y-6 border-t border-gray-800 md:flex-row md:space-y-0">
         <div className="flex items-center space-x-6">
-          <Link to="https://online.ntnu.no/" className='transition hover:opacity-50'>
+          <Link
+            to="https://online.ntnu.no/"
+            className="transition hover:opacity-50"
+          >
             <img
               src="Online_hvit.svg"
               alt="Online logo"
               className="w-32 h-auto"
             />
           </Link>
-          <Link to="https://www.bekk.no/" className='transition hover:opacity-50'>
+          <Link
+            to="https://www.bekk.no/"
+            className="transition hover:opacity-50"
+          >
             <img src="bekk_white.svg" alt="Bekk logo" className="w-32 h-auto" />
           </Link>
         </div>

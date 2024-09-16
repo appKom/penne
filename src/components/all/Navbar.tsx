@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { Spiral as Hamburger } from 'hamburger-react';
 import clsx from 'clsx';
@@ -13,6 +13,7 @@ const navLinks = [
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
+  const location = useLocation();
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -28,11 +29,16 @@ const Navbar = () => {
     };
   }, [lastScroll]);
 
+  useEffect(() => {
+    // Scroll to top when location changes
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
     <div
       className={clsx(
         showNavbar ? 'opacity-100' : 'opacity-0 pointer-events-none',
-        'bg-[#131620] top-0 sticky w-full transition z-20 flex items-center justify-between px-4 py-2 md:py-5 md:px-8 border-b border-[#293046] shadow-md',
+        'bg-gray-950/80 backdrop-blur top-0 sticky w-full transition z-20 flex items-center justify-between px-4 py-2 md:py-5 md:px-8 border-b border-[#293046] shadow-md',
       )}
     >
       <MobileNavbar />
@@ -119,7 +125,7 @@ const DesktopNavbar = () => (
       {navLinks.map((link) => (
         <Link
           to={link.path}
-          className="px-4 py-2 transition hover:bg-[#1e2334] text-lg rounded-md border hover:border hover:border-[#293046] border-[#131620] tracking-wide"
+          className="px-4 py-2 transition hover:bg-[#1e2334] text-lg rounded-md border hover:border hover:border-[#293046] border-transparent tracking-wide"
           key={link.title}
         >
           {link.title}
