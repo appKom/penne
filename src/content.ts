@@ -1,42 +1,47 @@
+import { TMember } from './lib/types';
+
 export const homeText =
-  'Et fond er en kollektiv invistering der flere går sammen å plasserer penger i verdipapirmarkedet. Dette kalles ofte for kollektiv sparing, og man kan se for seg at et fond er en kurv med investeringer. Online har et slikt fond, dette betyr at ulike parter innvesterer i Online, noe vi setter stor pris på. Under finner du en graf, denne grafen er en oversikt over utviklingen av Online sitt fond. Grafen inkluderer også en graf for OSEBX, som er hovedindeksen på Oslo Børs. Disse grafene kan sammenlignes for å se hvordan Online sitt fond har utviklet seg i forhold til hovedindeksen på Oslo Børs. Under finner du en graf, denne grafen er en oversikt over den relative utviklingen til Online sitt fond.';
+  'Et fond er en kollektiv investering der flere går sammen for å plassere penger i verdipapirmarkedet. Dette kalles ofte kollektiv sparing, og man kan se for seg at et fond er en kurv med investeringer. Online har et slikt fond, noe som betyr at ulike parter investerer i Online, noe vi setter stor pris på. Under finner du en graf, som gir en oversikt over utviklingen av Onlines fond. Grafen inkluderer også en oversikt over OSEBX, som er hovedindeksen på Oslo Børs. Disse grafene kan sammenlignes for å se hvordan Onlines fond har utviklet seg i forhold til hovedindeksen på Oslo Børs.';
 
 export const applicationText = [
   'Alle Onlines medlemmer kan søke Onlines fond om penger. Søknaden skal være velbegrunnet og ha som hensikt å komme flest mulig medlemmer av Online til gode. For at Fondstyre skal kunne ta en god avgjørelse trenger vi en helhetlig forståelse av hvem dere er og hva dere gjør.',
   'Skriv gjerne litt for mye, enn litt for lite. Søknaden er kun gyldig dersom det søkes om mellom 10 000 kr og 100 000 kr.',
 ];
 
-export const aboutUsText =
-  'Onlinefondet er en engasjert og livlig studentorganisasjon ved NTNU, dedikert til å fremme studentenes interesser og berike deres akademiske og sosiale opplevelser. Gjennom vårt fond, ledet av et dedikert fondstyre, gir vi økonomisk støtte til initiativer som sikrer at medlemmenes behov og interesser blir ivaretatt. Fra å finansiere nytt musikkutstyr for vårt linjeforeningsband, til å støtte surfeturer og sosiale arrangementer, streber vi etter å gi tilbake til vår studentkommunitet. Med en rik historie og et engasjert medlemskap, er vi stolte av vår evne til å kombinere det faglige med det sosiale, og skape varige minner for alle Onlinere.';
+export const aboutUsText = [
+  'Onlinefondet er en engasjert og livlig komité i linjeforeningen Online, dedikert til å fremme informatikkstudenters interesser og berike deres akademiske og sosiale opplevelser. Gjennom vårt fond, ledet av et dedikert fondstyre, gir vi økonomisk støtte til initiativer som sikrer at medlemmenes behov og interesser blir ivaretatt.',
+  'Fra å finansiere nytt musikkutstyr for vårt linjeforeningsband til å støtte surfeturer og sosiale arrangementer, streber vi etter å gi tilbake til vår studentkommunitet. Med en rik historie og et engasjert medlemskap, er vi stolte av vår evne til å kombinere det faglige med det sosiale, og skape varige minner for alle Onlinere.',
+];
 
-export const currentMembers = [
+export const currentMembers: TMember[] = [
   {
-    name: 'Hilmir Straumland (Leder)',
-    image: 'members/hilmir-straumland.jpg',
+    name: 'Hilmir Straumland',
+    imagePath: 'members/hilmir-straumland.jpg',
+    role: 'Leder',
   },
   {
     name: 'Johanna Wilmers',
-    image: 'members/johanna-wilmers.jpg',
+    imagePath: 'members/johanna-wilmers.jpg',
   },
   {
     name: 'Magnus Byrkjeland',
-    image: 'members/magnus-byrkjeland.jpg',
+    imagePath: 'members/magnus-byrkjeland.jpg',
   },
   {
     name: 'Maiken Lie',
-    image: 'members/female.jpg',
+    imagePath: 'members/female.jpg',
   },
   {
     name: 'William Andersson',
-    image: 'members/william-andersson.jpg',
+    imagePath: 'members/william-andersson.jpg',
   },
   {
     name: 'Thea Karin Fladby',
-    image: 'members/thea-karin-fladby.jpg',
+    imagePath: 'members/thea-karin-fladby.jpg',
   },
   {
     name: 'Johanne Tronstad',
-    image: 'members/female.jpg',
+    imagePath: 'members/female.jpg',
   },
 ];
 
@@ -44,10 +49,10 @@ export const pastMembers = [
   {
     year: '2022',
     members: [
+      'Henrik Giil Liisberg (Leder)',
       'Henrik Horten Hegli',
       'Anh-Kha Vo Nguyen',
       'Hilmir Straumland',
-      'Henrik Giil Liisberg (Leder)',
       'William Andersson',
       'Michael Johansen',
       'Johanne Tronstad',
@@ -56,8 +61,8 @@ export const pastMembers = [
   {
     year: '2021',
     members: [
-      'Milla Weium',
       'Jonathan Brooks (Leder)',
+      'Milla Weium',
       'Jan Arild Brobak',
       'Henrik Giil Liisberg',
       'Kaja Sofie Lundgaard',
@@ -68,8 +73,8 @@ export const pastMembers = [
   {
     year: '2020',
     members: [
-      'Christoffer Stensrud',
       'Nicolai Andre Dalaaker (Leder)',
+      'Christoffer Stensrud',
       'Jan Arild Brobak',
       'Christian Nyvoll',
       'Kaja Sofie Lundgaard',
@@ -80,9 +85,9 @@ export const pastMembers = [
   {
     year: '2019',
     members: [
+      'Sigurd Oxaas Wie (Leder)',
       'Kaja Sofie Lundgaard',
       'Nicolai Andre Dalaaker',
-      'Sigurd Oxaas Wie (Leder)',
       'Christian Nyvoll',
       'Martin Bjerke',
       'Christoffer Skar Lofsberg',
