@@ -47,7 +47,7 @@ const Navbar = () => {
     <div
       className={clsx(
         showNavbar ? 'opacity-100' : 'opacity-0 pointer-events-none',
-        'bg-[#131620] top-0 sticky w-full h-20 transition z-20 flex items-center justify-between p-5 text-xl',
+        'bg-[#131620] top-0 sticky w-full h-20 transition z-20 flex items-center justify-between p-5 border-b border-[#293046] shadow-md',
       )}
     >
       {/* MOBILE HAMBURGER MENU */}
@@ -59,26 +59,6 @@ const Navbar = () => {
       <Link to="/Bekk.no">
         <img src="bekk_white.svg" alt="Bekk Logo" className="h-auto w-24" />
       </Link>
-
-      <div ref={dropdownRef} className="md:hidden">
-        <Hamburger toggled={showNavMenu} toggle={setShowNavMenu} />
-        <div
-          className={clsx(
-            'absolute top-full left-0 right-0 flex flex-col bg-[#191919] border-t border-b border-gray-200',
-            showNavMenu ? 'block' : 'hidden',
-          )}
-        >
-          {navLinks.map((link) => (
-            <Link
-              to={link.path}
-              className="block px-8 py-4 hover:bg-white transition hover:text-[#131620]"
-              key={link.title}
-            >
-              {link.title}
-            </Link>
-          ))}
-        </div>
-      </div>
 
       {/* DESKTOP NAVBAR */}
       <div className="absolute left-0 right-0 justify-center hidden gap-8 m-auto mx-auto transform -translate-y-1/2 top-1/2 md:flex">
