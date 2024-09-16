@@ -1,7 +1,4 @@
-import Title from '../components/all/Title';
-import HorizontalLine from '../components/all/HorizontalLine';
-import SubTitle from '../components/all/SubTitle';
-import Paragraph from '../components/all/Paragraph';
+import { ArrowRightIcon } from 'lucide-react';
 import { applicationText } from '../content';
 
 const applicationContent = [
@@ -13,23 +10,53 @@ const applicationContent = [
 ];
 
 const ApplicationPage = () => (
-  <div className="flex flex-col items-center justify-center w-full h-full">
-    <div className="w-full p-12 sm:w-4/5">
-      <Title title="Søke om støtte" />
-      <HorizontalLine />
-      <SubTitle title="Hvordan søke om støtte?" />
-      <Paragraph text={applicationText} />
-      <Paragraph text="Søknader sendes til fondet@online.ntnu.no" />
-      <Paragraph text="Dette skal være med i søknaden:" />
-      <ul className="mt-8">
-        {applicationContent.map((item) => (
-          <li className="mx-8 my-4 text-xl list-disc sm:mx-12 md:mx-16">
-            {item}
-          </li>
+  <div className="max-w-5xl px-4 py-10 mx-auto sm:py-20 sm:px-6 lg:px-8">
+    <h1 className="mb-8 text-5xl font-extrabold tracking-tight text-center">
+      Søke om støtte
+    </h1>
+
+    <div className="space-y-12">
+      <section>
+        <SemiTitle text="Hvordan søke om støtte?" />
+        {applicationText.map((text, index) => (
+          <p key={index} className="mb-4 text-lg leading-relaxed text-gray-400">
+            {text}
+          </p>
         ))}
-      </ul>
+      </section>
+
+      <section>
+        <SemiTitle text="Søknader sendes til:" />
+        <div className="p-6 bg-[#1c2132] rounded-lg">
+          <a
+            href="mailto:fondet@online.ntnu.no"
+            className="flex items-center text-blue-400 transition-colors duration-200 hover:text-blue-300 group"
+          >
+            fondet@online.ntnu.no
+            <ArrowRightIcon className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <SemiTitle text="Søknaded må inneholde:" />
+        <ul className="space-y-4 text-gray-300">
+          {applicationContent.map((item, index) => (
+            <li key={index} className="flex items-center text-lg">
+              <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 mr-3 font-medium bg-blue-500 rounded-full">
+                {index + 1}
+              </div>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   </div>
 );
 
 export default ApplicationPage;
+
+const SemiTitle = ({ text }: { text: string }) => {
+  return <h1 className="mb-4 text-2xl font-semibold">{text}</h1>;
+};
