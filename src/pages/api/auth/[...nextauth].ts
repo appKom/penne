@@ -1,23 +1,23 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import Auth0Provider from "next-auth/providers/auth0";
+import NextAuth, { NextAuthOptions } from 'next-auth';
+import Auth0Provider from 'next-auth/providers/auth0';
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     Auth0Provider({
-      clientId: process.env.AUTH0_CLIENT_ID || "",
-      clientSecret: process.env.AUTH0_CLIENT_SECRET || "",
+      clientId: process.env.AUTH0_CLIENT_ID || '',
+      clientSecret: process.env.AUTH0_CLIENT_SECRET || '',
       issuer: process.env.AUTH0_ISSUER,
       style: {
-        logo: "/auth0.svg",
-        logoDark: "/auth0-dark.svg",
-        bg: "#fff",
-        text: "#EB5424",
-        bgDark: "#fff",
-        textDark: "#161b22",
+        logo: '/auth0.svg',
+        logoDark: '/auth0-dark.svg',
+        bg: '#fff',
+        text: '#EB5424',
+        bgDark: '#fff',
+        textDark: '#161b22',
       },
 
       async profile(profile, tokens) {
-        const apiUrl = "https://old.online.ntnu.no/api/v1/profile/";
+        const apiUrl = 'https://old.online.ntnu.no/api/v1/profile/';
 
         const headers = {
           Authorization: `Bearer ${tokens.access_token}`,
@@ -26,7 +26,7 @@ export const authOptions = {
         const response = await fetch(apiUrl, { headers });
 
         if (!response.ok) {
-          throw new Error("Failed to fetch user profile");
+          throw new Error('Failed to fetch user profile');
         }
 
         const userInfo = await response.json();
@@ -34,17 +34,18 @@ export const authOptions = {
         const commiteeUrl = `https://old.online.ntnu.no/api/v1/group/online-groups/?members__user=${userInfo.id}`;
         const committeeResponse = await fetch(commiteeUrl, { headers });
         if (!committeeResponse.ok)
-          throw new Error("Failed to fetch committees");
+          throw new Error('Failed to fetch committees');
 
         const committeeData = await committeeResponse.json();
 
         return {
           id: userInfo.id,
           subId: profile.sub,
-          name: userInfo.first_name + " " + userInfo.last_name,
+          name: userInfo.first_name + ' ' + userInfo.last_name,
           email: userInfo.email,
-          committees: committeeData.results.map((committee) =>
-            committee.name_short.toLowerCase()
+          committees: committeeData.results.map(
+            (committee: { name_short: string }) =>
+              committee.name_short.toLowerCase(),
           ),
           isCommittee: userInfo.is_committee,
         };
@@ -65,9 +66,9 @@ export const authOptions = {
         token.subId = user.subId;
         token.committees = user.committees;
         token.isCommittee = user.isCommittee;
-        token.role = committees.some((element) => element === "Fond")
-          ? "admin"
-          : "user";
+        token.role = committees.some((element) => element === 'Fond')
+          ? 'admin'
+          : 'user';
       }
       return token;
     },
