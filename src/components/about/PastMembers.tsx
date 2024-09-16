@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { pastMembers } from '../../content';
-import clsx from 'clsx';
 
 export default function PastMembers() {
   const [expandedYear, setExpandedYear] = useState<string | null>(null);
@@ -10,7 +10,7 @@ export default function PastMembers() {
   };
 
   return (
-    <div className="max-w-[48rem] my-8 mx-auto p-4 sm:p-6 rounded-lg shadow-md bg-gray-800">
+    <div className="max-w-[48rem] my-8 mx-auto p-4 sm:p-6 rounded-lg shadow-md">
       <h2 className="mb-6 text-2xl font-bold text-center text-white">
         Tidligere medlemmer
       </h2>
@@ -21,16 +21,14 @@ export default function PastMembers() {
             className="overflow-hidden border border-gray-600 rounded-md"
           >
             <button
-              className="flex items-center justify-between w-full p-4 text-base font-semibold text-left text-white transition-colors duration-200 bg-gray-700 cursor-pointer hover:bg-gray-600"
+              className="flex items-center justify-between w-full p-4 text-base font-semibold text-left text-white transition-colors duration-200 bg-gray-800 cursor-pointer hover:bg-gray-700"
               onClick={() => toggleYear(yearData.year)}
               aria-expanded={expandedYear === yearData.year}
             >
               <span>Fondstyre {yearData.year}</span>
-              <svg
-                className={clsx(
-                  'transition-transform duration-200',
-                  expandedYear === yearData.year ? 'rotate-180' : '',
-                )}
+              <motion.svg
+                animate={{ rotate: expandedYear === yearData.year ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -38,43 +36,52 @@ export default function PastMembers() {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d={
-                    expandedYear === yearData.year
-                      ? 'M18 15L12 9L6 15'
-                      : 'M6 9L12 15L18 9'
-                  }
+                  d="M6 9L12 15L18 9"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-              </svg>
+              </motion.svg>
             </button>
-            {expandedYear === yearData.year && (
-              <div className="p-4 bg-gray-700">
-                <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
-                  {yearData.members.map((member, index) => (
-                    <li
-                      key={index}
-                      className="flex items-baseline text-sm text-gray-300 before:content-['•'] before:mr-2 before:text-gray-500"
-                    >
-                      {member.includes('(Leder)') ? (
-                        <>
-                          <span className="font-semibold">
-                            {member.replace(' (Leder)', '')}
-                          </span>
-                          <span className="ml-1 text-xs text-blue-400">
-                            (Leder)
-                          </span>
-                        </>
-                      ) : (
-                        member
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            <AnimatePresence initial={false}>
+              {expandedYear === yearData.year && (
+                <motion.div
+                  initial="collapsed"
+                  animate="expanded"
+                  exit="collapsed"
+                  variants={{
+                    expanded: { height: 'auto', },
+                    collapsed: { height: 0 },
+                  }}
+                  transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+                >
+                  <div className="p-4 bg-gray-800">
+                    <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
+                      {yearData.members.map((member, index) => (
+                        <li
+                          key={index}
+                          className="flex items-baseline text-sm text-gray-300 before:content-['•'] before:mr-2 before:text-gray-500"
+                        >
+                          {member.includes('(Leder)') ? (
+                            <>
+                              <span className="font-semibold">
+                                {member.replace(' (Leder)', '')}
+                              </span>
+                              <span className="ml-1 text-xs text-blue-400">
+                                (Leder)
+                              </span>
+                            </>
+                          ) : (
+                            member
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         ))}
       </div>

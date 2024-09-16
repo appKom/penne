@@ -12,7 +12,9 @@ const AboutPage = () => (
     <HorizontalLine />
     <div className="flex flex-col items-center justify-center w-full gap-6 m-auto md:w-4/5">
       {aboutUsText.map((paragraph) => (
-        <p className="text-left md:leading-7 md:text-lg">{paragraph}</p>
+        <p key={paragraph} className="text-left md:leading-7 md:text-lg">
+          {paragraph}
+        </p>
       ))}
     </div>
 
