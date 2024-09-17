@@ -1,5 +1,5 @@
 import { ArrowRightIcon } from 'lucide-react';
-import { applicationText } from '../content';
+import { applicationText } from '../lib/content';
 
 const email = 'fond@online.ntnu.no';
 

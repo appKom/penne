@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { pastMembers } from '../../content';
+import { pastMembers } from '../../lib/content';
 
 export default function PastMembers() {
   const [expandedYear, setExpandedYear] = useState<string | null>(null);

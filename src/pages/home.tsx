@@ -3,7 +3,7 @@ import Splash from '../components/home/Splash';
 import ScrollDownIcon from '../components/home/ScrollDownIcon';
 import PieChart from '../components/graphs/PieChart';
 import PerformanceDisplay from '../components/graphs/PerformanceDisplay';
-import { homeText } from '../content';
+import { homeText } from '../lib/content';
 
 const HomePage = () => (
   <div className="flex flex-col items-center justify-center h-full">
@@ -12,7 +12,9 @@ const HomePage = () => (
       <ScrollDownIcon />
     </div>
     <h1 className="my-4 mt-10 text-2xl md:hidden">Online Fondet</h1>
-    <div id="home-text" className="w-3/4 py-20 text-lg text-justify">{homeText}</div>
+    <div id="home-text" className="w-3/4 py-20 text-lg text-justify">
+      {homeText}
+    </div>
     <PerformanceDisplay />
     <div className="hidden w-full mb-10 md:block">
       <div className="w-full mt-40 mb-10 text-lg text-center">
