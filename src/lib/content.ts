@@ -1,4 +1,4 @@
-import { TMember } from './lib/types';
+import { TMember } from './types';
 
 export const homeText =
   'Et fond er en kollektiv investering der flere går sammen for å plassere penger i verdipapirmarkedet. Dette kalles ofte kollektiv sparing, og man kan se for seg at et fond er en kurv med investeringer. Online har et slikt fond, noe som betyr at ulike parter investerer i Online, noe vi setter stor pris på. Under finner du en graf, som gir en oversikt over utviklingen av Onlines fond. Grafen inkluderer også en oversikt over OSEBX, som er hovedindeksen på Oslo Børs. Disse grafene kan sammenlignes for å se hvordan Onlines fond har utviklet seg i forhold til hovedindeksen på Oslo Børs.';
@@ -15,37 +15,49 @@ export const aboutUsText = [
 
 export const currentMembers: TMember[] = [
   {
-    name: 'Hilmir Straumland',
-    imagePath: 'members/hilmir-straumland.jpg',
+    name: 'Magnus Byrkjeland',
+    imagePath: 'members/byrkjeland.JPG',
     role: 'Leder',
   },
   {
-    name: 'Johanna Wilmers',
-    imagePath: 'members/johanna-wilmers.jpg',
+    name: 'Brinje Marie Haugli',
+    imagePath: 'members/female.jpg',
   },
   {
-    name: 'Magnus Byrkjeland',
-    imagePath: 'members/magnus-byrkjeland.jpg',
+    name: 'Duvara Nishaharan',
+    imagePath: 'members/female.jpg',
+  },
+  {
+    name: 'Jacob Gullesen Hagen',
+    imagePath: 'members/jakob.jpg',
   },
   {
     name: 'Maiken Lie',
     imagePath: 'members/female.jpg',
   },
   {
-    name: 'William Andersson',
-    imagePath: 'members/william-andersson.jpg',
-  },
-  {
     name: 'Thea Karin Fladby',
     imagePath: 'members/thea-karin-fladby.jpg',
   },
   {
-    name: 'Johanne Tronstad',
-    imagePath: 'members/female.jpg',
+    name: 'Magnus Tomter Ouren',
+    imagePath: 'members/ouren.jpeg',
   },
 ];
 
 export const pastMembers = [
+  {
+    year: '2023',
+    members: [
+      'Hilmir Straumland (Leder)',
+      'Johanna Wilmers',
+      'Magnus Byrkjeland',
+      'Maiken Lie',
+      'William Andersson',
+      'Thea Karin Fladby',
+      'Johanne Tronstad',
+    ],
+  },
   {
     year: '2022',
     members: [

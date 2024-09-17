@@ -1,5 +1,5 @@
 import Member from '../components/about/Member';
-import { aboutUsText, currentMembers } from '../content';
+import { aboutUsText, currentMembers } from '../lib/content';
 import { TMember } from '../lib/types';
 import PastMembers from '../components/about/PastMembers';
 import { motion } from 'framer-motion';
