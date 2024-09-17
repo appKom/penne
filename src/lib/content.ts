@@ -16,7 +16,7 @@ export const aboutUsText = [
 export const currentMembers: TMember[] = [
   {
     name: 'Magnus Byrkjeland',
-    imagePath: 'members/byrkjeland.JPG',
+    imagePath: 'members/byrkjeland.jpg',
     role: 'Leder',
   },
   {
