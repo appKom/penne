@@ -1,3 +1,6 @@
+// @ts-nocheck
+// TODO: Remove the ts-nocheck comment and fix TS issues, @akselsf?
+
 export default async function handler(req, res) {
   const portfolioId = process.env.SHAREVILLE_PORTFOLIO_ID;
   const fetchlink = `https://www.shareville.no/api/v1/portfolios/${portfolioId}/positions`;

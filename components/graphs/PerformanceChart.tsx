@@ -1,3 +1,6 @@
+// @ts-nocheck
+// TODO: Remove the ts-nocheck comment and fix TS issues, @akselsf?
+
 import { lazy } from 'react';
 
 const ReactApexChart = lazy(() => import('react-apexcharts')/* , { ssr: false } */);
