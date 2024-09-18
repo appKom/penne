@@ -21,11 +21,11 @@ export const currentMembers: TMember[] = [
   },
   {
     name: 'Brinje Marie Haugli',
-    imagePath: '/members/female.jpg',
+    imagePath: '/members/brinje.jpg',
   },
   {
     name: 'Duvara Nishaharan',
-    imagePath: '/members/female.jpg',
+    imagePath: '/members/duvara.jpg',
   },
   {
     name: 'Jacob Gullesen Hagen',
@@ -33,7 +33,7 @@ export const currentMembers: TMember[] = [
   },
   {
     name: 'Maiken Lie',
-    imagePath: '/members/female.jpg',
+    imagePath: '/members/maiken.jpg',
   },
   {
     name: 'Thea Karin Fladby',
