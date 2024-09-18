@@ -1,8 +1,8 @@
 'use client';
 
-import PerformanceDisplay from '@/components/graphs/PerformanceDisplay';
+/* import PerformanceDisplay from '@/components/graphs/PerformanceDisplay';
 import PieChart from '@/components/graphs/PieChart';
-import Table from '@/components/graphs/Table';
+import Table from '@/components/graphs/Table'; */
 import ScrollDownIcon from '@/components/home/ScrollDownIcon';
 import Splash from '@/components/home/Splash';
 import { homeText } from '@/lib/content';
@@ -20,7 +20,10 @@ const HomePage = () => (
       <div id="home-text" className="w-3/4 py-20 text-lg text-justify">
         {homeText}
       </div>
-      <PerformanceDisplay />
+      {<div className='mb-20'>
+        TODO her kommer det grafer
+      </div>}
+      {/* <PerformanceDisplay />
       <div className="hidden w-full mb-10 md:block">
         <div className="w-full mt-40 mb-10 text-lg text-center">
           Denne smultringen gir en oversikt over fondets sammensetning (FAKE
@@ -33,7 +36,7 @@ const HomePage = () => (
           Tabellen viser fond, andel og kategori (FAKE DATA)
         </div>
         <Table />
-      </div>
+      </div> */}
     </div>
   </Provider>
 );
