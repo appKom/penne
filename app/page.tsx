@@ -21,7 +21,7 @@ const HomePage = () => (
         {homeText}
       </div>
       {<div className='mb-20'>
-        TODO her kommer det grafer
+        Her kommer det straks grafer :)
       </div>}
       {/* <PerformanceDisplay />
       <div className="hidden w-full mb-10 md:block">
