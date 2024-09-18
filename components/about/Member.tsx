@@ -13,6 +13,7 @@ const Member = (props: TMember) => (
       <Image
         src={props.imagePath}
         alt={props.name}
+        // unsure if these should the right dimensions
         height={512}
         width={512}
         className="object-cover w-32 rounded-full lg:w-48 aspect-square border-[#333b54] border-2 shadow-xl"

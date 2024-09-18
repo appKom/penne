@@ -73,7 +73,7 @@ const Footer = () => (
             <Image
               src="Online_hvit.svg"
               alt="Online logo"
-              // height and width doesn't matter since it's an SVG
+              // unsure if these should the right dimensions
               height={0}
               width={0}
               className="w-32 h-auto"
@@ -86,7 +86,7 @@ const Footer = () => (
             <Image
               src="bekk_white.svg"
               alt="Bekk logo"
-              // height and width doesn't matter since it's an SVG
+              // unsure if these should the right dimensions
               height={0}
               width={0}
               className="w-32 h-auto"

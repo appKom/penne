@@ -6,7 +6,9 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/joy/CircularProgress';
 import { useGetPositionsQuery } from '@/lib/services/ApiService';
 
-const ReactApexChart = lazy(() => import('react-apexcharts')/* , { ssr: false } */);
+const ReactApexChart = lazy(
+  () => import('react-apexcharts') /* , { ssr: false } */,
+);
 
 export default function PieChart() {
   const { data, isLoading } = useGetPositionsQuery();

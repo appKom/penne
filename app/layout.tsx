@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/all/Navbar';
 import Footer from '@/components/all/Footer';
 
+// TODO: add favicon, and maybe dynamic title and description based on page
 export const metadata: Metadata = {
   title: 'Onlinefondet',
   description: 'TODO: Add description',

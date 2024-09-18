@@ -3,7 +3,9 @@
 
 import { lazy } from 'react';
 
-const ReactApexChart = lazy(() => import('react-apexcharts')/* , { ssr: false } */);
+const ReactApexChart = lazy(
+  () => import('react-apexcharts') /* , { ssr: false } */,
+);
 
 export default function PerformanceChart(props) {
   const onlineColor = '#ffffff';

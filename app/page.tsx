@@ -20,9 +20,7 @@ const HomePage = () => (
       <div id="home-text" className="w-3/4 py-20 text-lg text-justify">
         {homeText}
       </div>
-      {<div className='mb-20'>
-        Her kommer det straks grafer :)
-      </div>}
+      {<div className="mb-20">Her kommer det straks grafer :)</div>}
       {/* <PerformanceDisplay />
       <div className="hidden w-full mb-10 md:block">
         <div className="w-full mt-40 mb-10 text-lg text-center">

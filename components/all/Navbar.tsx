@@ -115,7 +115,7 @@ const MobileNavbar = () => {
         <Image
           src="bekk_white.svg"
           alt="Bekk logo"
-          // height and width doesn't matter since it's an SVG
+              // unsure if these should the right dimensions
           height={0}
           width={0}
           className="h-10 w-auto"
@@ -155,6 +155,7 @@ const DesktopNavbar = () => (
       <Image
         src="bekk_white.svg"
         alt="Bekk logo"
+              // unsure if these should the right dimensions
         height={0}
         width={0}
         className="h-10 w-auto"

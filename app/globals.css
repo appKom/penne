@@ -24,10 +24,16 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: 'Source Sans 3', sans-serif;
+  overflow-x: hidden;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* dont know if we need this */
+.MuiCircularProgress-primary {
+  color: green !important;
 }
