@@ -6,12 +6,17 @@ const Splash = () => (
       src="/realfagsbygget.png"
       alt="Realfagsbygget"
       // unsure what the height and width should be
-      height={100000}
-      width={100000}
-      className="w-4/5 animate-fadeIn"
+      height={1000}
+      width={1000}
+      className="animate-fadeIn w-[200px] sm:w-[300px] xl:w-[400px]"
     />
-    <h1 className="text-[150px] tracking-wider absolute font-playfair animate-spashSlideUp w-min leading-tight [text-shadow:_1px_1px_2px_rgb(0_0_0_/_40%)]">
-      ONLINE FONDET
+    <h1 className="text-center absolute font-playfair animate-spashSlideUp leading-tight [text-shadow:_1px_1px_2px_rgb(0_0_0_/_40%)]">
+      <span className="block text-6xl sm:text-8xl xl:text-9xl tracking-wider">
+        ONLINE
+      </span>
+      <span className="block text-6xl sm:text-8xl xl:text-9xl tracking-wider">
+        FONDET
+      </span>
     </h1>
   </div>
 );
