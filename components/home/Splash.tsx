@@ -6,8 +6,8 @@ const Splash = () => (
       src="/realfagsbygget.png"
       alt="Realfagsbygget"
       // unsure what the height and width should be
-      height={1000}
-      width={1000}
+      height={683}
+      width={616}
       className="animate-fadeIn w-[200px] sm:w-[300px] xl:w-[400px]"
     />
     <h1 className="text-center absolute font-playfair animate-spashSlideUp leading-tight [text-shadow:_1px_1px_2px_rgb(0_0_0_/_40%)]">
