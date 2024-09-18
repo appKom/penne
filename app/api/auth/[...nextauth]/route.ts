@@ -92,4 +92,4 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-export const POST = NextAuth(authOptions);
+export default NextAuth(authOptions);
