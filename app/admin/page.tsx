@@ -1,6 +1,7 @@
 'use client';
-import { Button } from '@mui/material';
+
 import { useSession, signIn } from 'next-auth/react';
+import { Button } from '@/components/all/Button';
 
 const AdminPage = () => {
   const { data: session } = useSession();
@@ -10,11 +11,10 @@ const AdminPage = () => {
   if (!session) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center justify-center px-6">
+        <div className="flex flex-col items-center justify-center px-6 gap-5">
           <h1 className="text-3xl">Vennligst logg inn</h1>
           <Button
-            variant="contained"
-            color="primary"
+            color="orange"
             title="Logg inn"
             onClick={() => handleLogin()}
           />
