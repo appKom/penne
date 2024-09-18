@@ -31,7 +31,7 @@ const ScrollDownIcon = () => {
     <div
       className={clsx(
         'flex justify-center items-center h-[10px] sticky bottom-10 cursor-pointer w-16 m-auto p-5 group',
-        !isVisible && 'hidden',
+        !isVisible && 'invisible',
       )}
       onClick={() => handleClick('home-text')}
     >
