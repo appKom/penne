@@ -7,6 +7,9 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { Button } from './Button';
+import { Session } from 'next-auth';
 
 const navLinks = [
   { title: 'Fondet', path: '/' },
@@ -18,6 +21,7 @@ const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -46,7 +50,7 @@ const Navbar = () => {
       )}
     >
       <MobileNavbar />
-      <DesktopNavbar />
+      <DesktopNavbar session={session} />
     </div>
   );
 };
@@ -115,7 +119,7 @@ const MobileNavbar = () => {
         <Image
           src="bekk_white.svg"
           alt="Bekk logo"
-              // unsure if these should the right dimensions
+          // unsure if these should the right dimensions
           height={0}
           width={0}
           className="h-10 w-auto"
@@ -125,41 +129,55 @@ const MobileNavbar = () => {
   );
 };
 
-const DesktopNavbar = () => (
-  <div className="items-center justify-between hidden w-full md:flex">
-    <Link
-      href="/"
-      className="p-2 text-2xl font-bold transition hover:opacity-50"
-    >
-      Onlinefondet
-    </Link>
+interface DesktopNavbarProps {
+  session: Session | null;
+}
 
-    {/* NAV-ITEMS */}
-    <div className="absolute left-0 right-0 flex justify-center gap-8 m-auto mx-auto transform -translate-y-1/2 top-1/2">
-      {navLinks.map((link) => (
+const DesktopNavbar = ({ session }: DesktopNavbarProps) => {
+  return (
+    <div className="items-center justify-between hidden w-full md:flex">
+      <Link
+        href="/"
+        className="p-2 text-2xl font-bold transition hover:opacity-50"
+      >
+        Onlinefondet
+      </Link>
+
+      {/* NAV-ITEMS */}
+      <div className="relative flex justify-center gap-8">
+        {navLinks.map((link) => (
+          <Link
+            href={link.path}
+            className="px-4 py-2 transition hover:bg-[#1e2334] text-lg rounded-md border hover:border hover:border-[#293046] border-transparent tracking-wide"
+            key={link.title}
+          >
+            {link.title}
+          </Link>
+        ))}
+      </div>
+
+      <div className="flex flex-row gap-5 items-center">
+        {session?.user?.role === 'admin' && (
+          <Link href={'/admin'}>
+            <Button href="/admin" title="Admin" color="orange" />
+          </Link>
+        )}
+
         <Link
-          href={link.path}
-          className="px-4 py-2 transition hover:bg-[#1e2334] text-lg rounded-md border hover:border hover:border-[#293046] border-transparent tracking-wide"
-          key={link.title}
+          href="https://www.bekk.no/"
+          target="_blank"
+          className="hidden p-2 transition md:block hover:opacity-50"
         >
-          {link.title}
+          <Image
+            src="bekk_white.svg"
+            alt="Bekk logo"
+            // unsure if these should the right dimensions
+            height={0}
+            width={0}
+            className="h-10 w-auto"
+          />
         </Link>
-      ))}
+      </div>
     </div>
-
-    <Link
-      href="https://www.bekk.no/"
-      target="_blank"
-      className="hidden p-2 transition md:block hover:opacity-50"
-    >
-      <Image
-        src="bekk_white.svg"
-        alt="Bekk logo"
-              // unsure if these should the right dimensions
-        height={0}
-        width={0}
-        className="h-10 w-auto"
-      />
-    </Link>
-  </div>
-);
+  );
+};
