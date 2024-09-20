@@ -9,6 +9,8 @@ import { homeText } from '@/lib/content';
 import { store } from '@/lib/services/Store';
 import { Provider } from 'react-redux';
 
+//Test
+
 const HomePage = () => (
   <Provider store={store}>
     <div className="flex flex-col items-center justify-center h-full">
