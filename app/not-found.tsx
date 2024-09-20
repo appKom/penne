@@ -1,4 +1,4 @@
-import { Button } from '@/components/all/Button';
+import Button from '@/components/all/Button';
 import Image from 'next/image';
 
 export default function Custom404() {

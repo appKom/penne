@@ -1,7 +1,7 @@
 'use client';
 
 import { useSession, signIn, signOut } from 'next-auth/react';
-import { Button } from '@/components/all/Button';
+import Button from '@/components/all/Button';
 import Link from 'next/link';
 import { CircleDollarSignIcon, PaperclipIcon, UserIcon } from 'lucide-react';
 

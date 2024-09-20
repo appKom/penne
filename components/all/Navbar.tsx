@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { Button } from './Button';
+import Button from './Button';
 import { Session } from 'next-auth';
 
 const navLinks = [
