@@ -136,34 +136,34 @@ interface DesktopNavbarProps {
 const DesktopNavbar = ({ session }: DesktopNavbarProps) => {
   return (
     <div className="items-center justify-between hidden w-full md:flex">
-      <Link
+      <a
         href="/"
         className="p-2 text-2xl font-bold transition hover:opacity-50"
       >
         Onlinefondet
-      </Link>
+      </a>
 
       {/* NAV-ITEMS */}
       <div className="relative flex justify-center gap-8">
         {navLinks.map((link) => (
-          <Link
+          <a
             href={link.path}
             className="px-4 py-2 transition hover:bg-[#1e2334] text-lg rounded-md border hover:border hover:border-[#293046] border-transparent tracking-wide"
             key={link.title}
           >
             {link.title}
-          </Link>
+          </a>
         ))}
       </div>
 
       <div className="flex flex-row gap-5 items-center">
         {session?.user?.role === 'admin' && (
-          <Link href={'/admin'}>
+          <a href={'/admin'}>
             <Button href="/admin" title="Admin" color="orange" />
-          </Link>
+          </a>
         )}
 
-        <Link
+        <a
           href="https://www.bekk.no/"
           target="_blank"
           className="hidden p-2 transition md:block hover:opacity-50"
@@ -176,7 +176,7 @@ const DesktopNavbar = ({ session }: DesktopNavbarProps) => {
             width={0}
             className="h-10 w-auto"
           />
-        </Link>
+        </a>
       </div>
     </div>
   );

@@ -52,27 +52,22 @@ export default function AdminLayout({
   }
   if (session && session?.user?.role === 'admin') {
     return (
-      <html lang="nb">
-        <head>
-          <link rel="icon" href="public/icon-256.png" sizes="any" />
-        </head>
-        <SessionWrapper>
-          <body className="antialiased">
-            <Navbar />
-            <div className="flex flex-col min-h-screen items-center">
-              {children}
-              <div className="w-full max-w-lg  text-center">
-                <Button
-                  color="orange"
-                  title="Logg ut"
-                  onClick={() => handleLogout()}
-                />
-              </div>
+      <SessionWrapper>
+        <body className="antialiased">
+          <Navbar />
+          <div className="flex flex-col min-h-screen items-center">
+            {children}
+            <div className="w-full max-w-lg  text-center">
+              <Button
+                color="orange"
+                title="Logg ut"
+                onClick={() => handleLogout()}
+              />
             </div>
-            <Footer />
-          </body>
-        </SessionWrapper>
-      </html>
+          </div>
+          <Footer />
+        </body>
+      </SessionWrapper>
     );
   }
 }
