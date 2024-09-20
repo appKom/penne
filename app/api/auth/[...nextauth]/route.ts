@@ -38,7 +38,10 @@ const handler = NextAuth({
       session.user = {
         id: token.sub ? parseInt(token.sub, 10) : 0,
         name: session.user?.name || '',
-        role: 'user',
+        role:
+          session.user?.email == 'fredrik.carsten.hansteen@online.ntnu.no'
+            ? 'admin'
+            : 'user', //TODO vente på dotkom
         email: session.user?.email || '',
         groups: (token.groups as string[]) || [],
       };
