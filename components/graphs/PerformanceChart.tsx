@@ -1,17 +1,23 @@
-// @ts-nocheck
-// TODO: Remove the ts-nocheck comment and fix TS issues, @akselsf?
+'use client';
 
-import { lazy } from 'react';
+import ReactApexChart from 'react-apexcharts';
+import { PerformanceData } from './PerformanceDisplay';
 
-const ReactApexChart = lazy(
-  () => import('react-apexcharts') /* , { ssr: false } */,
-);
+interface Props {
+  period: string;
+  data: PerformanceData;
+}
 
-export default function PerformanceChart(props) {
+export default function PerformanceChart({ period, data }: Props) {
   const onlineColor = '#ffffff';
   const osebxColor = '#00ff00';
 
-  function getFormattedArray(data, period) {
+  interface DataPoint {
+    date: string;
+    value: number;
+  }
+
+  function getFormattedArray(data: DataPoint[], period: string) {
     const currentDate = new Date();
     const w1 = new Date(currentDate.getTime() - 1000 * 60 * 60 * 24 * 7);
     const m1 = new Date(
@@ -104,7 +110,7 @@ export default function PerformanceChart(props) {
           curve: 'straight',
           width: 1,
         },
-        background: '#FFFFFFF',
+
         chart: {
           type: 'line',
 
@@ -140,8 +146,8 @@ export default function PerformanceChart(props) {
         },
         yaxis: {
           labels: {
-            formatter: function (val) {
-              return val;
+            formatter: function (val: number) {
+              return val.toString();
             },
           },
         },
@@ -166,7 +172,7 @@ export default function PerformanceChart(props) {
           },
 
           y: {
-            formatter: function (val) {
+            formatter: function (val: number) {
               return val != undefined ? val.toString().slice(0, 4) + '%' : '';
             },
           },
@@ -175,11 +181,11 @@ export default function PerformanceChart(props) {
       series={[
         {
           name: 'OnlineFondet',
-          data: getFormattedArray(props.data.fonddata.data, props.period),
+          data: getFormattedArray(data.online, period),
         },
         {
           name: 'OSEBX',
-          data: getFormattedArray(props.data.osebx.data, props.period),
+          data: getFormattedArray(data.osebx, period),
         },
       ]}
     />

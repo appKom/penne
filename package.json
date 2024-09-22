@@ -25,7 +25,8 @@
     "react": "^18",
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "yahoo-finance2": "^2.12.4"
   },
   "devDependencies": {
     "@types/node": "^20",

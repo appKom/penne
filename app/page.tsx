@@ -1,5 +1,6 @@
 'use client';
 
+import PerformanceDisplay from '@/components/graphs/PerformanceDisplay';
 /* import PerformanceDisplay from '@/components/graphs/PerformanceDisplay';
 import PieChart from '@/components/graphs/PieChart';
 import Table from '@/components/graphs/Table'; */
@@ -7,6 +8,7 @@ import ScrollDownIcon from '@/components/home/ScrollDownIcon';
 import Splash from '@/components/home/Splash';
 import { homeText } from '@/lib/content';
 import { store } from '@/lib/services/Store';
+import { PieChart, Table } from 'lucide-react';
 import { Provider } from 'react-redux';
 
 //Test
@@ -23,7 +25,7 @@ const HomePage = () => (
         {homeText}
       </div>
       {<div className="mb-20">Her kommer det straks grafer :)</div>}
-      {/* <PerformanceDisplay />
+      <PerformanceDisplay />
       <div className="hidden w-full mb-10 md:block">
         <div className="w-full mt-40 mb-10 text-lg text-center">
           Denne smultringen gir en oversikt over fondets sammensetning (FAKE
@@ -36,7 +38,7 @@ const HomePage = () => (
           Tabellen viser fond, andel og kategori (FAKE DATA)
         </div>
         <Table />
-      </div> */}
+      </div>
     </div>
   </Provider>
 );
