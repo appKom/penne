@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Button from './Button';
 import { Session } from 'next-auth';
+import Image from 'next/image';
 
 const navLinks = [
   { title: 'Fondet', path: '/' },
@@ -140,9 +141,28 @@ const DesktopNavbar = ({ session }: DesktopNavbarProps) => {
         ))}
       </div>
 
-      {session?.user?.role === 'admin' && (
-        <Button href="/admin" title="Admin" color="orange" />
-      )}
+      <div className="flex flex-row gap-5 items-center">
+        {session?.user?.role === 'admin' && (
+          <Link href={'/admin'}>
+            <Button href="/admin" title="Admin" color="orange" />
+          </Link>
+        )}
+
+        <Link
+          href="https://www.bekk.no/"
+          target="_blank"
+          className="hidden p-2 transition md:block hover:opacity-50"
+        >
+          <Image
+            src="/bekk_white.svg"
+            alt="Bekk logo"
+            // unsure if these should the right dimensions
+            height={0}
+            width={0}
+            className="h-10 w-auto"
+          />
+        </Link>
+      </div>
     </div>
   );
 };
