@@ -158,9 +158,7 @@ const DesktopNavbar = ({ session }: DesktopNavbarProps) => {
 
       <div className="flex flex-row gap-5 items-center">
         {session?.user?.role === 'admin' && (
-          <Link href='/admin'>
-            <Button href="/admin" title="Admin" color="orange" />
-          </Link>
+          <Button href="/admin" title="Admin" color="orange" />
         )}
 
         <Link
