@@ -128,7 +128,7 @@ const DesktopNavbar = ({ session }: DesktopNavbarProps) => {
       </Link>
 
       {/* NAV-ITEMS */}
-      <div className="absolute left-0 right-0 flex justify-center gap-8 m-auto mx-auto transform -translate-y-1/2 top-1/2">
+      <div className="absolute left-0 right-0 flex justify-center w-max gap-8 m-auto mx-auto transform -translate-y-1/2 top-1/2">
         {navLinks.map((link) => (
           <Link
             href={link.path}
