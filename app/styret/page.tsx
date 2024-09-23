@@ -14,10 +14,7 @@ const AboutPage = () => (
     <SemiTitle text="Hvem er vi?" />
     <div className="flex flex-col items-center justify-center w-full gap-6 m-auto">
       {aboutUsText.map((paragraph) => (
-        <p
-          key={paragraph}
-          className="text-left text-gray-400 md:leading-7 md:text-lg"
-        >
+        <p key={paragraph} className="text-gray-400 md:leading-7 md:text-lg">
           {paragraph}
         </p>
       ))}
