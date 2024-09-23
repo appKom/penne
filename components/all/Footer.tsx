@@ -25,13 +25,13 @@ const footerLinks = [
 ];
 
 const Footer = () => (
-  <footer className="px-4 py-12 text-gray-200 bg-gray-950 md:px-6 lg:px-8">
+  <footer className="px-4 py-12 text-gray-200 bg-gray-950 md:px-6 lg:px-8 border-t border-[#293046]">
     <div className="mx-auto max-w-7xl">
       <div className="flex flex-col items-center justify-between mb-8 space-y-8 md:flex-row md:space-y-0">
         <div className="flex flex-col items-center space-y-4 md:items-start">
           <h2 className="text-2xl font-bold">Onlinefondet</h2>
           <div className="flex items-center space-x-2 transition-colors hover:text-onlineyellow">
-            <Mail size={18} className="" />
+            <Mail size={18} />
             <Link href="mailto:onlinefondet@online.ntnu.no">
               onlinefondet@online.ntnu.no
             </Link>

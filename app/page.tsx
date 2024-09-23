@@ -14,15 +14,24 @@ import { Provider } from 'react-redux';
 const HomePage = () => (
   <Provider store={store}>
     <div className="flex flex-col items-center justify-center h-full">
-      <div className="hidden md:block">
-        <Splash />
-        <ScrollDownIcon />
+      <Splash />
+      <ScrollDownIcon />
+      <div
+        id="home-text"
+        className="w-full py-16 text-lg bg-gray-950 border-y border-[#293046]"
+      >
+        <div className="max-w-3xl m-auto px-4">
+          {homeText.map((text, index) => (
+            <p
+              key={index}
+              className="mb-4 text-lg leading-relaxed text-gray-200"
+            >
+              {text}
+            </p>
+          ))}
+        </div>
       </div>
-      <h1 className="my-4 mt-10 text-2xl md:hidden">Online Fondet</h1>
-      <div id="home-text" className="w-3/4 py-20 text-lg text-justify">
-        {homeText}
-      </div>
-      {<div className="mb-20">Her kommer det straks grafer :)</div>}
+      {<div className="my-64">Her kommer det straks grafer :)</div>}
       {/* <PerformanceDisplay />
       <div className="hidden w-full mb-10 md:block">
         <div className="w-full mt-40 mb-10 text-lg text-center">

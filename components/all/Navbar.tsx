@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Spiral as Hamburger } from 'hamburger-react';
 import clsx from 'clsx';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -110,21 +109,6 @@ const MobileNavbar = () => {
           </motion.div>
         )}
       </div>
-
-      <Link
-        href="https://www.bekk.no/"
-        target="_blank"
-        className="hidden p-2 transition md:block hover:opacity-50"
-      >
-        <Image
-          src="bekk_white.svg"
-          alt="Bekk logo"
-          // unsure if these should the right dimensions
-          height={0}
-          width={0}
-          className="h-10 w-auto"
-        />
-      </Link>
     </div>
   );
 };
@@ -144,7 +128,7 @@ const DesktopNavbar = ({ session }: DesktopNavbarProps) => {
       </Link>
 
       {/* NAV-ITEMS */}
-      <div className="relative flex justify-center gap-8">
+      <div className="absolute left-0 right-0 flex justify-center w-max gap-8 m-auto mx-auto transform -translate-y-1/2 top-1/2">
         {navLinks.map((link) => (
           <Link
             href={link.path}
@@ -156,28 +140,9 @@ const DesktopNavbar = ({ session }: DesktopNavbarProps) => {
         ))}
       </div>
 
-      <div className="flex flex-row gap-5 items-center">
-        {session?.user?.role === 'admin' && (
-          <Link href={'/admin'}>
-            <Button href="/admin" title="Admin" color="orange" />
-          </Link>
-        )}
-
-        <Link
-          href="https://www.bekk.no/"
-          target="_blank"
-          className="hidden p-2 transition md:block hover:opacity-50"
-        >
-          <Image
-            src="/bekk_white.svg"
-            alt="Bekk logo"
-            // unsure if these should the right dimensions
-            height={0}
-            width={0}
-            className="h-10 w-auto"
-          />
-        </Link>
-      </div>
+      {session?.user?.role === 'admin' && (
+        <Button href="/admin" title="Admin" color="orange" />
+      )}
     </div>
   );
 };
