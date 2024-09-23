@@ -1,7 +1,5 @@
 'use client';
-import Navbar from '@/components/all/Navbar';
-import Footer from '@/components/all/Footer';
-import SessionWrapper from '@/lib/auth/sessionProvider';
+
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Button from '@/components/all/Button';
 
@@ -52,22 +50,18 @@ export default function AdminLayout({
   }
   if (session && session?.user?.role === 'admin') {
     return (
-      <SessionWrapper>
-        <body className="antialiased">
-          <Navbar />
-          <div className="flex flex-col min-h-screen items-center">
-            {children}
-            <div className="w-full max-w-lg  text-center">
-              <Button
-                color="orange"
-                title="Logg ut"
-                onClick={() => handleLogout()}
-              />
-            </div>
+      <div>
+        <div className="flex flex-col min-h-screen items-center">
+          {children}
+          <div className="w-full max-w-lg  text-center">
+            <Button
+              color="orange"
+              title="Logg ut"
+              onClick={() => handleLogout()}
+            />
           </div>
-          <Footer />
-        </body>
-      </SessionWrapper>
+        </div>
+      </div>
     );
   }
 }
