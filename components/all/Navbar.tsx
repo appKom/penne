@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Spiral as Hamburger } from 'hamburger-react';
 import clsx from 'clsx';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
