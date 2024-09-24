@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/all/Navbar';
 import Footer from '@/components/all/Footer';
-import SessionWrapper from '@/lib/auth/sessionProvider';
+import SessionWrapper from '@/lib/auth/SessionWrapper';
 
 // TODO: add favicon, and maybe dynamic title and description based on page
 export const metadata: Metadata = {
