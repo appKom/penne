@@ -42,7 +42,7 @@ const Navbar = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  const handleLogout = () => signOut({ callbackUrl: '/' });
+  const handleLogout = () => signOut({ callbackUrl: '/admin' });
 
   return (
     <div
@@ -151,7 +151,7 @@ const DesktopNavbar = ({ session, handleLogout }: DesktopNavbarProps) => {
             <Button href="/admin" title="Admin" color="white" />
             <Button
               title="Logg ut"
-              onClick={() => handleLogout}
+              onClick={() => handleLogout()}
               color="orange"
               className="hidden lg:flex"
             />
