@@ -9,7 +9,6 @@ import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import Button from './Button';
 import { Session } from 'next-auth';
-import Image from 'next/image';
 
 const navLinks = [
   { title: 'Fondet', path: '/' },
@@ -147,7 +146,9 @@ const DesktopNavbar = ({ session, handleLogout }: DesktopNavbarProps) => {
       <div className="flex flex-row gap-5 items-center">
         {session?.user?.role === 'admin' && (
           <div className="flex flex-row gap-4 items-center">
-            <p className="text-gray-300 text-lg hidden xl:flex">{session.user.name}</p>
+            <p className="text-gray-300 text-lg hidden xl:flex">
+              {session.user.name}
+            </p>
             <Button href="/admin" title="Admin" color="white" />
             <Button
               title="Logg ut"
