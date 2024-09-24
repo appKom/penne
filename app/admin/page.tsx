@@ -30,7 +30,7 @@ const AdminPage = () => {
       <div className="flex flex-col items-center  px-6 gap-5">
         <h1 className="text-3xl">{`Velkommen ${session?.user!.name}`}</h1>
 
-        <div className="flex flex-col sm:flex-row gap-5 pt-4 pb-12">
+        <div className="grid  grid-rows-5 gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {routes.map((route, index) => (
             <div key={index}>
               <Link href={route.href} className="">
