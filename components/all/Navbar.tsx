@@ -147,31 +147,15 @@ const DesktopNavbar = ({ session, handleLogout }: DesktopNavbarProps) => {
       <div className="flex flex-row gap-5 items-center">
         {session?.user?.role === 'admin' && (
           <div className="flex flex-row gap-4 items-center">
-            <p className="text-gray-300 text-lg hidden xl:flex">{`${session.user.name}`}</p>
+            <p className="text-gray-300 text-lg hidden xl:flex">{session.user.name}</p>
             <Button href="/admin" title="Admin" color="white" />
             <Button
               title="Logg ut"
               onClick={() => handleLogout()}
               color="orange"
-              className="hidden lg:flex"
             />
           </div>
         )}
-
-        <Link
-          href="https://www.bekk.no/"
-          target="_blank"
-          className="hidden p-2 transition md:block hover:opacity-50"
-        >
-          <Image
-            src="/bekk_white.svg"
-            alt="Bekk logo"
-            // unsure if these should the right dimensions
-            height={0}
-            width={0}
-            className="h-10 w-auto"
-          />
-        </Link>
       </div>
     </div>
   );
