@@ -20,13 +20,13 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="public/icon-256.png" sizes="any" />
       </head>
-      <SessionWrapper>
-        <body className="antialiased">
+      <body className="antialiased">
+        <SessionWrapper>
           <Navbar />
           {children}
           <Footer />
-        </body>
-      </SessionWrapper>
+        </SessionWrapper>
+      </body>
     </html>
   );
 }
