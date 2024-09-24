@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import Button from './Button';
 import { Session } from 'next-auth';
 import Image from 'next/image';
@@ -42,6 +42,8 @@ const Navbar = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  const handleLogout = () => signOut({ callbackUrl: '/' });
+
   return (
     <div
       className={clsx(
@@ -50,7 +52,7 @@ const Navbar = () => {
       )}
     >
       <MobileNavbar />
-      <DesktopNavbar session={session} />
+      <DesktopNavbar session={session} handleLogout={handleLogout} />
     </div>
   );
 };
@@ -116,9 +118,10 @@ const MobileNavbar = () => {
 
 interface DesktopNavbarProps {
   session: Session | null;
+  handleLogout: () => void;
 }
 
-const DesktopNavbar = ({ session }: DesktopNavbarProps) => {
+const DesktopNavbar = ({ session, handleLogout }: DesktopNavbarProps) => {
   return (
     <div className="items-center justify-between hidden w-full md:flex">
       <Link
@@ -145,7 +148,13 @@ const DesktopNavbar = ({ session }: DesktopNavbarProps) => {
         {session?.user?.role === 'admin' && (
           <div className="flex flex-row gap-4 items-center">
             <p className="text-gray-300 text-lg hidden xl:flex">{`${session.user.name}`}</p>
-            <Button href="/admin" title="Admin" color="orange" />
+            <Button href="/admin" title="Admin" color="white" />
+            <Button
+              title="Logg ut"
+              onClick={() => handleLogout}
+              color="orange"
+              className="hidden lg:flex"
+            />
           </div>
         )}
 

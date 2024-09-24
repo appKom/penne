@@ -53,13 +53,6 @@ export default function AdminLayout({
       <div>
         <div className="flex flex-col min-h-screen items-center">
           {children}
-          <div className="w-full max-w-lg  text-center">
-            <Button
-              color="orange"
-              title="Logg ut"
-              onClick={() => handleLogout()}
-            />
-          </div>
         </div>
       </div>
     );

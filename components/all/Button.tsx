@@ -6,16 +6,26 @@ interface Props {
   title: string;
   onClick?: () => void;
   href?: string;
-  color: 'orange';
+  color: 'orange' | 'white';
+  className?: string;
 }
 
-const Button = ({ title, onClick, color, href }: Props) => {
-  const colorStyle =
-    color === 'orange'
-      ? 'border border-onlineyellow text-onlineyellow hover:border-orange-600 hover:text-orange-600'
-      : '';
+const Button = ({ title, onClick, color, href, className }: Props) => {
+  let colorStyle = '';
 
-  const buttonStyle = `px-4 py-3 rounded-md  ${colorStyle}`;
+  switch (color) {
+    case 'orange':
+      colorStyle =
+        'border border-onlineyellow text-onlineyellow hover:border-orange-600 hover:text-orange-600';
+      break;
+
+    case 'white':
+      colorStyle =
+        'border border-white text-white hover:border-gray-600 hover:text-gray-600';
+      break;
+  }
+
+  const buttonStyle = `px-4 py-3 rounded-md  ${colorStyle} ${className}`;
 
   if (onClick) {
     return (
