@@ -4,6 +4,10 @@ import { useState, useRef, useEffect } from 'react';
 import { UserPlus, Upload, XIcon } from 'lucide-react';
 import { MemberType, GenderType } from '@/lib/types';
 import toast from 'react-hot-toast';
+import TextInput from '@/components/form/TextInput';
+import OptionsBox from '@/components/form/OptionsBox';
+import Checkbox from '@/components/form/Checkbox';
+import Table from '@/components/form/Table';
 
 const AdminMemberPage = () => {
   const [members, setMembers] = useState<MemberType[]>([]);
@@ -127,28 +131,56 @@ const AdminMemberPage = () => {
     }
   };
 
+  // Define the columns for the table
+  const columns = [
+    {
+      header: 'Navn',
+      accessor: 'name' as keyof MemberType,
+    },
+    {
+      header: 'Bilde',
+      accessor: 'imageHref' as keyof MemberType,
+      renderCell: (member: MemberType) => (
+        <img
+          src={member.imageHref}
+          alt={member.name}
+          className="w-10 h-10 rounded-full object-cover"
+        />
+      ),
+    },
+    {
+      header: 'Rolle',
+      accessor: 'role' as keyof MemberType,
+    },
+    {
+      header: 'Status',
+      accessor: 'status' as keyof MemberType,
+      renderCell: (member: MemberType) =>
+        member.isCurrent ? 'Aktiv' : `(${member.year})`,
+    },
+  ];
+
+  const tableData = members.map((member) => ({
+    ...member,
+    status: member.isCurrent ? 'Aktiv' : `(${member.year})`,
+  }));
+
   return (
     <div className="container mx-auto p-4 w-full items-start">
       <h1 className="text-2xl font-bold mb-4">Administrer medlemmer</h1>
       <form onSubmit={handleSubmit} className="space-y-4 mb-8">
+        <TextInput
+          id="name"
+          label="Navn"
+          value={name}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setName(e.target.value)
+          }
+          required
+        />
+
         <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-200"
-          >
-            Navn
-          </label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="mt-1 p-1 block w-full max-w-lg rounded-md bg-gray-700 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
-        </div>
-        <div>
-          <div className="flex items-center gap-4  mt-4">
+          <div className="flex items-center gap-4 mt-4">
             <input
               id="image"
               type="file"
@@ -176,82 +208,46 @@ const AdminMemberPage = () => {
             )}
           </div>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-200">
-            Rolle
-          </label>
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            required
-            className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-800 text-gray-200"
-          >
-            <option className="text-gray-200" value="" disabled>
-              Velgt en rolle
-            </option>
-            {roles.map((role) => (
-              <option key={role} value={role}>
-                {role}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-200">
-            Kjønn
-          </label>
-          <select
-            value={gender}
-            required
-            onChange={(e) => setGender(e.target.value as GenderType)}
-            className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-800 text-gray-200"
-          >
-            <option className="text-gray-200" value="" disabled>
-              Velgt kjønn
-            </option>
-            {genders.map((gender) => (
-              <option key={gender} value={gender}>
-                {gender}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="flex items-center space-x-2">
-          <input
-            id="current-member"
-            type="checkbox"
-            checked={isCurrent}
-            onChange={(e) => setIsCurrent(e.target.checked)}
-            className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
-          />
-          <label
-            htmlFor="current-member"
-            className="text-sm font-medium text-gray-200"
-          >
-            Aktivt medlem
-          </label>
-        </div>
+
+        <OptionsBox
+          label="Rolle"
+          value={role}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            setRole(e.target.value)
+          }
+          required
+          options={roles.map((role) => ({ value: role, label: role }))}
+        />
+
+        <OptionsBox
+          label="Kjønn"
+          value={gender}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            setGender(e.target.value as GenderType)
+          }
+          required
+          options={genders.map((gender) => ({ value: gender, label: gender }))}
+        />
+
+        <Checkbox
+          id="current-member"
+          label="Aktivt medlem"
+          checked={isCurrent}
+          onChange={(e) => setIsCurrent(e.target.checked)}
+        />
+
         {!isCurrent && (
-          <div>
-            <label className="block text-sm font-medium text-gray-200">
-              Aktivt år
-            </label>
-            <select
-              value={selectedYear}
-              onChange={(e) => setSelectedYear(Number(e.target.value))}
-              className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-800 text-gray-200"
-            >
-              <option className="text-gray-200" value="" disabled>
-                Velgt et år
-              </option>
-              {years.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
-          </div>
+          <OptionsBox
+            label="Aktivt år"
+            value={selectedYear.toString()}
+            onChange={(e) => setSelectedYear(Number(e.target.value))}
+            options={years.map((year) => ({
+              value: year.toString(),
+              label: year.toString(),
+            }))}
+          />
         )}
+
         <button
           type="submit"
           className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -261,73 +257,19 @@ const AdminMemberPage = () => {
         </button>
       </form>
 
-      <h2 className="text-xl font-semibold mb-2">Member List</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-600 border border-gray-600 text-white">
-          <thead className="bg-gray-900">
-            <tr>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
-              >
-                Navn
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
-              >
-                Bilde
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
-              >
-                Rolle
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
-              >
-                Status
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
-              ></th>
-            </tr>
-          </thead>
-          <tbody className="bg-gray-800 divide-y divide-gray-600">
-            {members.map((member) => (
-              <tr key={member.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  {member.name}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <img
-                    src={member.imageHref}
-                    alt={member.name}
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  {member.role}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  {member.isCurrent ? 'Aktiv' : `(${member.year})`}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right">
-                  <button
-                    onClick={() => handleRemove(member.id)}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    <XIcon className="h-5 w-5" />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <h2 className="text-xl font-semibold mb-2">Medlemsliste</h2>
+      <Table
+        columns={columns}
+        data={tableData}
+        renderRowActions={(member: MemberType) => (
+          <button
+            onClick={() => handleRemove(member.id)}
+            className="text-red-500 hover:text-red-700"
+          >
+            <XIcon className="h-5 w-5" />
+          </button>
+        )}
+      />
     </div>
   );
 };
