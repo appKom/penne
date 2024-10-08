@@ -4,36 +4,34 @@ import PastMembers from '@/components/about/PastMembers';
 import { aboutUsText } from '@/lib/content';
 import { MemberType } from '@/lib/types';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import useSWR from 'swr';
+import SkeletonMember from '@/components/about/SkeletonMember';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const AboutPage = () => {
-  const [currentMembers, setCurrentMembers] = useState<MemberType[]>([]);
-  const [pastMembers, setPastMembers] = useState<MemberType[]>([]);
+  const currentYear = new Date().getFullYear();
 
-  useEffect(() => {
-    const fetchMembers = async () => {
-      try {
-        const response = await fetch('/api/admin/member');
-        if (response.ok) {
-          const data = await response.json();
-          const currentYear = new Date().getFullYear();
-          const current = data.members.filter(
-            (member: MemberType) => member.year === currentYear,
-          );
-          const past = data.members.filter(
-            (member: MemberType) => member.year !== currentYear,
-          );
+  const { data, error } = useSWR('/api/admin/member', fetcher);
 
-          setCurrentMembers(current);
-          setPastMembers(past);
-        }
-      } catch (error) {
-        console.error('Error fetching members:', error);
-      }
-    };
+  if (error)
+    return (
+      <div className="min-h-screen text-white flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold">
+            Feil ved henting av medlemmer
+          </h2>
+          <p className="text-slate-400 mt-2">Vennligst prøv igjen senere.</p>
+        </div>
+      </div>
+    );
 
-    fetchMembers();
-  }, []);
+  const currentMembers = data
+    ? data.members.filter((member: MemberType) => member.year === currentYear)
+    : [];
+  const pastMembers = data
+    ? data.members.filter((member: MemberType) => member.year !== currentYear)
+    : [];
 
   return (
     <div className="max-w-5xl px-4 py-10 mx-auto sm:py-20 sm:px-6 lg:px-8">
@@ -49,16 +47,18 @@ const AboutPage = () => {
         ))}
       </div>
       <div className="flex flex-wrap items-center justify-center w-full max-w-full gap-6 my-20 sm:gap-12">
-        {currentMembers.map((member: MemberType, index) => (
-          <motion.div
-            key={member.name}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 * (index + 1) }}
-          >
-            <Member {...member} />
-          </motion.div>
-        ))}
+        {(data ? currentMembers : Array.from({ length: 4 })).map(
+          (member: MemberType | undefined, index: number) => (
+            <motion.div
+              key={member ? member.name : index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 * (index + 1) }}
+            >
+              {member ? <Member {...member} /> : <SkeletonMember />}
+            </motion.div>
+          ),
+        )}
       </div>
 
       <SemiTitle text="Tidligere medlemmer" />

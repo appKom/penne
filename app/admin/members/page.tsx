@@ -21,7 +21,7 @@ const AdminMemberPage = () => {
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
+  const years = Array.from({ length: 100 }, (_, i) => currentYear - 1 - i);
 
   const roles = ['Leder', 'Medlem'];
   const genders: GenderType[] = ['Mann', 'Kvinne', 'Annet'];
@@ -94,6 +94,13 @@ const AdminMemberPage = () => {
   };
 
   const handleRemove = async (id: number) => {
+    const confirmed = window.confirm(
+      'Er du sikker på at du vil slette dette medlemmet?',
+    );
+    if (!confirmed) {
+      return;
+    }
+
     try {
       const response = await fetch('/api/admin/member', {
         method: 'DELETE',
