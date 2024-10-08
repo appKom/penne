@@ -168,7 +168,7 @@ const AdminMemberPage = () => {
 
   const tableData = members.map((member) => ({
     ...member,
-    status: member.isCurrent ? 'Aktiv' : `(${member.year})`,
+    status: member.year == currentYear ? 'Aktiv' : `(${member.year})`,
   }));
 
   return (
