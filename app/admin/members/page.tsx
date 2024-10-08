@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { UserPlus, Upload } from 'lucide-react';
+import { UserPlus, Upload, XIcon } from 'lucide-react';
 
 type Genders = 'Mann' | 'Kvinne' | 'Annet';
 
@@ -60,6 +60,10 @@ const AdminMemberPage = () => {
     };
     setMembers([...members, newMember]);
     resetForm();
+  };
+
+  const handleRemove = (id: number) => {
+    setMembers(members.filter((member) => member.id !== id));
   };
 
   const resetForm = () => {
@@ -235,6 +239,10 @@ const AdminMemberPage = () => {
               >
                 Status
               </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
+              ></th>
             </tr>
           </thead>
           <tbody className="bg-gray-800 divide-y divide-gray-600">
@@ -250,12 +258,19 @@ const AdminMemberPage = () => {
                     className="w-10 h-10 rounded-full object-cover"
                   />
                 </td>
-
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   {member.role}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   {member.isCurrent ? 'Current' : `Past (${member.year})`}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-right">
+                  <button
+                    onClick={() => handleRemove(member.id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <XIcon className="h-5 w-5" />
+                  </button>
                 </td>
               </tr>
             ))}
