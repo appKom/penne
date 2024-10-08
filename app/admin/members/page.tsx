@@ -2,18 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { UserPlus, Upload, XIcon } from 'lucide-react';
-
-type Genders = 'Mann' | 'Kvinne' | 'Annet';
-
-type Member = {
-  id: number;
-  name: string;
-  image?: string;
-  role: string;
-  gender: Genders;
-  isCurrent: boolean;
-  year?: number;
-};
+import { Member, Genders } from '@/lib/types';
 
 const AdminMemberPage = () => {
   const [members, setMembers] = useState<Member[]>([]);
@@ -50,7 +39,7 @@ const AdminMemberPage = () => {
     const newMember: Member = {
       id: Date.now(),
       name,
-      image: image
+      imageHref: image
         ? URL.createObjectURL(image)
         : `/members/${gender === 'Kvinne' ? 'female.jpg' : 'male.jpg'}`,
       gender,
@@ -253,7 +242,7 @@ const AdminMemberPage = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <img
-                    src={member.image}
+                    src={member.imageHref}
                     alt={member.name}
                     className="w-10 h-10 rounded-full object-cover"
                   />

@@ -13,6 +13,7 @@ model Member {
   name      String
   imageHref String?
   role      String?
-  current   Boolean?
+  gender    String
+  isCurrent Boolean?
   year      Int?
 }
