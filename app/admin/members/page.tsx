@@ -131,7 +131,6 @@ const AdminMemberPage = () => {
     }
   };
 
-  // Define the columns for the table
   const columns = [
     {
       header: 'Navn',
