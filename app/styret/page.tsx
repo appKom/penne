@@ -1,45 +1,74 @@
-// 'use client';
+'use client';
+import Member from '@/components/about/Member';
+import PastMembers from '@/components/about/PastMembers';
+import { aboutUsText } from '@/lib/content';
+import { MemberType } from '@/lib/types';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
-// import Member from '@/components/about/Member';
-// import PastMembers from '@/components/about/PastMembers';
-// import { aboutUsText, currentMembers } from '@/lib/content';
+const AboutPage = () => {
+  const [currentMembers, setCurrentMembers] = useState<MemberType[]>([]);
+  const [pastMembers, setPastMembers] = useState<MemberType[]>([]);
 
-// import { motion } from 'framer-motion';
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await fetch('/api/admin/member');
+        if (response.ok) {
+          const data = await response.json();
+          const currentYear = new Date().getFullYear();
+          const current = data.members.filter(
+            (member: MemberType) => member.year === currentYear,
+          );
+          const past = data.members.filter(
+            (member: MemberType) => member.year !== currentYear,
+          );
 
-// const AboutPage = () => (
-//   <div className="max-w-5xl px-4 py-10 mx-auto sm:py-20 sm:px-6 lg:px-8">
-//     <h1 className="mb-8 text-5xl font-extrabold tracking-tight text-center">
-//       Fondstyret
-//     </h1>
-//     <SemiTitle text="Hvem er vi?" />
-//     <div className="flex flex-col items-center justify-center w-full gap-6 m-auto">
-//       {aboutUsText.map((paragraph) => (
-//         <p key={paragraph} className="text-gray-400 md:leading-7 md:text-lg">
-//           {paragraph}
-//         </p>
-//       ))}
-//     </div>
+          setCurrentMembers(current);
+          setPastMembers(past);
+        }
+      } catch (error) {
+        console.error('Error fetching members:', error);
+      }
+    };
 
-//     <div className="flex flex-wrap items-center justify-center w-full max-w-full gap-6 my-20 sm:gap-12">
-//       {currentMembers.map((member: Member, index) => (
-//         <motion.div
-//           key={member.name}
-//           initial={{ opacity: 0, y: 20 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ delay: 0.2 * (index + 1) }}
-//         >
-//           <Member {...member} />
-//         </motion.div>
-//       ))}
-//     </div>
+    fetchMembers();
+  }, []);
 
-//     <SemiTitle text="Tidligere medlemmer" />
-//     <PastMembers />
-//   </div>
-// );
+  return (
+    <div className="max-w-5xl px-4 py-10 mx-auto sm:py-20 sm:px-6 lg:px-8">
+      <h1 className="mb-8 text-5xl font-extrabold tracking-tight text-center">
+        Fondstyret
+      </h1>
+      <SemiTitle text="Hvem er vi?" />
+      <div className="flex flex-col items-center justify-center w-full gap-6 m-auto">
+        {aboutUsText.map((paragraph) => (
+          <p key={paragraph} className="text-gray-400 md:leading-7 md:text-lg">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center justify-center w-full max-w-full gap-6 my-20 sm:gap-12">
+        {currentMembers.map((member: MemberType, index) => (
+          <motion.div
+            key={member.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 * (index + 1) }}
+          >
+            <Member {...member} />
+          </motion.div>
+        ))}
+      </div>
 
-// export default AboutPage;
+      <SemiTitle text="Tidligere medlemmer" />
+      <PastMembers members={pastMembers} />
+    </div>
+  );
+};
 
-// const SemiTitle = ({ text }: { text: string }) => (
-//   <h1 className="mb-4 text-2xl font-semibold">{text}</h1>
-// );
+export default AboutPage;
+
+const SemiTitle = ({ text }: { text: string }) => (
+  <h1 className="mb-4 text-2xl font-semibold">{text}</h1>
+);
