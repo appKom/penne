@@ -2,14 +2,15 @@
 
 import { useState, useRef } from 'react';
 import { UserPlus, Upload, XIcon } from 'lucide-react';
-import { Member, Genders } from '@/lib/types';
+import { MemberType, GenderType } from '@/lib/types';
+import toast from 'react-hot-toast';
 
 const AdminMemberPage = () => {
-  const [members, setMembers] = useState<Member[]>([]);
+  const [members, setMembers] = useState<MemberType[]>([]);
   const [name, setName] = useState('');
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [gender, setGender] = useState<Genders>('Annet');
+  const [gender, setGender] = useState<GenderType>('Annet');
   const [role, setRole] = useState('');
   const [isCurrent, setIsCurrent] = useState(true);
   const currentYear = new Date().getFullYear();
@@ -19,7 +20,7 @@ const AdminMemberPage = () => {
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
 
   const roles = ['Leder', 'Medlem'];
-  const genders: Genders[] = ['Mann', 'Kvinne', 'Annet'];
+  const genders: GenderType[] = ['Mann', 'Kvinne', 'Annet'];
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -33,22 +34,54 @@ const AdminMemberPage = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const toBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newMember: Member = {
-      id: Date.now(),
+    let imageBase64 = '';
+    if (image) {
+      imageBase64 = await toBase64(image);
+    }
+
+    const payload = {
       name,
-      imageHref: image
-        ? URL.createObjectURL(image)
-        : `/members/${gender === 'Kvinne' ? 'female.jpg' : 'male.jpg'}`,
-      gender,
+      image: imageBase64,
       role,
+      gender,
       isCurrent,
-      year: isCurrent ? undefined : selectedYear,
+      year: selectedYear,
     };
-    setMembers([...members, newMember]);
-    resetForm();
+
+    try {
+      const response = await fetch('/api/admin/member', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        toast.success('Medlem lagt til');
+        resetForm();
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(`Klare ikke å legge til medlem: ${error.message}`);
+      } else {
+        toast.error('Klarte ikke å legge til medlem');
+      }
+    }
   };
 
   const handleRemove = (id: number) => {
@@ -60,6 +93,7 @@ const AdminMemberPage = () => {
     setImage(null);
     setImagePreview(null);
     setRole('');
+    setGender('Annet');
     setIsCurrent(true);
     setSelectedYear(currentYear);
     if (fileInputRef.current) {
@@ -88,7 +122,7 @@ const AdminMemberPage = () => {
           />
         </div>
         <div>
-          <div className="flex items-center  mt-4">
+          <div className="flex items-center gap-4  mt-4">
             <input
               id="image"
               type="file"
@@ -141,7 +175,7 @@ const AdminMemberPage = () => {
           <select
             value={gender}
             required
-            onChange={(e) => setGender(e.target.value as Genders)}
+            onChange={(e) => setGender(e.target.value as GenderType)}
             className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-800 text-gray-200"
           >
             <option className="text-gray-200" value="" disabled>

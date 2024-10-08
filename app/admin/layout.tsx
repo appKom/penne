@@ -2,6 +2,7 @@
 
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Button from '@/components/all/Button';
+import { Toaster } from 'react-hot-toast';
 
 export default function AdminLayout({
   children,
@@ -67,6 +68,7 @@ export default function AdminLayout({
   if (session && session?.user?.role === 'admin') {
     return (
       <div>
+        <Toaster />
         <div className="flex flex-col min-h-screen items-center">
           {children}
         </div>

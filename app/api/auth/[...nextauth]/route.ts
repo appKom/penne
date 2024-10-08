@@ -40,7 +40,7 @@ const handler = NextAuth({
         name: session.user?.name || '',
         role:
           session.user?.email == 'fredrik.carsten.hansteen@online.ntnu.no' ||
-          'julian.ottosen@online.ntnu.no '
+          'julian.ottosen@online.ntnu.no'
             ? 'admin'
             : 'user', //TODO vente på dotkom
         email: session.user?.email || '',

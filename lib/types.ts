@@ -1,11 +1,11 @@
-export type Genders = 'Mann' | 'Kvinne' | 'Annet';
+export type GenderType = 'Mann' | 'Kvinne' | 'Annet';
 
-export type Member = {
+export type MemberType = {
   id: number;
   name: string;
   imageHref: string;
   role: string;
-  gender: Genders;
+  gender: GenderType;
   isCurrent: boolean;
-  year?: number;
+  year: number;
 };
