@@ -26,48 +26,55 @@ export const POST = async (request: Request) => {
 
     const image = formData.get('image') as File | null;
 
-    if (!name || !role || !gender || !year || !image) {
-      return NextResponse.json(
-        { error: 'Invalid member data provided' },
-        { status: 400 },
-      );
-    }
+    let imageHref = '';
 
-    const arrayBuffer = await image.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    if (image && image.size > 0) {
+      const arrayBuffer = await image.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
 
-    const fileName = `${Date.now()}_${name}.jpg`;
+      const fileName = `${Date.now()}_${name}.jpg`;
 
-    const { data, error } = await supabase.storage
-      .from('members')
-      .upload(fileName, buffer, {
-        contentType: image.type,
-      });
+      const { data, error } = await supabase.storage
+        .from('members')
+        .upload(fileName, buffer, {
+          contentType: image.type,
+        });
 
-    if (error) {
-      console.error('Error uploading image:', error.message);
-      return NextResponse.json(
-        { error: 'Error uploading image' },
-        { status: 500 },
-      );
-    }
+      if (error) {
+        console.error('Error uploading image:', error.message);
+        return NextResponse.json(
+          { error: 'Error uploading image' },
+          { status: 500 },
+        );
+      }
 
-    const { data: publicData } = supabase.storage
-      .from('members')
-      .getPublicUrl(data.path);
+      const { data: publicData } = supabase.storage
+        .from('members')
+        .getPublicUrl(data.path);
 
-    if (!publicData?.publicUrl) {
-      return NextResponse.json(
-        { error: 'Failed to get image URL' },
-        { status: 500 },
-      );
+      if (!publicData?.publicUrl) {
+        return NextResponse.json(
+          { error: 'Failed to get image URL' },
+          { status: 500 },
+        );
+      }
+
+      imageHref = publicData.publicUrl;
+    } else {
+      if (gender === 'Mann') {
+        imageHref = '/members/male.jpg';
+      } else if (gender === 'Kvinne') {
+        imageHref = '/members/female.jpg';
+      } else {
+        imageHref = '/members/male.jpg';
+      }
     }
 
     const prisma = new PrismaClient();
     const member = await prisma.member.create({
       data: {
         name,
-        imageHref: publicData.publicUrl,
+        imageHref,
         role,
         gender,
         isCurrent: isCurrent === 'true',

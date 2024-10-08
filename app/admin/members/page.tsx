@@ -57,18 +57,15 @@ const AdminMemberPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!image) {
-      toast.error('Please upload an image.');
-      return;
-    }
-
     const formData = new FormData();
     formData.append('name', name);
     formData.append('role', role);
     formData.append('gender', gender);
     formData.append('isCurrent', isCurrent.toString());
     formData.append('year', selectedYear.toString());
-    formData.append('image', image);
+    if (image) {
+      formData.append('image', image);
+    }
 
     try {
       const response = await fetch('/api/admin/member', {
