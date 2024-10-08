@@ -11,7 +11,7 @@ const AdminMemberPage = () => {
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [gender, setGender] = useState<GenderType>('Annet');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('Medlem');
   const [isCurrent, setIsCurrent] = useState(true);
   const currentYear = new Date().getFullYear();
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
