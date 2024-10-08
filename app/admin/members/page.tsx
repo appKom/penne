@@ -128,7 +128,7 @@ const AdminMemberPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 w-full items-start">
       <h1 className="text-2xl font-bold mb-4">Administrer medlemmer</h1>
       <form onSubmit={handleSubmit} className="space-y-4 mb-8">
         <div>
