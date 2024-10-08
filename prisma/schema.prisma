@@ -9,8 +9,10 @@ generator client {
 }
 
 model Member {
-  name      String   @id
+  id        Int      @id @default(autoincrement())
+  name      String
   imageHref String?
   role      String?
   current   Boolean?
+  year      Int?
 }
