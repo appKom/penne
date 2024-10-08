@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { UserPlus, Upload, XIcon } from 'lucide-react';
 import { MemberType, GenderType } from '@/lib/types';
 import toast from 'react-hot-toast';
@@ -22,6 +22,26 @@ const AdminMemberPage = () => {
   const roles = ['Leder', 'Medlem'];
   const genders: GenderType[] = ['Mann', 'Kvinne', 'Annet'];
 
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await fetch('/api/admin/member');
+        if (response.ok) {
+          const data = await response.json();
+          setMembers(data.members);
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(`Klarte ikke å hente medlemmer: ${error.message}`);
+        } else {
+          toast.error('Klarte ikke å hente medlemmer');
+        }
+      }
+    };
+
+    fetchMembers();
+  }, []);
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
@@ -34,58 +54,67 @@ const AdminMemberPage = () => {
     }
   };
 
-  const toBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    let imageBase64 = '';
-    if (image) {
-      imageBase64 = await toBase64(image);
+    if (!image) {
+      toast.error('Please upload an image.');
+      return;
     }
 
-    const payload = {
-      name,
-      image: imageBase64,
-      role,
-      gender,
-      isCurrent,
-      year: selectedYear,
-    };
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('role', role);
+    formData.append('gender', gender);
+    formData.append('isCurrent', isCurrent.toString());
+    formData.append('year', selectedYear.toString());
+    formData.append('image', image);
 
     try {
       const response = await fetch('/api/admin/member', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: formData,
       });
 
       if (response.ok) {
-        toast.success('Medlem lagt til');
+        toast.success('Medlem lagt til!');
         resetForm();
-      }
-
-      if (!response.ok) {
+        setMembers([...members, (await response.json()).member]);
+      } else {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(`Klare ikke å legge til medlem: ${error.message}`);
+        toast.error(`Failed to add member: ${error.message}`);
       } else {
-        toast.error('Klarte ikke å legge til medlem');
+        toast.error('Failed to add member');
       }
     }
   };
 
-  const handleRemove = (id: number) => {
-    setMembers(members.filter((member) => member.id !== id));
+  const handleRemove = async (id: number) => {
+    try {
+      const response = await fetch('/api/admin/member', {
+        method: 'DELETE',
+        body: JSON.stringify({ id }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        setMembers(members.filter((member) => member.id !== id));
+        toast.success('Medlem fjernet!');
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(`Failed to remove member: ${error.message}`);
+      } else {
+        toast.error('Failed to remove member');
+      }
+    }
   };
 
   const resetForm = () => {
@@ -285,7 +314,7 @@ const AdminMemberPage = () => {
                   {member.role}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  {member.isCurrent ? 'Current' : `Past (${member.year})`}
+                  {member.isCurrent ? 'Aktiv' : `(${member.year})`}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right">
                   <button
