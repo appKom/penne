@@ -10,8 +10,6 @@ import SkeletonMember from '@/components/about/SkeletonMember';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const AboutPage = () => {
-  const currentYear = new Date().getFullYear();
-
   const { data, error } = useSWR('/api/admin/member', fetcher);
 
   if (error)
@@ -27,10 +25,10 @@ const AboutPage = () => {
     );
 
   const currentMembers = data
-    ? data.members.filter((member: MemberType) => member.year === currentYear)
+    ? data.members.filter((member: MemberType) => member.isCurrent)
     : [];
   const pastMembers = data
-    ? data.members.filter((member: MemberType) => member.year !== currentYear)
+    ? data.members.filter((member: MemberType) => !member.isCurrent)
     : [];
 
   return (

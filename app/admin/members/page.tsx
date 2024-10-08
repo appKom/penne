@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { UserPlus, Upload, XIcon } from 'lucide-react';
+import { UserPlus, Upload, XIcon, Edit } from 'lucide-react';
 import { MemberType, GenderType } from '@/lib/types';
 import toast from 'react-hot-toast';
 import TextInput from '@/components/form/TextInput';
@@ -11,6 +11,8 @@ import Table from '@/components/form/Table';
 
 const AdminMemberPage = () => {
   const [members, setMembers] = useState<MemberType[]>([]);
+  const [editingMember, setEditingMember] = useState<MemberType | null>(null);
+
   const [name, setName] = useState('');
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -21,7 +23,7 @@ const AdminMemberPage = () => {
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const years = Array.from({ length: 100 }, (_, i) => currentYear - 1 - i);
+  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
 
   const roles = ['Leder', 'Medlem'];
   const genders: GenderType[] = ['Mann', 'Kvinne', 'Annet'];
@@ -32,6 +34,11 @@ const AdminMemberPage = () => {
         const response = await fetch('/api/admin/member');
         if (response.ok) {
           const data = await response.json();
+
+          data.members.sort((a: MemberType, b: MemberType) =>
+            a.year > b.year ? -1 : 1,
+          );
+
           setMembers(data.members);
         }
       } catch (error) {
@@ -45,6 +52,17 @@ const AdminMemberPage = () => {
 
     fetchMembers();
   }, []);
+
+  const handleEdit = (member: MemberType) => {
+    setEditingMember(member);
+    setName(member.name);
+    setRole(member.role);
+    setGender(member.gender);
+    setIsCurrent(member.isCurrent);
+    setSelectedYear(member.year);
+    setImagePreview(member.imageHref);
+    setImage(null);
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -72,15 +90,41 @@ const AdminMemberPage = () => {
     }
 
     try {
-      const response = await fetch('/api/admin/member', {
-        method: 'POST',
-        body: formData,
-      });
+      let response;
+
+      if (editingMember) {
+        formData.append('id', editingMember.id.toString());
+        response = await fetch('/api/admin/member', {
+          method: 'PUT',
+          body: formData,
+        });
+      } else {
+        response = await fetch('/api/admin/member', {
+          method: 'POST',
+          body: formData,
+        });
+      }
 
       if (response.ok) {
-        toast.success('Medlem lagt til!');
+        toast.success(editingMember ? 'Medlem oppdatert' : 'Medlem lagt til!');
         resetForm();
-        setMembers([...members, (await response.json()).member]);
+
+        if (editingMember) {
+          const updatedMember = await response.json();
+          setMembers(
+            members.map((member) =>
+              member.id === editingMember.id ? updatedMember.member : member,
+            ),
+          );
+        } else {
+          setMembers(
+            [...members, (await response.json()).member].sort(
+              (a: MemberType, b: MemberType) => (a.year > b.year ? -1 : 1),
+            ),
+          );
+        }
+
+        setEditingMember(null);
       } else {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -88,7 +132,11 @@ const AdminMemberPage = () => {
       if (error instanceof Error) {
         toast.error(`Failed to add member: ${error.message}`);
       } else {
-        toast.error('Failed to add member');
+        toast.error(
+          editingMember
+            ? 'Klarte ikke å oppdatere medlem'
+            : 'Klarte ikke å legge til medlem',
+        );
       }
     }
   };
@@ -168,7 +216,7 @@ const AdminMemberPage = () => {
 
   const tableData = members.map((member) => ({
     ...member,
-    status: member.year == currentYear ? 'Aktiv' : `(${member.year})`,
+    status: member.isCurrent ? 'Aktiv' : `(${member.year})`,
   }));
 
   return (
@@ -258,8 +306,17 @@ const AdminMemberPage = () => {
           type="submit"
           className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          <UserPlus className="mr-2 h-4 w-4" />
-          Legg til medlem
+          {editingMember ? (
+            <>
+              <Edit className="mr-2 h-4 w-4" />
+              Oppdater medlem
+            </>
+          ) : (
+            <>
+              <UserPlus className="mr-2 h-4 w-4" />
+              Legg til medlem
+            </>
+          )}
         </button>
       </form>
 
@@ -268,12 +325,20 @@ const AdminMemberPage = () => {
         columns={columns}
         data={tableData}
         renderRowActions={(member: MemberType) => (
-          <button
-            onClick={() => handleRemove(member.id)}
-            className="text-red-500 hover:text-red-700"
-          >
-            <XIcon className="h-5 w-5" />
-          </button>
+          <>
+            <button
+              onClick={() => handleEdit(member)}
+              className="text-blue-500 hover:text-blue-700 mr-2"
+            >
+              <Edit className="h-5 w-5" />
+            </button>
+            <button
+              onClick={() => handleRemove(member.id)}
+              className="text-red-500 hover:text-red-700"
+            >
+              <XIcon className="h-5 w-5" />
+            </button>
+          </>
         )}
       />
     </div>
