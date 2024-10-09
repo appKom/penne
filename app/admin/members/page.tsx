@@ -259,7 +259,7 @@ const AdminMemberPage = () => {
                 Last opp bilde
               </button>
             )}
-            {imagePreview && (
+            {imagePreview && isCurrent && (
               <img
                 src={imagePreview}
                 alt="Preview"
