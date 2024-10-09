@@ -27,6 +27,7 @@ const AdminMemberPage = () => {
 
   const roles = ['Leder', 'Medlem'];
   const genders: GenderType[] = ['Mann', 'Kvinne', 'Annet'];
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -47,6 +48,8 @@ const AdminMemberPage = () => {
         } else {
           toast.error('Klarte ikke å hente medlemmer');
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -77,6 +80,7 @@ const AdminMemberPage = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setIsLoading(true);
     e.preventDefault();
 
     const formData = new FormData();
@@ -138,6 +142,8 @@ const AdminMemberPage = () => {
             : 'Klarte ikke å legge til medlem',
         );
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -321,26 +327,35 @@ const AdminMemberPage = () => {
       </form>
 
       <h2 className="text-xl font-semibold mb-2">Medlemsliste</h2>
-      <Table
-        columns={columns}
-        data={tableData}
-        renderRowActions={(member: MemberType) => (
-          <>
-            <button
-              onClick={() => handleEdit(member)}
-              className="text-blue-500 hover:text-blue-700 mr-2"
-            >
-              <Edit className="h-5 w-5" />
-            </button>
-            <button
-              onClick={() => handleRemove(member.id)}
-              className="text-red-500 hover:text-red-700"
-            >
-              <XIcon className="h-5 w-5" />
-            </button>
-          </>
-        )}
-      />
+      {isLoading ? (
+        <div className=" text-white flex items-center justify-center">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-16 w-16 border-y-2 border-onlineyellow mb-4"></div>
+            <h2 className="text-2xl font-semibold">Laster inn medlemmer...</h2>
+          </div>
+        </div>
+      ) : (
+        <Table
+          columns={columns}
+          data={tableData}
+          renderRowActions={(member: MemberType) => (
+            <>
+              <button
+                onClick={() => handleEdit(member)}
+                className="text-blue-500 hover:text-blue-700 mr-2"
+              >
+                <Edit className="h-5 w-5" />
+              </button>
+              <button
+                onClick={() => handleRemove(member.id)}
+                className="text-red-500 hover:text-red-700"
+              >
+                <XIcon className="h-5 w-5" />
+              </button>
+            </>
+          )}
+        />
+      )}
     </div>
   );
 };
