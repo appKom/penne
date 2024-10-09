@@ -25,10 +25,14 @@ const AboutPage = () => {
     );
 
   const currentMembers = data
-    ? data.members.filter((member: MemberType) => member.isCurrent)
+    ? data.members
+        .filter((member: MemberType) => member.isCurrent)
+        .sort((role: MemberType) => (role.role === 'Leder' ? -1 : 1))
     : [];
   const pastMembers = data
-    ? data.members.filter((member: MemberType) => !member.isCurrent)
+    ? data.members
+        .filter((member: MemberType) => !member.isCurrent)
+        .sort((role: MemberType) => (role.role === 'Leder' ? -1 : 1))
     : [];
 
   return (
