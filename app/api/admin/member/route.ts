@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { isAdmin } from '@/lib/auth/apiChecks';
 import { createClient } from '@supabase/supabase-js';
+import { prisma } from '@/lib/prisma';
 
 const supabaseUrl = process.env.NEXT_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
@@ -78,7 +78,6 @@ export const POST = async (request: Request) => {
       }
     }
 
-    const prisma = new PrismaClient();
     const member = await prisma.member.create({
       data: {
         name,
@@ -182,8 +181,6 @@ export const PUT = async (request: Request) => {
       updateData.imageHref = imageHref;
     }
 
-    const prisma = new PrismaClient();
-
     const member = await prisma.member.update({
       where: { id: Number(id) },
       data: updateData,
@@ -217,7 +214,6 @@ export async function DELETE(request: Request) {
       );
     }
 
-    const prisma = new PrismaClient();
     const member = await prisma.member.delete({
       where: {
         id: Number(id),
@@ -236,7 +232,6 @@ export async function DELETE(request: Request) {
 
 export async function GET() {
   try {
-    const prisma = new PrismaClient();
     const members = await prisma.member.findMany();
 
     return NextResponse.json({ members }, { status: 200 });
