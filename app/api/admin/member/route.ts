@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth/next';
 import { isAdmin } from '@/lib/auth/apiChecks';
 import { createClient } from '@supabase/supabase-js';
 import { prisma } from '@/lib/prisma';
+import { GenderType } from '@/lib/types';
 
 const supabaseUrl = process.env.NEXT_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
@@ -28,7 +29,7 @@ export const POST = async (request: Request) => {
 
     const name = formData.get('name') as string;
     const role = formData.get('role') as string;
-    const gender = formData.get('gender') as string;
+    const gender = formData.get('gender') as GenderType;
     const isCurrent = formData.get('isCurrent') as string;
     const year = formData.get('year') as string;
 
@@ -112,7 +113,7 @@ export const PUT = async (request: Request) => {
     const id = formData.get('id') as string;
     const name = formData.get('name') as string;
     const role = formData.get('role') as string;
-    const gender = formData.get('gender') as string;
+    const gender = formData.get('gender') as GenderType;
     const isCurrent = formData.get('isCurrent') as string;
     const year = formData.get('year') as string;
     const image = formData.get('image') as File | null;
@@ -163,7 +164,7 @@ export const PUT = async (request: Request) => {
     interface UpdateData {
       name: string;
       role: string;
-      gender: string;
+      gender: GenderType;
       isCurrent: boolean;
       year: number;
       imageHref?: string;
