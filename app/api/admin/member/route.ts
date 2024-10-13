@@ -9,13 +9,13 @@ const supabaseUrl = process.env.NEXT_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-function sanitizeFileName(name: string): string {
+const sanitizeFileName = (name: string): string => {
   return name
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-zA-Z0-9]/g, '_')
     .toLowerCase();
-}
+};
 
 export const POST = async (request: Request) => {
   try {
@@ -197,7 +197,7 @@ export const PUT = async (request: Request) => {
   }
 };
 
-export async function DELETE(request: Request) {
+export const DELETE = async (request: Request) => {
   try {
     const session = await getServerSession();
 
@@ -229,9 +229,9 @@ export async function DELETE(request: Request) {
       { status: 500 },
     );
   }
-}
+};
 
-export async function GET() {
+export const GET = async () => {
   try {
     const members = await prisma.member.findMany();
 
@@ -243,4 +243,4 @@ export async function GET() {
       { status: 500 },
     );
   }
-}
+};
