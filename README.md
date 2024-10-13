@@ -21,4 +21,7 @@ yarn install
 
 ### 3. Set up environment variables
 
-XXX
+#### Create `.env` file:
+
+```bash
+cp .env.template .env
