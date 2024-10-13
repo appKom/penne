@@ -2,6 +2,12 @@ import { isAdmin } from '@/lib/auth/apiChecks';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
+import { sanitizeFileName } from '../member/route';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_SUPABASE_URL!;
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const GET = async () => {
   try {
@@ -34,6 +40,46 @@ export const POST = async (request: Request) => {
     const dateApplied = new Date(formData.get('dateApplied') as string);
     const dateGranted = new Date(formData.get('dateGranted') as string);
 
+    const attachment = formData.get('attachment') as File | null;
+
+    let attachmentHref = '';
+
+    if (attachment && attachment.size > 0) {
+      const arrayBuffer = await attachment.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+
+      const fileName = `${Date.now()}_${sanitizeFileName(purpose)}.${attachment.type.split('/')[1]}`;
+
+      const { data, error } = await supabase.storage
+        .from('application')
+        .upload(fileName, buffer, {
+          contentType: attachment.type,
+        });
+
+      if (error) {
+        console.error('Error uploading attachment:', error.message);
+        return NextResponse.json(
+          { error: 'Error uploading attachment' },
+          { status: 500 },
+        );
+      }
+
+      const { data: publicData } = supabase.storage
+        .from('application')
+        .getPublicUrl(data.path);
+
+      if (!publicData?.publicUrl) {
+        return NextResponse.json(
+          { error: 'Failed to get image URL' },
+          { status: 500 },
+        );
+      }
+
+      attachmentHref = publicData.publicUrl;
+    } else {
+      attachmentHref = '';
+    }
+
     const application = await prisma.application.create({
       data: {
         purpose,
@@ -42,6 +88,7 @@ export const POST = async (request: Request) => {
         recipient,
         dateApplied,
         dateGranted,
+        attachments: attachmentHref,
       },
     });
 

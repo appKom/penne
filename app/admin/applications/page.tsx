@@ -8,6 +8,7 @@ import { ApplicationType } from '@/lib/types';
 import toast from 'react-hot-toast';
 import Table from '@/components/form/Table';
 import { formatDateNorwegian } from '@/lib/dateUtils';
+import Image from 'next/image';
 
 const ApplicationsPage = () => {
   const [purpose, setPurpose] = useState('');
@@ -133,6 +134,8 @@ const ApplicationsPage = () => {
     setDateApplied(undefined);
     setDateGranted(undefined);
     setEditingApplication(null);
+    setAttachment(null);
+    setAttachmentPreview(null);
   };
 
   const handleEdit = (application: ApplicationType) => {
@@ -147,6 +150,8 @@ const ApplicationsPage = () => {
     setDateGranted(
       application.dateGranted ? new Date(application.dateGranted) : undefined,
     );
+    setAttachmentPreview(application.attachments);
+    setAttachment(null);
   };
 
   const handleRemove = async (id: number) => {
@@ -211,6 +216,32 @@ const ApplicationsPage = () => {
       accessor: 'dateGranted' as keyof ApplicationType,
       renderCell: (item: ApplicationType) =>
         formatDateNorwegian(item.dateGranted),
+    },
+    {
+      header: 'Vedlegg',
+      accessor: 'attachments' as keyof ApplicationType,
+      renderCell: (application: ApplicationType) => {
+        if (!application.attachments) return null;
+
+        const fileType = application.attachments.split('.').pop();
+
+        return fileType === 'pdf' ? (
+          <iframe
+            src={application.attachments}
+            title="PDF Preview"
+            width="50"
+            height="50"
+          ></iframe>
+        ) : (
+          <Image
+            height={50}
+            width={50}
+            src={application.attachments}
+            alt={application.purpose}
+            className="w-10 h-10 rounded-full object-cover"
+          />
+        );
+      },
     },
   ];
 

@@ -9,7 +9,7 @@ const supabaseUrl = process.env.NEXT_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const sanitizeFileName = (name: string): string => {
+export const sanitizeFileName = (name: string): string => {
   return name
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
