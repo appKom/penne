@@ -7,15 +7,17 @@ import { FileText, Edit, XIcon } from 'lucide-react';
 import { ApplicationType } from '@/lib/types';
 import toast from 'react-hot-toast';
 import Table from '@/components/form/Table';
+import { formatDateNorwegian } from '@/lib/dateUtils';
 
 const ApplicationsPage = () => {
   const [purpose, setPurpose] = useState('');
   const [grantedAmount, setGrantedAmount] = useState(0);
   const [amountApplied, setAmountApplied] = useState(0);
-  const [recipient, setrecipient] = useState('');
+  const [recipient, setRecipient] = useState('');
   const [dateApplied, setDateApplied] = useState<Date | undefined>(undefined);
   const [dateGranted, setDateGranted] = useState<Date | undefined>(undefined);
-  const [editingApplication, setEditingApplication] = useState(false);
+  const [editingApplication, setEditingApplication] =
+    useState<ApplicationType | null>(null);
 
   const [isLoading, setIsLoading] = useState(true);
   const [applications, setApplications] = useState<ApplicationType[]>([]);
@@ -43,19 +45,131 @@ const ApplicationsPage = () => {
     fetchApplications();
   }, []);
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    setIsLoading(true);
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('purpose', purpose);
+    formData.append('grantedAmount', grantedAmount.toString());
+    formData.append('amountApplied', amountApplied.toString());
+    formData.append('recipient', recipient);
+    formData.append('dateApplied', dateApplied?.toISOString() || '');
+    formData.append('dateGranted', dateGranted?.toISOString() || '');
+
+    try {
+      let response;
+
+      if (editingApplication) {
+        formData.append('id', editingApplication.id.toString());
+        response = await fetch('/api/admin/application', {
+          method: 'PUT',
+          body: formData,
+        });
+      } else {
+        response = await fetch('/api/admin/application', {
+          method: 'POST',
+          body: formData,
+        });
+      }
+
+      if (response.ok) {
+        toast.success(
+          editingApplication ? 'Søknad oppdatert' : 'Søknad lagt til!',
+        );
+        resetForm();
+
+        if (editingApplication) {
+          const updatedApplication = await response.json();
+          setApplications(
+            applications.map((application) =>
+              application.id === editingApplication.id
+                ? updatedApplication.application
+                : application,
+            ),
+          );
+        } else {
+          setApplications([
+            ...applications,
+            (await response.json()).application,
+          ]);
+        }
+
+        setEditingApplication(null);
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(`Failed to add application: ${error.message}`);
+      } else {
+        toast.error(
+          editingApplication
+            ? 'Klarte ikke å oppdatere søknad'
+            : 'Klarte ikke å legge til søknad',
+        );
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const resetForm = () => {
+    setPurpose('');
+    setGrantedAmount(0);
+    setAmountApplied(0);
+    setRecipient('');
+    setDateApplied(undefined);
+    setDateGranted(undefined);
+    setEditingApplication(null);
+  };
+
   const handleEdit = (application: ApplicationType) => {
+    setEditingApplication(application);
     setPurpose(application.purpose);
     setGrantedAmount(application.grantedAmount);
     setAmountApplied(application.amountApplied);
-    setrecipient(application.recipient);
-    setDateApplied(application.dateApplied);
-    setDateGranted(application.dateGranted);
-
-    setEditingApplication(true);
+    setRecipient(application.recipient);
+    setDateApplied(
+      application.dateApplied ? new Date(application.dateApplied) : undefined,
+    );
+    setDateGranted(
+      application.dateGranted ? new Date(application.dateGranted) : undefined,
+    );
   };
 
   const handleRemove = async (id: number) => {
-    return id;
+    const confirmed = window.confirm(
+      'Er du sikker på at du vil slette denne søknaden?',
+    );
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/admin/application', {
+        method: 'DELETE',
+        body: JSON.stringify({ id }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        setApplications(
+          applications.filter((application) => application.id !== id),
+        );
+        toast.success('Søknad fjernet!');
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(`Klarte ikke å fjerne søknad: ${error.message}`);
+      } else {
+        toast.error('Klarte ikke å fjerne søknad');
+      }
+    }
   };
 
   const columns = [
@@ -78,22 +192,27 @@ const ApplicationsPage = () => {
     {
       header: 'Dato Søkt',
       accessor: 'dateApplied' as keyof ApplicationType,
+      renderCell: (item: ApplicationType) =>
+        formatDateNorwegian(item.dateApplied),
     },
     {
       header: 'Dato Innvilget',
       accessor: 'dateGranted' as keyof ApplicationType,
+      renderCell: (item: ApplicationType) =>
+        formatDateNorwegian(item.dateGranted),
     },
   ];
 
   return (
     <div className="container mx-auto p-4 w-full items-start">
       <h1 className="text-2xl font-bold mb-4">Administrer søknader</h1>
-      <form className="space-y-4 mb-8">
+      <form onSubmit={handleSubmit} className="space-y-4 mb-8">
         <TextInput
           id="purpose"
           label="Formål"
           value={purpose}
           onChange={(e) => setPurpose(e.target.value)}
+          required
         />
         <DateInput
           label="Dato søkt"
@@ -117,7 +236,8 @@ const ApplicationsPage = () => {
           id="recipient"
           label="Motakker"
           value={recipient}
-          onChange={(e) => setrecipient(e.target.value)}
+          onChange={(e) => setRecipient(e.target.value)}
+          required
         />
         <NumberInput
           id="grantedAmount"
@@ -150,12 +270,12 @@ const ApplicationsPage = () => {
         </button>
       </form>
 
-      <h2 className="text-xl font-semibold mb-2">Medlemsliste</h2>
+      <h2 className="text-xl font-semibold mb-2">Søknader</h2>
       {isLoading ? (
         <div className=" text-white flex items-center justify-center">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-16 w-16 border-y-2 border-onlineyellow mb-4"></div>
-            <h2 className="text-2xl font-semibold">Laster inn medlemmer...</h2>
+            <h2 className="text-2xl font-semibold">Laster inn søknader...</h2>
           </div>
         </div>
       ) : (
