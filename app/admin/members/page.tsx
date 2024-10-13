@@ -8,6 +8,7 @@ import TextInput from '@/components/form/TextInput';
 import OptionsBox from '@/components/form/OptionsBox';
 import Checkbox from '@/components/form/Checkbox';
 import Table from '@/components/form/Table';
+import Image from 'next/image';
 
 const AdminMemberPage = () => {
   const [members, setMembers] = useState<MemberType[]>([]);
@@ -201,7 +202,9 @@ const AdminMemberPage = () => {
       header: 'Bilde',
       accessor: 'imageHref' as keyof MemberType,
       renderCell: (member: MemberType) => (
-        <img
+        <Image
+          height={50}
+          width={50}
           src={member.imageHref}
           alt={member.name}
           className="w-10 h-10 rounded-full object-cover"
@@ -260,9 +263,11 @@ const AdminMemberPage = () => {
               </button>
             )}
             {imagePreview && isCurrent && (
-              <img
+              <Image
                 src={imagePreview}
                 alt="Preview"
+                height={40}
+                width={40}
                 className="w-16 h-16 rounded-full object-cover"
               />
             )}
