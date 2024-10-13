@@ -18,4 +18,5 @@ export type ApplicationType = {
   recipient: string;
   dateApplied: Date;
   dateGranted: Date;
+  attachments: string;
 };

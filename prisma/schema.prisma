@@ -32,4 +32,5 @@ model Application {
   recipient     String
   dateApplied   DateTime
   dateGranted   DateTime
+  attachments   String?
 }

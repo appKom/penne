@@ -2,8 +2,8 @@
 import TextInput from '@/components/form/TextInput';
 import NumberInput from '@/components/form/NumberInput';
 import DateInput from '@/components/form/DateInput';
-import { useState, useEffect } from 'react';
-import { FileText, Edit, XIcon } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { FileText, Edit, XIcon, Upload } from 'lucide-react';
 import { ApplicationType } from '@/lib/types';
 import toast from 'react-hot-toast';
 import Table from '@/components/form/Table';
@@ -16,6 +16,13 @@ const ApplicationsPage = () => {
   const [recipient, setRecipient] = useState('');
   const [dateApplied, setDateApplied] = useState<Date | undefined>(undefined);
   const [dateGranted, setDateGranted] = useState<Date | undefined>(undefined);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [attachmentPreview, setAttachmentPreview] = useState<string | null>(
+    null,
+  );
+
+  const [attachment, setAttachment] = useState<File | null>(null);
+
   const [editingApplication, setEditingApplication] =
     useState<ApplicationType | null>(null);
 
@@ -56,6 +63,10 @@ const ApplicationsPage = () => {
     formData.append('recipient', recipient);
     formData.append('dateApplied', dateApplied?.toISOString() || '');
     formData.append('dateGranted', dateGranted?.toISOString() || '');
+
+    if (attachment) {
+      formData.append('attachment', attachment);
+    }
 
     try {
       let response;
@@ -203,6 +214,26 @@ const ApplicationsPage = () => {
     },
   ];
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setAttachment(file);
+
+      if (file.type === 'application/pdf') {
+        const previewUrl = URL.createObjectURL(file);
+        setAttachmentPreview(previewUrl);
+      } else if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setAttachmentPreview(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        toast.error('Unsupported file type. Please upload a PDF or an image.');
+      }
+    }
+  };
+
   return (
     <div className="container mx-auto p-4 w-full items-start">
       <h1 className="text-2xl font-bold mb-4">Administrer søknader</h1>
@@ -245,29 +276,81 @@ const ApplicationsPage = () => {
           value={grantedAmount}
           onChange={(e) => setGrantedAmount(parseFloat(e.target.value))}
         />
+
         <NumberInput
           id="amountApplied"
           label="Søkt Beløp"
           value={amountApplied}
           onChange={(e) => setAmountApplied(parseFloat(e.target.value))}
         />
-
-        <button
-          type="submit"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          {editingApplication ? (
-            <>
-              <Edit className="mr-2 h-4 w-4" />
-              Oppdater søknad
-            </>
-          ) : (
-            <>
-              <FileText className="mr-2 h-4 w-4" />
-              Legg til søknad
-            </>
+        {attachmentPreview && (
+          <div className="mt-4">
+            {attachment?.type === 'application/pdf' ? (
+              <iframe
+                src={attachmentPreview}
+                title="PDF Preview"
+                width="100%"
+                height="500px"
+              ></iframe>
+            ) : (
+              <img
+                src={attachmentPreview}
+                alt="Preview"
+                className="max-w-full h-auto"
+              />
+            )}
+          </div>
+        )}
+        <div className="flex flex-row gap-2">
+          {attachmentPreview && (
+            <div>
+              <button
+                type="button"
+                onClick={() => {
+                  setAttachment(null);
+                  setAttachmentPreview(null);
+                }}
+                className="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                <Upload className="inline-block mr-2 h-4 w-4" />
+                Slett vedlegg
+              </button>
+            </div>
           )}
-        </button>
+          <input
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            ref={fileInputRef}
+            className="hidden"
+          />
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            <Upload className="inline-block mr-2 h-4 w-4" />
+            Last opp vedlegg
+          </button>
+
+          <button
+            type="submit"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            {editingApplication ? (
+              <>
+                <Edit className="mr-2 h-4 w-4" />
+                Oppdater søknad
+              </>
+            ) : (
+              <>
+                <FileText className="mr-2 h-4 w-4" />
+                Legg til søknad
+              </>
+            )}
+          </button>
+        </div>
       </form>
 
       <h2 className="text-xl font-semibold mb-2">Søknader</h2>
