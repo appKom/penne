@@ -1,42 +1,73 @@
 'use client';
-
 import Member from '@/components/about/Member';
 import PastMembers from '@/components/about/PastMembers';
-import { aboutUsText, currentMembers } from '@/lib/content';
-import { TMember } from '@/lib/types';
+import { aboutUsText } from '@/lib/content';
+import { MemberType } from '@/lib/types';
 import { motion } from 'framer-motion';
+import useSWR from 'swr';
+import SkeletonMember from '@/components/about/SkeletonMember';
 
-const AboutPage = () => (
-  <div className="max-w-5xl px-4 py-10 mx-auto sm:py-20 sm:px-6 lg:px-8">
-    <h1 className="mb-8 text-5xl font-extrabold tracking-tight text-center">
-      Fondstyret
-    </h1>
-    <SemiTitle text="Hvem er vi?" />
-    <div className="flex flex-col items-center justify-center w-full gap-6 m-auto">
-      {aboutUsText.map((paragraph) => (
-        <p key={paragraph} className="text-gray-400 md:leading-7 md:text-lg">
-          {paragraph}
-        </p>
-      ))}
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+const AboutPage = () => {
+  const { data, error } = useSWR('/api/admin/member', fetcher);
+
+  if (error)
+    return (
+      <div className="min-h-screen text-white flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold">
+            Feil ved henting av medlemmer
+          </h2>
+          <p className="text-slate-400 mt-2">Vennligst prøv igjen senere.</p>
+        </div>
+      </div>
+    );
+
+  const currentMembers = data
+    ? data.members
+        .filter((member: MemberType) => member.isCurrent)
+        .sort((role: MemberType) => (role.role === 'Leder' ? -1 : 1))
+    : [];
+  const pastMembers = data
+    ? data.members
+        .filter((member: MemberType) => !member.isCurrent)
+        .sort((role: MemberType) => (role.role === 'Leder' ? -1 : 1))
+    : [];
+
+  return (
+    <div className="max-w-5xl px-4 py-10 mx-auto sm:py-20 sm:px-6 lg:px-8">
+      <h1 className="mb-8 text-5xl font-extrabold tracking-tight text-center">
+        Fondstyret
+      </h1>
+      <SemiTitle text="Hvem er vi?" />
+      <div className="flex flex-col items-center justify-center w-full gap-6 m-auto">
+        {aboutUsText.map((paragraph) => (
+          <p key={paragraph} className="text-gray-400 md:leading-7 md:text-lg">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center justify-center w-full max-w-full gap-6 my-20 sm:gap-12">
+        {(data ? currentMembers : Array.from({ length: 4 })).map(
+          (member: MemberType | undefined, index: number) => (
+            <motion.div
+              key={member ? member.name : index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 * (index + 1) }}
+            >
+              {member ? <Member {...member} /> : <SkeletonMember />}
+            </motion.div>
+          ),
+        )}
+      </div>
+
+      <SemiTitle text="Tidligere medlemmer" />
+      <PastMembers members={pastMembers} />
     </div>
-
-    <div className="flex flex-wrap items-center justify-center w-full max-w-full gap-6 my-20 sm:gap-12">
-      {currentMembers.map((member: TMember, index) => (
-        <motion.div
-          key={member.name}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 * (index + 1) }}
-        >
-          <Member {...member} />
-        </motion.div>
-      ))}
-    </div>
-
-    <SemiTitle text="Tidligere medlemmer" />
-    <PastMembers />
-  </div>
-);
+  );
+};
 
 export default AboutPage;
 

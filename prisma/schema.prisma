@@ -1,0 +1,25 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum GenderType {
+  Mann
+  Kvinne
+  Annet
+}
+
+model Member {
+  id        Int        @id @default(autoincrement())
+  name      String
+  imageHref String
+  role      String
+  gender    GenderType
+  isCurrent Boolean
+  year      Int
+}

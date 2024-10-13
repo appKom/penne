@@ -1,7 +1,7 @@
+import { MemberType } from '@/lib/types';
 import Image from 'next/image';
-import { TMember } from '../../lib/types';
 
-const Member = (props: TMember) => (
+const Member = (props: MemberType) => (
   <div className="relative flex flex-col items-center justify-center gap-4 text-center w-fit">
     <div className="relative overflow-hidden rounded-full group">
       <div className="absolute inset-0 bg-gradient-to-t from-[#0D5474] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -11,7 +11,7 @@ const Member = (props: TMember) => (
         </p>
       </div>
       <Image
-        src={props.imagePath}
+        src={props.imageHref}
         alt={props.name}
         // unsure if these should the right dimensions
         height={512}

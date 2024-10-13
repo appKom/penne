@@ -1,5 +1,11 @@
-export type TMember = {
+export type GenderType = 'Mann' | 'Kvinne' | 'Annet';
+
+export type MemberType = {
+  id: number;
   name: string;
-  imagePath: string;
-  role?: string;
+  imageHref: string;
+  role: string;
+  gender: GenderType;
+  isCurrent: boolean;
+  year: number;
 };

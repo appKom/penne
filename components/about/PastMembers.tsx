@@ -1,13 +1,37 @@
+'use client';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { pastMembers } from '../../lib/content';
+import { MemberType } from '@/lib/types';
 
-export default function PastMembers() {
+interface Props {
+  members: MemberType[];
+}
+
+export default function PastMembers({ members }: Props) {
   const [expandedYear, setExpandedYear] = useState<string | null>(null);
 
   const toggleYear = (year: string) => {
     setExpandedYear(expandedYear === year ? null : year);
   };
+
+  const membersByYear = members.reduce(
+    (acc: { [key: string]: MemberType[] }, member: MemberType) => {
+      const year = member.year.toString();
+      if (!acc[year]) {
+        acc[year] = [];
+      }
+      acc[year].push(member);
+      return acc;
+    },
+    {},
+  );
+
+  const pastMembers = Object.keys(membersByYear)
+    .sort((a, b) => Number(b) - Number(a))
+    .map((year) => ({
+      year,
+      members: membersByYear[year],
+    }));
 
   return (
     <div className="py-4 mx-auto shadow-md sm:py-4">
@@ -55,25 +79,27 @@ export default function PastMembers() {
                 >
                   <div className="p-4 bg-gray-800">
                     <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
-                      {yearData.members.map((member, index) => (
-                        <li
-                          key={index}
-                          className="flex items-baseline text-sm text-gray-300 before:content-['•'] before:mr-2 before:text-gray-500"
-                        >
-                          {member.includes('(Leder)') ? (
-                            <>
-                              <span className="font-semibold">
-                                {member.replace(' (Leder)', '')}
-                              </span>
-                              <span className="ml-1 text-xs text-onlineyellow">
-                                (Leder)
-                              </span>
-                            </>
-                          ) : (
-                            member
-                          )}
-                        </li>
-                      ))}
+                      {yearData.members.map(
+                        (member: MemberType, index: number) => (
+                          <li
+                            key={index}
+                            className="flex items-baseline text-sm text-gray-300 before:content-['•'] before:mr-2 before:text-gray-500"
+                          >
+                            {member.role === 'Leder' ? (
+                              <>
+                                <span className="font-semibold">
+                                  {member.name}
+                                </span>
+                                <span className="ml-1 text-xs text-onlineyellow">
+                                  (Leder)
+                                </span>
+                              </>
+                            ) : (
+                              member.name
+                            )}
+                          </li>
+                        ),
+                      )}
                     </ul>
                   </div>
                 </motion.div>
