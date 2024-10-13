@@ -9,3 +9,13 @@ export type MemberType = {
   isCurrent: boolean;
   year: number;
 };
+
+export type ApplicationType = {
+  id: number;
+  purpose: string;
+  grantedAmount: number;
+  amountApplied: number;
+  recipient: string;
+  dateApplied: Date;
+  dateGranted: Date;
+};
