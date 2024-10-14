@@ -221,6 +221,8 @@ export const PUT = async (request: Request) => {
 
     if (attachment) {
       updateData.attachment = attachmentHref;
+    } else {
+      updateData.attachment = '';
     }
 
     const application = await prisma.application.update({
