@@ -153,12 +153,49 @@ export const PUT = async (request: Request) => {
     const recipient = formData.get('recipient') as string;
     const dateApplied = new Date(formData.get('dateApplied') as string);
     const dateGranted = new Date(formData.get('dateGranted') as string);
+    const attachment = formData.get('attachment') as File | null;
 
     if (!id) {
       return NextResponse.json(
         { error: 'Application ID is required for updating' },
         { status: 400 },
       );
+    }
+
+    let attachmentHref = '';
+
+    if (attachment && attachment.size > 0) {
+      const arrayBuffer = await attachment.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+
+      const fileName = `${Date.now()}_${sanitizeFileName(purpose)}.${attachment.type.split('/')[1]}`;
+
+      const { data, error } = await supabase.storage
+        .from('application')
+        .upload(fileName, buffer, {
+          contentType: attachment.type,
+        });
+
+      if (error) {
+        console.error('Error uploading file:', error.message);
+        return NextResponse.json(
+          { error: 'Error uploading file' },
+          { status: 500 },
+        );
+      }
+
+      const { data: publicData } = supabase.storage
+        .from('application')
+        .getPublicUrl(data.path);
+
+      if (!publicData?.publicUrl) {
+        return NextResponse.json(
+          { error: 'Failed to get attachment URL' },
+          { status: 500 },
+        );
+      }
+
+      attachmentHref = publicData.publicUrl;
     }
 
     interface UpdateData {
@@ -168,6 +205,7 @@ export const PUT = async (request: Request) => {
       recipient: string;
       dateApplied: Date;
       dateGranted: Date;
+      attachments?: string;
     }
 
     const updateData: UpdateData = {
@@ -178,6 +216,10 @@ export const PUT = async (request: Request) => {
       dateApplied,
       dateGranted,
     };
+
+    if (attachment) {
+      updateData.attachments = attachmentHref;
+    }
 
     const application = await prisma.application.update({
       where: { id: Number(id) },
