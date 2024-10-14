@@ -231,7 +231,7 @@ const ApplicationsPage = () => {
             title="PDF Preview"
             width="50"
             height="50"
-          ></iframe>
+          />
         ) : (
           <Image
             height={50}
@@ -322,7 +322,7 @@ const ApplicationsPage = () => {
                 title="PDF Preview"
                 width="100%"
                 height="500px"
-              ></iframe>
+              />
             ) : (
               <img
                 src={attachmentPreview}
