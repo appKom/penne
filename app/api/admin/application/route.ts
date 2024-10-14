@@ -2,8 +2,8 @@ import { isAdmin } from '@/lib/auth/apiChecks';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
-import { sanitizeFileName } from '../member/route';
 import { createClient } from '@supabase/supabase-js';
+import { sanitizeFileName } from '@/lib/utilFunctions';
 
 const supabaseUrl = process.env.NEXT_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;

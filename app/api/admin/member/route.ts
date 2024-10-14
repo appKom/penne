@@ -4,18 +4,11 @@ import { isAdmin } from '@/lib/auth/apiChecks';
 import { createClient } from '@supabase/supabase-js';
 import { prisma } from '@/lib/prisma';
 import { GenderType } from '@/lib/types';
+import { sanitizeFileName } from '@/lib/utilFunctions';
 
 const supabaseUrl = process.env.NEXT_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
-
-export const sanitizeFileName = (name: string): string => {
-  return name
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-zA-Z0-9]/g, '_')
-    .toLowerCase();
-};
 
 export const POST = async (request: Request) => {
   try {
