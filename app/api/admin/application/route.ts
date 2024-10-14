@@ -88,7 +88,7 @@ export const POST = async (request: Request) => {
         recipient,
         dateApplied,
         dateGranted,
-        attachments: attachmentHref,
+        attachment: attachmentHref,
       },
     });
 
@@ -162,6 +162,8 @@ export const PUT = async (request: Request) => {
       );
     }
 
+    console.log(attachment);
+
     let attachmentHref = '';
 
     if (attachment && attachment.size > 0) {
@@ -205,7 +207,7 @@ export const PUT = async (request: Request) => {
       recipient: string;
       dateApplied: Date;
       dateGranted: Date;
-      attachments?: string;
+      attachment?: string;
     }
 
     const updateData: UpdateData = {
@@ -218,7 +220,7 @@ export const PUT = async (request: Request) => {
     };
 
     if (attachment) {
-      updateData.attachments = attachmentHref;
+      updateData.attachment = attachmentHref;
     }
 
     const application = await prisma.application.update({

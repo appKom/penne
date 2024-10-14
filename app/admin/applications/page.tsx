@@ -150,7 +150,7 @@ const ApplicationsPage = () => {
     setDateGranted(
       application.dateGranted ? new Date(application.dateGranted) : undefined,
     );
-    setAttachmentPreview(application.attachments);
+    setAttachmentPreview(application.attachment);
     setAttachment(null);
   };
 
@@ -221,13 +221,13 @@ const ApplicationsPage = () => {
       header: 'Vedlegg',
       accessor: 'attachments' as keyof ApplicationType,
       renderCell: (application: ApplicationType) => {
-        if (!application.attachments) return null;
+        if (!application.attachment) return null;
 
-        const fileType = application.attachments.split('.').pop();
+        const fileType = application.attachment.split('.').pop();
 
         return fileType === 'pdf' ? (
           <iframe
-            src={application.attachments}
+            src={application.attachment}
             title="PDF Preview"
             width="50"
             height="50"
@@ -236,7 +236,7 @@ const ApplicationsPage = () => {
           <Image
             height={50}
             width={50}
-            src={application.attachments}
+            src={application.attachment}
             alt={application.purpose}
             className="w-10 h-10 rounded-full object-cover"
           />
