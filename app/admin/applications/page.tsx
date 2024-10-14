@@ -151,7 +151,9 @@ const ApplicationsPage = () => {
       application.dateGranted ? new Date(application.dateGranted) : undefined,
     );
     setAttachmentPreview(application.attachment);
-    setAttachment(null);
+    setAttachment(
+      application.attachment ? new File([], application.attachment) : null,
+    );
   };
 
   const handleRemove = async (id: number) => {
@@ -315,8 +317,9 @@ const ApplicationsPage = () => {
           onChange={(e) => setAmountApplied(parseFloat(e.target.value))}
         />
         {attachmentPreview && (
-          <div className="mt-4">
-            {attachment?.type === 'application/pdf' ? (
+          <div className="mt-4 w-full max-w-md">
+            {attachmentPreview.split('.').pop() === 'pdf' ||
+            attachment?.type === 'application/pdf' ? (
               <iframe
                 src={attachmentPreview}
                 title="PDF Preview"
