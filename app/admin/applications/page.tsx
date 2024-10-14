@@ -385,6 +385,7 @@ const ApplicationsPage = () => {
             )}
           </button>
         </div>
+        <p className="text-gray-300">Last opp PDF, PNG eller JPG</p>
       </form>
 
       <h2 className="text-xl font-semibold mb-2">Søknader</h2>
