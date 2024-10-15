@@ -12,17 +12,25 @@ const ApplicationCard = ({ application }: Props) => {
   return (
     <div className="bg-gray-800 rounded-lg justify-center px-6">
       <button
-        className="flex flex-row justify-between py-4 w-full"
+        className="flex flex-row justify-between items-center py-3 w-full"
         onClick={() => setExpanded(!expanded)}
       >
-        <h1 className="text-2xl font-semibold">{application.recipient}</h1>
+        <div className="flex flex-col gap-1 items-start">
+          <h1 className="text-2xl font-semibold">{application.recipient}</h1>
+          <p className="text-gray-400">{application.purpose}</p>
+        </div>
         <ArrowDownIcon
           className={`w-6 h-6 text-gray-400 transform transition-transform duration-300 ${
             expanded ? 'rotate-180' : ''
-          }`}
+          } self-center`}
         />
       </button>
-      {expanded && <p className="text-gray-400">{application.purpose}</p>}
+
+      {expanded && (
+        <div className="py-4">
+          <p className="text-gray-400">{application.amountApplied}</p>
+        </div>
+      )}
     </div>
   );
 };
@@ -31,9 +39,8 @@ export default ApplicationCard;
 
 export const SkeletonApplication = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center gap-4 text-center w-fit animate-pulse">
-      <div className="relative overflow-hidden rounded-full bg-gray-700 h-32 w-32 lg:w-48 lg:h-48" />
-      <div className="w-32 h-6 bg-gray-700 rounded mt-2" />
+    <div className="flex flex-col items-center justify-center gap-4 text-center w-full animate-pulse">
+      <div className="overflow-hidden rounded-lg bg-gray-700 h-16 w-full lg:h-16" />
     </div>
   );
 };
