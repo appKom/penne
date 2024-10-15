@@ -1,3 +1,4 @@
+import { formatDateNorwegian } from '@/lib/dateUtils';
 import { ApplicationType } from '@/lib/types';
 import { ArrowDownIcon } from 'lucide-react';
 import { useState } from 'react';
@@ -27,8 +28,19 @@ const ApplicationCard = ({ application }: Props) => {
       </button>
 
       {expanded && (
-        <div className="py-4">
-          <p className="text-gray-400">{application.amountApplied}</p>
+        <div className="py-2 text-white">
+          <div className="flex flex-col sm:flex-row gap-4 pb-4">
+            <div className="bg-gray-700 rounded-full px-3 py-1 text-sm">
+              <span className="font-medium">Søkt:</span>{' '}
+              {formatDateNorwegian(application.dateApplied)}
+            </div>
+            <div className="bg-gray-700 rounded-full px-3 py-1 text-sm">
+              <span className="font-medium">Innvilget:</span>{' '}
+              {formatDateNorwegian(application.dateGranted)}
+            </div>
+          </div>
+          <p>Søkt beløp: {application.amountApplied}</p>
+          <p>Innvilget beløp: {application.grantedAmount}</p>
         </div>
       )}
     </div>
