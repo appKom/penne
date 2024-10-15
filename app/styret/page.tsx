@@ -6,23 +6,14 @@ import { MemberType } from '@/lib/types';
 import { motion } from 'framer-motion';
 import useSWR from 'swr';
 import SkeletonMember from '@/components/about/SkeletonMember';
+import ErrorPage from '@/components/all/Error';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const AboutPage = () => {
   const { data, error } = useSWR('/api/admin/member', fetcher);
 
-  if (error)
-    return (
-      <div className="min-h-screen text-white flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold">
-            Feil ved henting av medlemmer
-          </h2>
-          <p className="text-slate-400 mt-2">Vennligst prøv igjen senere.</p>
-        </div>
-      </div>
-    );
+  if (error) return <ErrorPage error="Medlemmer" />;
 
   const currentMembers = data
     ? data.members
