@@ -39,8 +39,32 @@ const ApplicationCard = ({ application }: Props) => {
               {formatDateNorwegian(application.dateGranted)}
             </div>
           </div>
-          <p>Søkt beløp: {application.amountApplied}</p>
-          <p>Innvilget beløp: {application.grantedAmount}</p>
+          <div className="rounded-full">
+            <span className="font-medium">Søkt beløp:</span>{' '}
+            {application.amountApplied}kr
+          </div>
+          <div className="rounded-full">
+            <span className="font-medium">Innvilget beløp:</span>{' '}
+            {application.grantedAmount}kr
+          </div>
+          {application.attachment && (
+            <div className="mt-4 w-full">
+              {application.attachment.split('.').pop() === 'pdf' ? (
+                <iframe
+                  src={application.attachment}
+                  title="PDF Preview"
+                  width="100%"
+                  height="500px"
+                />
+              ) : (
+                <img
+                  src={application.attachment}
+                  alt="Preview"
+                  className="max-w-full h-auto"
+                />
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>
