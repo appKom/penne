@@ -43,11 +43,16 @@ const ApplicationCard = ({ application }: Props) => {
             <span className="font-medium">Søkt beløp:</span>{' '}
             {application.amountApplied}kr
           </div>
-          <div className="rounded-full">
+          <div className="rounded-full pb-2">
             <span className="font-medium">Innvilget beløp:</span>{' '}
             {application.grantedAmount}kr
           </div>
-          <div> {application.description}</div>
+          {application.description && (
+            <div className="p-2 border rounded-lg border-gray-600">
+              {' '}
+              {application.description}
+            </div>
+          )}
           {application.attachment && (
             <div className="mt-4 w-full">
               {application.attachment.split('.').pop() === 'pdf' ? (
