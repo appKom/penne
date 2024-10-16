@@ -23,3 +23,14 @@ model Member {
   isCurrent Boolean
   year      Int
 }
+
+model Application {
+  id            Int      @id @default(autoincrement())
+  purpose       String
+  grantedAmount Int
+  amountApplied Int
+  recipient     String
+  dateApplied   DateTime
+  dateGranted   DateTime
+  attachment    String?
+}
