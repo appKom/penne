@@ -39,6 +39,7 @@ export const POST = async (request: Request) => {
     const recipient = formData.get('recipient') as string;
     const dateApplied = new Date(formData.get('dateApplied') as string);
     const dateGranted = new Date(formData.get('dateGranted') as string);
+    const description = formData.get('description') as string;
 
     const attachment = formData.get('attachment') as File | null;
 
@@ -88,6 +89,7 @@ export const POST = async (request: Request) => {
         recipient,
         dateApplied,
         dateGranted,
+        description,
         attachment: attachmentHref,
       },
     });
@@ -154,6 +156,7 @@ export const PUT = async (request: Request) => {
     const dateApplied = new Date(formData.get('dateApplied') as string);
     const dateGranted = new Date(formData.get('dateGranted') as string);
     const attachment = formData.get('attachment') as File | null;
+    const description = formData.get('description') as string | null;
 
     if (!id) {
       return NextResponse.json(
@@ -207,6 +210,7 @@ export const PUT = async (request: Request) => {
       recipient: string;
       dateApplied: Date;
       dateGranted: Date;
+      description?: string;
       attachment?: string;
     }
 
@@ -219,10 +223,12 @@ export const PUT = async (request: Request) => {
       dateGranted,
     };
 
-    if (attachment) {
+    if (description) {
+      updateData.description = description;
+    }
+
+    if (attachmentHref) {
       updateData.attachment = attachmentHref;
-    } else {
-      updateData.attachment = '';
     }
 
     const application = await prisma.application.update({

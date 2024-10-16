@@ -27,6 +27,7 @@ model Member {
 model Application {
   id            Int      @id @default(autoincrement())
   purpose       String
+  description   String?
   grantedAmount Int
   amountApplied Int
   recipient     String

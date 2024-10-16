@@ -9,9 +9,11 @@ import toast from 'react-hot-toast';
 import Table from '@/components/form/Table';
 import { formatDateNorwegian } from '@/lib/dateUtils';
 import Image from 'next/image';
+import TextAreaInput from '@/components/form/TextAreaInput';
 
 const ApplicationsPage = () => {
   const [purpose, setPurpose] = useState('');
+  const [description, setDescription] = useState('');
   const [grantedAmount, setGrantedAmount] = useState(0);
   const [amountApplied, setAmountApplied] = useState(0);
   const [recipient, setRecipient] = useState('');
@@ -64,6 +66,7 @@ const ApplicationsPage = () => {
     formData.append('recipient', recipient);
     formData.append('dateApplied', dateApplied?.toISOString() || '');
     formData.append('dateGranted', dateGranted?.toISOString() || '');
+    formData.append('description', description);
 
     if (attachment) {
       formData.append('attachment', attachment);
@@ -131,6 +134,7 @@ const ApplicationsPage = () => {
     setGrantedAmount(0);
     setAmountApplied(0);
     setRecipient('');
+    setDescription('');
     setDateApplied(undefined);
     setDateGranted(undefined);
     setEditingApplication(null);
@@ -141,6 +145,7 @@ const ApplicationsPage = () => {
   const handleEdit = (application: ApplicationType) => {
     setEditingApplication(application);
     setPurpose(application.purpose);
+    setDescription(application.description || '');
     setGrantedAmount(application.grantedAmount);
     setAmountApplied(application.amountApplied);
     setRecipient(application.recipient);
@@ -278,6 +283,19 @@ const ApplicationsPage = () => {
           onChange={(e) => setPurpose(e.target.value)}
           required
         />
+        <TextInput
+          id="recipient"
+          label="Motakker"
+          value={recipient}
+          onChange={(e) => setRecipient(e.target.value)}
+          required
+        />
+        <TextAreaInput
+          id="description"
+          label="Beskrivelse"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
         <DateInput
           label="Dato søkt"
           value={dateApplied}
@@ -296,13 +314,7 @@ const ApplicationsPage = () => {
             )
           }
         />
-        <TextInput
-          id="recipient"
-          label="Motakker"
-          value={recipient}
-          onChange={(e) => setRecipient(e.target.value)}
-          required
-        />
+
         <NumberInput
           id="grantedAmount"
           label="Innvilget Beløp"

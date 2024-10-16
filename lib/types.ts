@@ -13,6 +13,7 @@ export type MemberType = {
 export type ApplicationType = {
   id: number;
   purpose: string;
+  description?: string;
   grantedAmount: number;
   amountApplied: number;
   recipient: string;

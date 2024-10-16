@@ -47,6 +47,7 @@ const ApplicationCard = ({ application }: Props) => {
             <span className="font-medium">Innvilget beløp:</span>{' '}
             {application.grantedAmount}kr
           </div>
+          <div> {application.description}</div>
           {application.attachment && (
             <div className="mt-4 w-full">
               {application.attachment.split('.').pop() === 'pdf' ? (
