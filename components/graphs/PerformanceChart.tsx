@@ -1,17 +1,25 @@
-// @ts-nocheck
-// TODO: Remove the ts-nocheck comment and fix TS issues, @akselsf?
-
 import { lazy } from 'react';
 
 const ReactApexChart = lazy(
   () => import('react-apexcharts') /* , { ssr: false } */,
 );
 
-export default function PerformanceChart(props) {
+interface Props {
+  data: {
+    fonddata: { data: { date: string; value: number }[] };
+    osebx: { data: { date: string; value: number }[] };
+  };
+  period: string;
+}
+
+export default function PerformanceChart({ data, period }: Props) {
   const onlineColor = '#ffffff';
   const osebxColor = '#00ff00';
 
-  function getFormattedArray(data, period) {
+  function getFormattedArray(
+    data: { date: string; value: number }[] | undefined,
+    period: string,
+  ) {
     const currentDate = new Date();
     const w1 = new Date(currentDate.getTime() - 1000 * 60 * 60 * 24 * 7);
     const m1 = new Date(
@@ -140,7 +148,7 @@ export default function PerformanceChart(props) {
         },
         yaxis: {
           labels: {
-            formatter: function (val) {
+            formatter: function (val: number) {
               return val;
             },
           },
@@ -166,7 +174,7 @@ export default function PerformanceChart(props) {
           },
 
           y: {
-            formatter: function (val) {
+            formatter: function (val: number) {
               return val != undefined ? val.toString().slice(0, 4) + '%' : '';
             },
           },
@@ -175,11 +183,11 @@ export default function PerformanceChart(props) {
       series={[
         {
           name: 'OnlineFondet',
-          data: getFormattedArray(props.data.fonddata.data, props.period),
+          data: getFormattedArray(data.fonddata.data, period),
         },
         {
           name: 'OSEBX',
-          data: getFormattedArray(props.data.osebx.data, props.period),
+          data: getFormattedArray(data.osebx.data, period),
         },
       ]}
     />

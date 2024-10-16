@@ -1,11 +1,12 @@
-// @ts-nocheck
-// TODO: Remove the ts-nocheck comment and fix TS issues, @akselsf?
-
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import styles from './PeriodBar.module.css';
 
-export default function PeriodBar(props) {
+interface Props {
+  setPeriod: (period: string) => void;
+}
+
+export default function PeriodBar(props: Props) {
   const buttons = [
     ['5Y', 'y5'],
     ['3Y', 'y3'],

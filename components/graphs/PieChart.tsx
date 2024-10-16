@@ -1,20 +1,16 @@
-// @ts-nocheck
-// TODO: Remove the ts-nocheck comment and fix TS issues, @akselsf?
-
 import { lazy } from 'react';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/joy/CircularProgress';
-import { useGetPositionsQuery } from '@/lib/services/ApiService';
 
 const ReactApexChart = lazy(
   () => import('react-apexcharts') /* , { ssr: false } */,
 );
 
 export default function PieChart() {
-  const { data, isLoading } = useGetPositionsQuery();
+  const isLoading = false;
 
-  const getPieData = (data) => {
-    const dataPie = [];
+  const getPieData = (data: { data: { percent: number }[] }) => {
+    const dataPie: number[] = [];
     data.data.forEach((arr) => {
       const val = arr.percent.toString().slice(0, 4);
       dataPie.push(Number(val));
@@ -22,12 +18,24 @@ export default function PieChart() {
     return dataPie;
   };
 
-  const getPieLabels = (data) => {
-    const labelData = [];
+  const getPieLabels = (data: { data: { instrument: { name: string } }[] }) => {
+    const labelData: string[] = [];
     data.data.forEach((arr) => {
       labelData.push(arr.instrument.name);
     });
     return labelData;
+  };
+
+  const data = {
+    data: [
+      { instrument: { name: 'Instrument1' }, percent: 7 },
+      { instrument: { name: 'Instrument2' }, percent: 6 },
+      { instrument: { name: 'Instrument3' }, percent: 5 },
+      { instrument: { name: 'Instrument4' }, percent: 4 },
+      { instrument: { name: 'Instrument5' }, percent: 3 },
+      { instrument: { name: 'Instrument6' }, percent: 2 },
+      { instrument: { name: 'Instrument7' }, percent: 1 },
+    ],
   };
 
   return (
