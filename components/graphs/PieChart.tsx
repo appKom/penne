@@ -1,104 +1,50 @@
-import { lazy } from 'react';
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/joy/CircularProgress';
+'use client';
+import React from 'react';
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { pieMockData } from '@/lib/mockData';
 
-const ReactApexChart = lazy(
-  () => import('react-apexcharts') /* , { ssr: false } */,
-);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function PieChart() {
-  const isLoading = false;
-
-  const getPieData = (data: { data: { percent: number }[] }) => {
-    const dataPie: number[] = [];
-    data.data.forEach((arr) => {
-      const val = arr.percent.toString().slice(0, 4);
-      dataPie.push(Number(val));
-    });
-    return dataPie;
-  };
-
-  const getPieLabels = (data: { data: { instrument: { name: string } }[] }) => {
-    const labelData: string[] = [];
-    data.data.forEach((arr) => {
-      labelData.push(arr.instrument.name);
-    });
-    return labelData;
-  };
+const PieChart = () => {
+  const labels = pieMockData.map((item) => item.company);
+  const dataValues = pieMockData.map((item) => item.percentage);
 
   const data = {
-    data: [
-      { instrument: { name: 'Instrument1' }, percent: 7 },
-      { instrument: { name: 'Instrument2' }, percent: 6 },
-      { instrument: { name: 'Instrument3' }, percent: 5 },
-      { instrument: { name: 'Instrument4' }, percent: 4 },
-      { instrument: { name: 'Instrument5' }, percent: 3 },
-      { instrument: { name: 'Instrument6' }, percent: 2 },
-      { instrument: { name: 'Instrument7' }, percent: 1 },
+    labels: labels,
+    datasets: [
+      {
+        label: 'Fund Composition',
+        data: dataValues,
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+        ],
+        borderColor: [
+          'rgba(75, 192, 192, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(153, 102, 255, 1)',
+        ],
+        borderWidth: 1,
+      },
     ],
   };
 
-  return (
-    <Box
-      maxWidth={700}
-      width={9 / 10}
-      boxShadow={3}
-      padding={3}
-      borderRadius={4}
-      margin={'0 auto'}
-    >
-      {isLoading ? (
-        <Box width={'100%'} display={'flex'} justifyContent={'center'}>
-          <CircularProgress size="lg" variant="plain" />
-        </Box>
-      ) : data ? (
-        <ReactApexChart
-          options={{
-            chart: {
-              stacked: false,
-              height: 360,
-              width: 380,
-              type: 'donut',
-              foreColor: '#ffffff',
-              zoom: {
-                enabled: false,
-              },
-              toolbar: {
-                show: false,
-              },
-            },
-            colors: [
-              '#e60049',
-              '#0bb4ff',
-              '#50e991',
-              '#e6d800',
-              '#9b19f5',
-              '#ffa300',
-              '#dc0ab4',
-              '#b3d4ff',
-              '#00bfa0',
-            ],
-            labels: getPieLabels(data),
-            responsive: [
-              {
-                breakpoint: 480,
-                options: {
-                  chart: {
-                    width: 200,
-                  },
-                  legend: {
-                    position: 'bottom',
-                  },
-                },
-              },
-            ],
-          }}
-          series={getPieData(data)}
-          type="donut"
-        />
-      ) : (
-        <p>error</p>
-      )}
-    </Box>
-  );
-}
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+    },
+  };
+
+  return <Pie data={data} options={options} />;
+};
+
+export default PieChart;

@@ -21,3 +21,15 @@ export type ApplicationType = {
   dateGranted: Date;
   attachment: string;
 };
+
+export type GraphType = {
+  date: string;
+  onlineFondet: number;
+  osebx: number;
+};
+
+export type OnlineFondType = {
+  date: Date;
+  company: string;
+  percentage: number;
+};
