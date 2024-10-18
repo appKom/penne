@@ -32,4 +32,5 @@ export type OnlineFondType = {
   date: Date;
   company: string;
   percentage: number;
+  category: string;
 };

@@ -44,7 +44,11 @@ const PieChart = () => {
     },
   };
 
-  return <Pie data={data} options={options} />;
+  return (
+    <div className="w-full max-w-lg  flex justify-center items-center mx-auto">
+      <Pie data={data} options={options} />
+    </div>
+  );
 };
 
 export default PieChart;

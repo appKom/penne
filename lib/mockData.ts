@@ -18,25 +18,30 @@ export const pieMockData: OnlineFondType[] = [
     date: new Date('2024-10-01'),
     company: 'Tech Investments Ltd.',
     percentage: 20,
+    category: 'Tech',
   },
   {
     date: new Date('2024-09-15'),
     company: 'Green Energy Fund',
     percentage: 30,
+    category: 'Green Energy',
   },
   {
     date: new Date('2024-08-20'),
     company: 'HealthTech Innovations',
     percentage: 10,
+    category: 'HealthTech',
   },
   {
     date: new Date('2024-07-10'),
     company: 'AI Solutions Inc.',
     percentage: 10,
+    category: 'AI',
   },
   {
     date: new Date('2024-06-05'),
     company: 'Blockchain Ventures',
     percentage: 30,
+    category: 'Blockchain',
   },
 ];

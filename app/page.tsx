@@ -6,7 +6,7 @@ import Splash from '@/components/home/Splash';
 import { homeText } from '@/lib/content';
 
 const HomePage = () => (
-  <div className="flex flex-col items-center justify-center h-full">
+  <div className="flex flex-col items-center justify-center">
     <Splash />
     <ScrollDownIcon />
     <div
