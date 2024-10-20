@@ -9,11 +9,13 @@ import { CompositionType } from '@/lib/types';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const PerformanceDisplay = () => {
-  const { data, error } = useSWR('/api/osebx', fetcher);
+  const { data: osebxData, error: osebxError } = useSWR('/api/osebx', fetcher);
+  const { data: compositionData, error: compositionError } = useSWR(
+    '/api/admin/composition',
+    fetcher,
+  );
 
-  console.log(data);
-
-  if (error) return <ErrorPage error="OSEBX" />;
+  if (osebxError || compositionError) return <ErrorPage error="Portfølje" />;
 
   const columns = [
     {
@@ -30,7 +32,7 @@ const PerformanceDisplay = () => {
     },
   ];
 
-  if (!data) return <div>Loading...</div>;
+  if (!osebxData || !compositionData) return <div>Loading...</div>;
 
   return (
     <div className="w-full max-w-3xl mx-auto px-5">
@@ -39,7 +41,7 @@ const PerformanceDisplay = () => {
           Denne smultringen gir en oversikt over fondets sammensetning (FAKE
           DATA)
         </div>
-        <PieChart composition={onlineFondData.compostion} />
+        <PieChart composition={compositionData.composition} />
       </div>
       <div className="w-full mt-10">
         <div className="w-full my-16 text-lg text-center">
@@ -47,7 +49,7 @@ const PerformanceDisplay = () => {
         </div>
         <LineChart
           onlineFondet={onlineFondData.onlinePerformance}
-          osebx={data.data}
+          osebx={osebxData.data}
         />
       </div>
 
@@ -55,7 +57,7 @@ const PerformanceDisplay = () => {
         <div className="my-16 text-lg text-center">
           Tabellen viser fond, andel og kategori (FAKE DATA)
         </div>
-        <Table columns={columns} data={onlineFondData.compostion} />
+        <Table columns={columns} data={compositionData.composition} />
       </div>
     </div>
   );
