@@ -41,12 +41,12 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
   const [selectedRange, setSelectedRange] =
     useState<keyof typeof timeRanges>('1 år');
 
-  const filterDataByRange = (rangeDays: number) => {
+  const filterDataByRange = (data: GraphType[], rangeDays: number) => {
     const today = new Date();
     const cutoffDate = new Date(today);
     cutoffDate.setDate(today.getDate() - rangeDays);
 
-    return onlineFondet
+    return data
       .filter((item) => {
         const itemDate = new Date(item.date);
         return itemDate >= cutoffDate;
@@ -54,30 +54,72 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   };
 
-  const filteredData = filterDataByRange(timeRanges[selectedRange]);
-  const sortedOsebxData = osebx.sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+  const normalizeData = (data: GraphType[]) => {
+    if (data.length === 0) return [];
+    const startValue = data[0].value;
+    return data.map((item) => ({
+      ...item,
+      value: (item.value / startValue) * 100,
+    }));
+  };
+
+  const filteredOnlineFondet = filterDataByRange(
+    onlineFondet,
+    timeRanges[selectedRange],
   );
+  const filteredOsebx = filterDataByRange(osebx, timeRanges[selectedRange]);
+
+  const normalizedOnlineFondet = normalizeData(filteredOnlineFondet);
+  const normalizedOsebx = normalizeData(filteredOsebx);
+
+  const allDatesSet = new Set([
+    ...normalizedOnlineFondet.map((item) => item.date),
+    ...normalizedOsebx.map((item) => item.date),
+  ]);
+  const allDates = Array.from(allDatesSet)
+    .map((date) => new Date(date))
+    .sort((a, b) => a.getTime() - b.getTime())
+    .map((date) => date.toISOString().split('T')[0]);
+
+  const mergedData = allDates.map((date) => {
+    const onlineFondetItem = normalizedOnlineFondet.find(
+      (item) => (item.date as unknown as string).split('T')[0] === date,
+    );
+    const osebxItem = normalizedOsebx.find(
+      (item) => (item.date as unknown as string).split('T')[0] === date,
+    );
+
+    return {
+      date,
+      onlineFondetValue: onlineFondetItem ? onlineFondetItem.value : null,
+      osebxValue: osebxItem ? osebxItem.value : null,
+    };
+  });
 
   const data = {
-    labels: filteredData.map((item) => {
+    labels: mergedData.map((item) => {
       const date = new Date(item.date);
-      return date.toISOString().split('T')[0];
+      return date.toLocaleDateString('nb-NO', {
+        year: 'numeric',
+        month: 'short',
+      });
     }),
     datasets: [
       {
         label: 'Onlinefondet',
-        data: filteredData.map((item) => item.value),
+        data: mergedData.map((item) => item.onlineFondetValue),
         borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         fill: true,
+        spanGaps: true,
       },
       {
         label: 'OSEBX',
-        data: sortedOsebxData.map((item) => item.value),
+        data: mergedData.map((item) => item.osebxValue),
         borderColor: 'rgba(255, 99, 132, 1)',
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         fill: true,
+        spanGaps: true,
       },
     ],
   };
@@ -94,12 +136,12 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
       y: {
         title: {
           display: true,
-          text: 'Prosent',
+          text: 'Verdi (%)',
         },
         ticks: {
           callback: function (value: string | number) {
             if (typeof value === 'number') {
-              return value + '%';
+              return `${value}%`;
             }
             return value;
           },
@@ -119,7 +161,9 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
             <button
               key={range}
               onClick={() => setSelectedRange(range as keyof typeof timeRanges)}
-              className={`px-4 py-2 rounded text-gray-200 border border-gray-700 ${selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'}`}
+              className={`px-4 py-2 rounded text-gray-200 border border-gray-700 ${
+                selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'
+              }`}
             >
               {range}
             </button>
@@ -131,7 +175,9 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
           <button
             key={range}
             onClick={() => setSelectedRange(range as keyof typeof timeRanges)}
-            className={`px-4 py-2 rounded text-gray-200 border border-gray-700 ${selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'}`}
+            className={`px-4 py-2 rounded text-gray-200 border border-gray-700 ${
+              selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'
+            }`}
           >
             {range}
           </button>
