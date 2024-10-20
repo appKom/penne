@@ -35,3 +35,26 @@ model Application {
   dateGranted   DateTime
   attachment    String?
 }
+
+model Composition {
+  id             Int           @id @default(autoincrement())
+  company        String
+  percentage     Int
+  category       String
+  OnlineFondet   OnlineFondet? @relation(fields: [onlineFondetId], references: [id])
+  onlineFondetId Int?
+}
+
+model Performance {
+  id             Int           @id @default(autoincrement())
+  date           DateTime
+  value          Int
+  OnlineFondet   OnlineFondet? @relation(fields: [onlineFondetId], references: [id])
+  onlineFondetId Int?
+}
+
+model OnlineFondet {
+  id          Int           @id @default(autoincrement())
+  composition Composition[]
+  performance Performance[]
+}
