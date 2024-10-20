@@ -23,12 +23,14 @@ export type ApplicationType = {
 };
 
 export type CompositionType = {
+  id?: number;
   company: string;
   percentage: number;
   category: string;
 };
 
 export type GraphType = {
+  id?: number;
   date: string;
   value: number;
 };

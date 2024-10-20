@@ -37,24 +37,15 @@ model Application {
 }
 
 model Composition {
-  id             Int           @id @default(autoincrement())
-  company        String
-  percentage     Int
-  category       String
-  OnlineFondet   OnlineFondet? @relation(fields: [onlineFondetId], references: [id])
-  onlineFondetId Int?
+  id         Int      @id @default(autoincrement())
+  company    String
+  percentage Int
+  category   String
+  date       DateTime @default(now())
 }
 
 model Performance {
-  id             Int           @id @default(autoincrement())
-  date           DateTime
-  value          Int
-  OnlineFondet   OnlineFondet? @relation(fields: [onlineFondetId], references: [id])
-  onlineFondetId Int?
-}
-
-model OnlineFondet {
-  id          Int           @id @default(autoincrement())
-  composition Composition[]
-  performance Performance[]
+  id    Int      @id @default(autoincrement())
+  date  DateTime
+  value Int
 }

@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { CircleDollarSignIcon, Users, FileText } from 'lucide-react';
+import { CircleDollarSignIcon, Users, FileText, PieChart } from 'lucide-react';
 
 interface IRoute {
   title: string;
@@ -33,6 +33,12 @@ const AdminPage = () => {
       icon: FileText,
       description:
         'Legg og rediger søknader som skal vises offentlig på nettsiden',
+    },
+    {
+      title: 'Sammensetning',
+      href: '/admin/composition',
+      icon: PieChart,
+      description: 'Rediger fondets sammensetning',
     },
   ];
 
