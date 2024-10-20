@@ -20,9 +20,8 @@ const PerformanceDisplay = () => {
     fetcher,
   );
 
-  console.log(onlineFondetData);
-
-  if (osebxError || compositionError) return <ErrorPage error="Portfølje" />;
+  if (osebxError || compositionError || onlineFondetError)
+    return <ErrorPage error="Portfølje" />;
 
   const columns = [
     {
@@ -39,9 +38,6 @@ const PerformanceDisplay = () => {
     },
   ];
 
-  if (!osebxData || !compositionData || !onlineFondetData)
-    return <div>Loading...</div>;
-
   return (
     <div className="w-full max-w-3xl mx-auto px-5">
       <div className="w-full">
@@ -49,23 +45,37 @@ const PerformanceDisplay = () => {
           Denne smultringen gir en oversikt over fondets sammensetning (FAKE
           DATA)
         </div>
-        <PieChart composition={compositionData.composition} />
+        {compositionData ? (
+          <PieChart composition={compositionData.composition} />
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-4 text-center w-full h-full animate-pulse">
+            <div className="overflow-hidden rounded-full bg-gray-700 h-56 w-56 lg:w-72 lg:h-72" />
+          </div>
+        )}
       </div>
       <div className="w-full mt-10">
         <div className="w-full my-16 text-lg text-center">
           Fondets prestasjon over tid (FAKE DATA)
         </div>
-        <LineChart
-          onlineFondet={onlineFondetData.performance}
-          osebx={osebxData.data}
-        />
+        {onlineFondetData ? (
+          <LineChart
+            onlineFondet={onlineFondetData.performance}
+            osebx={osebxData.data}
+          />
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
 
       <div className="w-full  my-16">
         <div className="my-16 text-lg text-center">
           Tabellen viser fond, andel og kategori (FAKE DATA)
         </div>
-        <Table columns={columns} data={compositionData.composition} />
+        {compositionData ? (
+          <Table columns={columns} data={compositionData.composition} />
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
     </div>
   );

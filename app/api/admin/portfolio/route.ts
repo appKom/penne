@@ -59,7 +59,6 @@ export const PUT = async (request: Request) => {
 
     const id = formData.get('id') as string;
     const date = formData.get('date') as string;
-    const category = formData.get('category') as string;
     const value = Number(formData.get('value'));
 
     const performance = await prisma.performance.update({

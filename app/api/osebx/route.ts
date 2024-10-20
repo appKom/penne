@@ -10,8 +10,6 @@ export const GET = async () => {
       },
     ).then((res) => res.json());
 
-    console.log(data);
-
     if (data && data.pricePoints) {
       interface PricePoint {
         last: number;
