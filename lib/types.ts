@@ -22,6 +22,12 @@ export type ApplicationType = {
   attachment: string;
 };
 
+export type CompositionType = {
+  company: string;
+  percentage: number;
+  category: string;
+};
+
 export type GraphType = {
   date: string;
   onlineFondet: number;
@@ -29,8 +35,6 @@ export type GraphType = {
 };
 
 export type OnlineFondType = {
-  date: Date;
-  company: string;
-  percentage: number;
-  category: string;
+  compostion: CompositionType[];
+  performance: GraphType[];
 };

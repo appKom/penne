@@ -1,22 +1,22 @@
 import Table from '../form/Table';
 import LineChart from './LineChart';
 import PieChart from './PieChart';
-import { pieMockData } from '@/lib/mockData';
-import { OnlineFondType } from '@/lib/types';
+import { onlineFondData } from '@/lib/mockData';
+import { CompositionType } from '@/lib/types';
 
 const PerformanceDisplay = () => {
   const columns = [
     {
       header: 'Fond',
-      accessor: 'company' as keyof OnlineFondType,
+      accessor: 'company' as keyof CompositionType,
     },
     {
       header: 'Andel',
-      accessor: 'percentage' as keyof OnlineFondType,
+      accessor: 'percentage' as keyof CompositionType,
     },
     {
       header: 'Kategori',
-      accessor: 'category' as keyof OnlineFondType,
+      accessor: 'category' as keyof CompositionType,
     },
   ];
 
@@ -36,11 +36,11 @@ const PerformanceDisplay = () => {
         <LineChart />
       </div>
 
-      <div className="w-full  my-40">
+      <div className="w-full  my-16">
         <div className="my-16 text-lg text-center">
           Tabellen viser fond, andel og kategori (FAKE DATA)
         </div>
-        <Table columns={columns} data={pieMockData} />
+        <Table columns={columns} data={onlineFondData.compostion} />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { graphMockData } from '@/lib/mockData';
+import { onlineFondData } from '@/lib/mockData';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -38,7 +38,7 @@ const filterDataByRange = (rangeDays: number) => {
   const cutoffDate = new Date(today);
   cutoffDate.setDate(today.getDate() - rangeDays);
 
-  return graphMockData.filter((item) => {
+  return onlineFondData.performance.filter((item) => {
     const itemDate = new Date(item.date);
     return itemDate >= cutoffDate;
   });

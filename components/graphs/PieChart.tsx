@@ -2,13 +2,13 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { pieMockData } from '@/lib/mockData';
+import { onlineFondData } from '@/lib/mockData';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PieChart = () => {
-  const labels = pieMockData.map((item) => item.company);
-  const dataValues = pieMockData.map((item) => item.percentage);
+  const labels = onlineFondData.compostion.map((item) => item.company);
+  const dataValues = onlineFondData.compostion.map((item) => item.percentage);
 
   const data = {
     labels: labels,
