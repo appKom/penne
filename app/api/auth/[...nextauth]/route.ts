@@ -6,8 +6,6 @@ const adminEmails: string[] = process.env.ADMIN_EMAILS
   ? process.env.ADMIN_EMAILS.split(',')
   : [];
 
-console.log(adminEmails);
-
 const handler = NextAuth({
   providers: [
     GoogleProvider({
