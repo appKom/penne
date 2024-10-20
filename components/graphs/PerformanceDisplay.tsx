@@ -3,7 +3,7 @@ import ErrorPage from '../all/Error';
 import Table from '../form/Table';
 import LineChart from './LineChart';
 import PieChart from './PieChart';
-import { onlineFondData } from '@/lib/mockData';
+
 import { CompositionType } from '@/lib/types';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -48,7 +48,7 @@ const PerformanceDisplay = () => {
           Fondets prestasjon over tid (FAKE DATA)
         </div>
         <LineChart
-          onlineFondet={onlineFondData.onlinePerformance}
+          onlineFondet={[{ date: new Date(), value: 100 }]}
           osebx={osebxData.data}
         />
       </div>
