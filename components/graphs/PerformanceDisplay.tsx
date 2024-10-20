@@ -15,6 +15,13 @@ const PerformanceDisplay = () => {
     fetcher,
   );
 
+  const { data: onlineFondetData, error: onlineFondetError } = useSWR(
+    '/api/admin/portfolio',
+    fetcher,
+  );
+
+  console.log(onlineFondetData);
+
   if (osebxError || compositionError) return <ErrorPage error="Portfølje" />;
 
   const columns = [
@@ -32,7 +39,8 @@ const PerformanceDisplay = () => {
     },
   ];
 
-  if (!osebxData || !compositionData) return <div>Loading...</div>;
+  if (!osebxData || !compositionData || !onlineFondetData)
+    return <div>Loading...</div>;
 
   return (
     <div className="w-full max-w-3xl mx-auto px-5">
@@ -48,7 +56,7 @@ const PerformanceDisplay = () => {
           Fondets prestasjon over tid (FAKE DATA)
         </div>
         <LineChart
-          onlineFondet={[{ date: new Date(), value: 100 }]}
+          onlineFondet={onlineFondetData.performance}
           osebx={osebxData.data}
         />
       </div>

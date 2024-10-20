@@ -46,27 +46,35 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
     const cutoffDate = new Date(today);
     cutoffDate.setDate(today.getDate() - rangeDays);
 
-    return onlineFondet.filter((item) => {
-      const itemDate = new Date(item.date);
-      return itemDate >= cutoffDate;
-    });
+    return onlineFondet
+      .filter((item) => {
+        const itemDate = new Date(item.date);
+        return itemDate >= cutoffDate;
+      })
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   };
 
   const filteredData = filterDataByRange(timeRanges[selectedRange]);
+  const sortedOsebxData = osebx.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+  );
 
   const data = {
-    labels: filteredData.map((item) => item.date),
+    labels: filteredData.map((item) => {
+      const date = new Date(item.date);
+      return date.toISOString().split('T')[0];
+    }),
     datasets: [
       {
-        label: 'Fund 1',
+        label: 'Onlinefondet',
         data: filteredData.map((item) => item.value),
         borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         fill: true,
       },
       {
-        label: 'Fund 2',
-        data: osebx.map((item) => item.value),
+        label: 'OSEBX',
+        data: sortedOsebxData.map((item) => item.value),
         borderColor: 'rgba(255, 99, 132, 1)',
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         fill: true,
@@ -80,6 +88,22 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
     plugins: {
       legend: {
         position: 'top' as const,
+      },
+    },
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: 'Prosent',
+        },
+        ticks: {
+          callback: function (value: string | number) {
+            if (typeof value === 'number') {
+              return value + '%';
+            }
+            return value;
+          },
+        },
       },
     },
   };
