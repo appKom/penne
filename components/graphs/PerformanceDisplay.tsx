@@ -1,10 +1,20 @@
+import useSWR from 'swr';
+import ErrorPage from '../all/Error';
 import Table from '../form/Table';
 import LineChart from './LineChart';
 import PieChart from './PieChart';
 import { onlineFondData } from '@/lib/mockData';
 import { CompositionType } from '@/lib/types';
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 const PerformanceDisplay = () => {
+  const { data, error } = useSWR('/api/osebx', fetcher);
+
+  console.log(data);
+
+  if (error) return <ErrorPage error="OSEBX" />;
+
   const columns = [
     {
       header: 'Fond',
@@ -19,6 +29,8 @@ const PerformanceDisplay = () => {
       accessor: 'category' as keyof CompositionType,
     },
   ];
+
+  if (!data) return <div>Loading...</div>;
 
   return (
     <div className="w-full max-w-3xl mx-auto px-5">
@@ -35,7 +47,7 @@ const PerformanceDisplay = () => {
         </div>
         <LineChart
           onlineFondet={onlineFondData.onlinePerformance}
-          osebx={onlineFondData.osebxPerformance}
+          osebx={data.data}
         />
       </div>
 

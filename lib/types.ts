@@ -36,5 +36,4 @@ export type GraphType = {
 export type OnlineFondType = {
   compostion: CompositionType[];
   onlinePerformance: GraphType[];
-  osebxPerformance: GraphType[];
 };
