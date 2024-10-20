@@ -21,3 +21,16 @@ export type ApplicationType = {
   dateGranted: Date;
   attachment: string;
 };
+
+export type CompositionType = {
+  id?: number;
+  company: string;
+  percentage: number;
+  category: string;
+};
+
+export type GraphType = {
+  id?: number;
+  date: Date;
+  value: number;
+};

@@ -165,8 +165,6 @@ export const PUT = async (request: Request) => {
       );
     }
 
-    console.log(attachment);
-
     let attachmentHref = '';
 
     if (attachment && attachment.size > 0) {

@@ -50,7 +50,6 @@ export default function AdminLayout({
   }
 
   if (session?.user?.role !== 'admin') {
-    console.log(session.user);
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
         <div className="flex flex-col items-center justify-center px-6 gap-5">

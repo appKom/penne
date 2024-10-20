@@ -1,3 +1,5 @@
+const adminEmails = process.env.ADMIN_EMAILS?.split(',') || [];
+
 interface Session {
   user?: {
     email?: string;
@@ -5,11 +7,8 @@ interface Session {
 }
 
 export const isAdmin = (session: Session) => {
-  if (
-    session.user?.email !== 'fredrik.carsten.hansteen@online.ntnu.no' &&
-    session.user?.email !== 'julian.ottosen@online.ntnu.no'
-  ) {
-    return false;
+  if (session.user?.email && adminEmails.includes(session.user.email)) {
+    return true;
   }
-  return true;
+  return false;
 };

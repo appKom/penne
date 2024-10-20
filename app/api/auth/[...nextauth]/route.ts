@@ -2,6 +2,12 @@ import { getUserGroups } from '@/lib/auth/getUserGroups';
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
+const adminEmails: string[] = process.env.ADMIN_EMAILS
+  ? process.env.ADMIN_EMAILS.split(',')
+  : [];
+
+console.log(adminEmails);
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -38,11 +44,7 @@ const handler = NextAuth({
       session.user = {
         id: token.sub ? parseInt(token.sub, 10) : 0,
         name: session.user?.name || '',
-        role:
-          session.user?.email == 'fredrik.carsten.hansteen@online.ntnu.no' ||
-          'julian.ottosen@online.ntnu.no'
-            ? 'admin'
-            : 'user', //TODO vente på dotkom
+        role: adminEmails.includes(session.user!.email) ? 'admin' : 'user', //TODO vente på dotkom
         email: session.user?.email || '',
         groups: (token.groups as string[]) || [],
       };

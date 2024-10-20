@@ -35,3 +35,17 @@ model Application {
   dateGranted   DateTime
   attachment    String?
 }
+
+model Composition {
+  id         Int      @id @default(autoincrement())
+  company    String
+  percentage Int
+  category   String
+  date       DateTime @default(now())
+}
+
+model Performance {
+  id    Int      @id @default(autoincrement())
+  date  DateTime
+  value Int
+}
