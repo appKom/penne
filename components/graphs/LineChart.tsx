@@ -85,7 +85,7 @@ const LineChart = () => {
       <div className="min-w-[250px] h-64 md:h-96 lg:h-fit">
         <Line data={data} options={options} />
       </div>
-      <div className="flex justify-center mb-4 space-x-4 md:hidden overflow-x-auto">
+      <div className="flex justify-center mb-4 pt-4 space-x-4 md:hidden overflow-x-auto">
         <div className="flex space-x-4 px-2">
           {Object.keys(timeRanges).map((range) => (
             <button
@@ -98,7 +98,7 @@ const LineChart = () => {
           ))}
         </div>
       </div>
-      <div className="hidden md:flex justify-center mb-4 space-x-4">
+      <div className="hidden md:flex justify-center pt-4 mb-4 space-x-4">
         {Object.keys(timeRanges).map((range) => (
           <button
             key={range}

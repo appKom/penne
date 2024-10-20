@@ -21,7 +21,7 @@ const PerformanceDisplay = () => {
   ];
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-3xl mx-auto px-5">
       <div className="w-full">
         <div className="w-full my-16 text-lg text-center">
           Denne smultringen gir en oversikt over fondets sammensetning (FAKE
