@@ -1,3 +1,4 @@
+import FondApplications from '@/components/Submissions/FondApplications';
 import { applicationText } from '@/lib/content';
 import { ArrowRightIcon } from 'lucide-react';
 
@@ -53,6 +54,7 @@ const ApplicationPage = () => (
           ))}
         </ul>
       </section>
+      <FondApplications />
     </div>
   </div>
 );
