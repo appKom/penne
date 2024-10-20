@@ -24,29 +24,29 @@ ChartJS.register(
 );
 
 const timeRanges = {
-  uke: 7,
-  måned: 30,
+  '1 måned': 30,
   '3 måneder': 90,
   '6 måneder': 180,
-  år: 365,
+  '1 år': 365,
   '3 år': 365 * 3,
   '5 år': 365 * 5,
 };
 
 interface Props {
-  performance: GraphType[];
+  onlineFondet: GraphType[];
+  osebx: GraphType[];
 }
 
-const LineChart = ({ performance }: Props) => {
+const LineChart = ({ onlineFondet, osebx }: Props) => {
   const [selectedRange, setSelectedRange] =
-    useState<keyof typeof timeRanges>('år');
+    useState<keyof typeof timeRanges>('1 år');
 
   const filterDataByRange = (rangeDays: number) => {
     const today = new Date();
     const cutoffDate = new Date(today);
     cutoffDate.setDate(today.getDate() - rangeDays);
 
-    return performance.filter((item) => {
+    return onlineFondet.filter((item) => {
       const itemDate = new Date(item.date);
       return itemDate >= cutoffDate;
     });
@@ -59,14 +59,14 @@ const LineChart = ({ performance }: Props) => {
     datasets: [
       {
         label: 'Fund 1',
-        data: filteredData.map((item) => item.onlineFondet),
+        data: filteredData.map((item) => item.value),
         borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         fill: true,
       },
       {
         label: 'Fund 2',
-        data: filteredData.map((item) => item.osebx),
+        data: osebx.map((item) => item.value),
         borderColor: 'rgba(255, 99, 132, 1)',
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         fill: true,

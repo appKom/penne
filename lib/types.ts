@@ -30,11 +30,11 @@ export type CompositionType = {
 
 export type GraphType = {
   date: string;
-  onlineFondet: number;
-  osebx: number;
+  value: number;
 };
 
 export type OnlineFondType = {
   compostion: CompositionType[];
-  performance: GraphType[];
+  onlinePerformance: GraphType[];
+  osebxPerformance: GraphType[];
 };

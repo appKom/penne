@@ -33,7 +33,10 @@ const PerformanceDisplay = () => {
         <div className="w-full my-16 text-lg text-center">
           Fondets prestasjon over tid (FAKE DATA)
         </div>
-        <LineChart performance={onlineFondData.performance} />
+        <LineChart
+          onlineFondet={onlineFondData.onlinePerformance}
+          osebx={onlineFondData.osebxPerformance}
+        />
       </div>
 
       <div className="w-full  my-16">
