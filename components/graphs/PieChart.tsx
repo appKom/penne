@@ -2,13 +2,17 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { onlineFondData } from '@/lib/mockData';
+import { CompositionType } from '@/lib/types';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChart = () => {
-  const labels = onlineFondData.compostion.map((item) => item.company);
-  const dataValues = onlineFondData.compostion.map((item) => item.percentage);
+interface Props {
+  composition: CompositionType[];
+}
+
+const PieChart = ({ composition }: Props) => {
+  const labels = composition.map((item) => item.company);
+  const dataValues = composition.map((item) => item.percentage);
 
   const data = {
     labels: labels,

@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { onlineFondData } from '@/lib/mockData';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { GraphType } from '@/lib/types';
 
 ChartJS.register(
   CategoryScale,
@@ -33,20 +33,24 @@ const timeRanges = {
   '5 år': 365 * 5,
 };
 
-const filterDataByRange = (rangeDays: number) => {
-  const today = new Date();
-  const cutoffDate = new Date(today);
-  cutoffDate.setDate(today.getDate() - rangeDays);
+interface Props {
+  performance: GraphType[];
+}
 
-  return onlineFondData.performance.filter((item) => {
-    const itemDate = new Date(item.date);
-    return itemDate >= cutoffDate;
-  });
-};
-
-const LineChart = () => {
+const LineChart = ({ performance }: Props) => {
   const [selectedRange, setSelectedRange] =
     useState<keyof typeof timeRanges>('år');
+
+  const filterDataByRange = (rangeDays: number) => {
+    const today = new Date();
+    const cutoffDate = new Date(today);
+    cutoffDate.setDate(today.getDate() - rangeDays);
+
+    return performance.filter((item) => {
+      const itemDate = new Date(item.date);
+      return itemDate >= cutoffDate;
+    });
+  };
 
   const filteredData = filterDataByRange(timeRanges[selectedRange]);
 

@@ -27,13 +27,13 @@ const PerformanceDisplay = () => {
           Denne smultringen gir en oversikt over fondets sammensetning (FAKE
           DATA)
         </div>
-        <PieChart />
+        <PieChart composition={onlineFondData.compostion} />
       </div>
       <div className="w-full mt-10">
         <div className="w-full my-16 text-lg text-center">
           Fondets prestasjon over tid (FAKE DATA)
         </div>
-        <LineChart />
+        <LineChart performance={onlineFondData.performance} />
       </div>
 
       <div className="w-full  my-16">
