@@ -18,7 +18,7 @@ const PieChart = ({ composition }: Props) => {
     labels: labels,
     datasets: [
       {
-        label: 'Fund Composition',
+        label: 'Prosent',
         data: dataValues,
         backgroundColor: [
           'rgba(75, 192, 192, 0.6)',
