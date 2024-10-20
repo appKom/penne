@@ -213,7 +213,7 @@ const AdminPortfolioPage = () => {
         />
 
         <p className="text-gray-300">
-          Legg til verdien til fondets verdi i prosent
+          Legg til verdien av porteføljen på en gitt dato.
         </p>
 
         <button
