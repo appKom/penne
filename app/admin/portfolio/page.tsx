@@ -29,9 +29,12 @@ const AdminPortfolioPage = () => {
         const response = await fetch('/api/admin/portfolio');
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
 
-          setPerformances(data.performance);
+          setPerformances(
+            data.performance.sort((a: GraphType, b: GraphType) =>
+              a.date > b.date ? -1 : 1,
+            ),
+          );
         }
       } catch (error) {
         if (error instanceof Error) {
