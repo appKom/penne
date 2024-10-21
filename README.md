@@ -13,12 +13,6 @@ cd onlinefondet
 npm install
 ```
 
-or
-
-```bash
-yarn install
-```
-
 ### 3. Set up environment variables
 
 #### Create `.env` file:
@@ -37,3 +31,4 @@ cp .env.template .env
 - **SUPABASE_ANEXT_SUPABASE_ANON_KEYNON_KEY**: The public anonymous key for interacting with the Supabase API. You can find this in the Supabase dashboard under Settings -> API.
 - **SUPABASE_SERVICE_KEY**: The service role key for your Supabase project, which allows access to more sensitive operations like inserting or modifying data with elevated permissions.
 - **DATABASE_URL**: The connection string to your database.
+- **ADMIN_EMAILS**: Admin emails, a string seperated by commas
