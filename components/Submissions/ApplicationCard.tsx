@@ -13,7 +13,7 @@ const ApplicationCard = ({ application }: Props) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="bg-gray-800 rounded-lg justify-center px-6">
+    <div className="bg-gray-800 border border-gray-500 rounded-lg justify-center px-6">
       <button
         className="flex flex-row justify-between items-center py-3 w-full"
         onClick={() => setExpanded(!expanded)}
