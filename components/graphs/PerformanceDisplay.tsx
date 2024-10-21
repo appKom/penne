@@ -63,7 +63,11 @@ const PerformanceDisplay = () => {
             osebx={osebxData.data}
           />
         ) : (
-          <div>Loading...</div>
+          <div className="px-5">
+            <div className="flex flex-col items-center justify-center gap-4 text-center w-full h-full animate-pulse">
+              <div className="overflow-hidden bg-gray-700 h-48 w-64 lg:w-96 lg:h-64" />
+            </div>
+          </div>
         )}
       </div>
 
@@ -74,7 +78,11 @@ const PerformanceDisplay = () => {
         {compositionData ? (
           <Table columns={columns} data={compositionData.composition} />
         ) : (
-          <div>Loading...</div>
+          <div className="px-5">
+            <div className="flex flex-col items-center justify-center gap-4 text-center w-full h-full animate-pulse">
+              <div className="overflow-hidden bg-gray-700 h-48 w-64 lg:w-96 lg:h-64" />
+            </div>
+          </div>
         )}
       </div>
     </div>
