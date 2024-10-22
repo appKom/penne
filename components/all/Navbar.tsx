@@ -18,7 +18,7 @@ const navLinks = [
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScroll, setLastScroll] = useState(0);
+  const lastScroll = useRef(0);
   const pathname = usePathname();
   const { data: session } = useSession();
 
@@ -26,15 +26,22 @@ const Navbar = () => {
     const controlNavbar = () => {
       const currentScroll = window.scrollY;
 
-      setShowNavbar(currentScroll <= lastScroll);
-      setLastScroll(currentScroll);
+      if (currentScroll <= 0) {
+        setShowNavbar(true);
+      } else if (currentScroll > lastScroll.current) {
+        setShowNavbar(false);
+      } else {
+        setShowNavbar(true);
+      }
+      lastScroll.current = currentScroll;
     };
+
     window.addEventListener('scroll', controlNavbar);
 
     return () => {
       window.removeEventListener('scroll', controlNavbar);
     };
-  }, [lastScroll]);
+  }, []);
 
   useEffect(() => {
     // Scroll to top when location changes
