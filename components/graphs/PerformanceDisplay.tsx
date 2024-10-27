@@ -42,8 +42,7 @@ const PerformanceDisplay = () => {
     <div className="w-full max-w-3xl mx-auto px-5">
       <div className="w-full">
         <div className="w-full my-16 text-lg text-center">
-          Denne smultringen gir en oversikt over fondets sammensetning (FAKE
-          DATA)
+          Denne smultringen gir en oversikt over fondets sammensetning
         </div>
         {compositionData ? (
           <PieChart composition={compositionData.composition} />
@@ -55,7 +54,7 @@ const PerformanceDisplay = () => {
       </div>
       <div className="w-full mt-10">
         <div className="w-full my-16 text-lg text-center">
-          Fondets prestasjon over tid (FAKE DATA)
+          Fondets prestasjon over tid
         </div>
         {onlineFondetData ? (
           <LineChart
@@ -73,7 +72,7 @@ const PerformanceDisplay = () => {
 
       <div className="w-full  my-16">
         <div className="my-16 text-lg text-center">
-          Tabellen viser fond, andel og kategori (FAKE DATA)
+          Tabellen viser fond, andel og kategori
         </div>
         {compositionData ? (
           <Table columns={columns} data={compositionData.composition} />
