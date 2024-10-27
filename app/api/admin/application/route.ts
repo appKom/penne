@@ -11,11 +11,15 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const GET = async () => {
   try {
-    const applications = await prisma.application.findMany();
+    const applications = await prisma.application.findMany({
+      orderBy: {
+        dateApplied: 'desc',
+      },
+    });
 
     return NextResponse.json({ applications }, { status: 200 });
   } catch (error) {
-    console.error('Error fetching members:', error);
+    console.error('Error fetching applications:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 },
