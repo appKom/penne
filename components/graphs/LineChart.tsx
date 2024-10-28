@@ -161,7 +161,7 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
             <button
               key={range}
               onClick={() => setSelectedRange(range as keyof typeof timeRanges)}
-              className={`px-4 py-2 rounded text-gray-200 border border-gray-700 w-full sm:w-28 ${
+              className={`px-4 py-2 rounded text-gray-200 border border-gray-700 w-28 ${
                 selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'
               }`}
             >
@@ -175,7 +175,7 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
           <button
             key={range}
             onClick={() => setSelectedRange(range as keyof typeof timeRanges)}
-            className={`px-4 py-2 rounded text-gray-200 border border-gray-700 w-full sm:w-28 ${
+            className={`px-4 py-2 rounded text-gray-200 border border-gray-700 w-28 ${
               selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'
             }`}
           >
