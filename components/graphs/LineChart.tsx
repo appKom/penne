@@ -39,7 +39,7 @@ interface Props {
 
 const LineChart = ({ onlineFondet, osebx }: Props) => {
   const [selectedRange, setSelectedRange] =
-    useState<keyof typeof timeRanges>('1 år');
+    useState<keyof typeof timeRanges>('5 år');
 
   const filterDataByRange = (data: GraphType[], rangeDays: number) => {
     const today = new Date();
@@ -161,7 +161,7 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
             <button
               key={range}
               onClick={() => setSelectedRange(range as keyof typeof timeRanges)}
-              className={`px-4 py-2 rounded text-gray-200 border border-gray-700 ${
+              className={`px-4 py-2 rounded text-gray-200 border border-gray-700 w-28 ${
                 selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'
               }`}
             >
@@ -175,7 +175,7 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
           <button
             key={range}
             onClick={() => setSelectedRange(range as keyof typeof timeRanges)}
-            className={`px-4 py-2 rounded text-gray-200 border border-gray-700 ${
+            className={`px-4 py-2 rounded text-gray-200 border border-gray-700 w-28 ${
               selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'
             }`}
           >
