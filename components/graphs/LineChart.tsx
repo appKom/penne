@@ -131,6 +131,11 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
       legend: {
         position: 'top' as const,
       },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => `${Math.round(ctx.raw * 100) / 100}%`
+        }
+      },
     },
     scales: {
       y: {
