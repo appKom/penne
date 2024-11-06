@@ -126,7 +126,6 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
 
   const options: ChartOptions<'line'> = {
     responsive: true,
-    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top' as const,
