@@ -18,7 +18,6 @@ const PieChart = ({ composition }: Props) => {
     labels: labels,
     datasets: [
       {
-        label: 'Prosent',
         data: dataValues,
         backgroundColor: [
           'rgba(255, 99, 132, 0.6)',
@@ -56,7 +55,12 @@ const PieChart = ({ composition }: Props) => {
       legend: {
         position: 'top' as const,
       },
-    },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => `${Math.round(ctx.raw * 100) / 100}%`
+        }
+      },
+    }
   };
 
   return (
