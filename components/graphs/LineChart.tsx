@@ -9,7 +9,7 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend, ChartOptions,
 } from 'chart.js';
 import { GraphType } from '@/lib/types';
 
@@ -124,16 +124,16 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'line'> = {
     responsive: true,
-    maintainsAspectRatio: false,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top' as const,
       },
       tooltip: {
         callbacks: {
-          label: (ctx) => `${Math.round(ctx.raw * 100) / 100}%`
+          label: (ctx) => `${Math.round(ctx.raw as number * 100) / 100}%`
         }
       },
     },
