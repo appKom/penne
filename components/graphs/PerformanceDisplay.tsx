@@ -5,6 +5,7 @@ import LineChart from './LineChart';
 import PieChart from './PieChart';
 
 import { CompositionType } from '@/lib/types';
+import AmountDisplay from './AmountDisplay';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -41,6 +42,13 @@ const PerformanceDisplay = () => {
   return (
     <div className="w-full max-w-3xl mx-auto px-5">
       <div className="w-full">
+        {onlineFondetData && onlineFondetData.performance ? (
+          <AmountDisplay performance={onlineFondetData.performance} />
+        ) : (
+          <div className="flex my-16 flex-col items-center justify-center gap-4 text-center w-full h-full animate-pulse">
+            <div className="overflow-hidden bg-gray-700 h-48 w-64 lg:w-96 lg:h-64" />
+          </div>
+        )}
         <div className="w-full my-16 text-lg text-center">
           Denne smultringen gir en oversikt over fondets sammensetning
         </div>
