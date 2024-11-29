@@ -1,30 +1,15 @@
-'use client';
-import Member from '@/components/about/Member';
 import PastMembers from '@/components/about/PastMembers';
 import { aboutUsText } from '@/lib/content';
 import { MemberType } from '@/lib/types';
-import { motion } from 'framer-motion';
-import useSWR from 'swr';
-import SkeletonMember from '@/components/about/SkeletonMember';
-import ErrorPage from '@/components/all/Error';
+import { prisma } from '@/lib/prisma';
+import CurrentMembers from '@/components/about/CurrentMembers';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const AboutPage = async () => {
+  const members: MemberType[] = await prisma.member.findMany({});
 
-const AboutPage = () => {
-  const { data, error } = useSWR('/api/admin/member', fetcher);
-
-  if (error) return <ErrorPage error="Medlemmer" />;
-
-  const currentMembers = data
-    ? data.members
-        .filter((member: MemberType) => member.isCurrent)
-        .sort((role: MemberType) => (role.role === 'Leder' ? -1 : 1))
-    : [];
-  const pastMembers = data
-    ? data.members
-        .filter((member: MemberType) => !member.isCurrent)
-        .sort((role: MemberType) => (role.role === 'Leder' ? -1 : 1))
-    : [];
+  const pastMembers: MemberType[] = await prisma.member.findMany({
+    where: { isCurrent: false },
+  });
 
   return (
     <div className="max-w-5xl px-4 py-10 mx-auto sm:py-20 sm:px-6 lg:px-8">
@@ -39,20 +24,7 @@ const AboutPage = () => {
           </p>
         ))}
       </div>
-      <div className="flex flex-wrap items-center justify-center w-full max-w-full gap-6 my-20 sm:gap-12">
-        {(data ? currentMembers : Array.from({ length: 4 })).map(
-          (member: MemberType | undefined, index: number) => (
-            <motion.div
-              key={member ? member.name : index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 * (index + 1) }}
-            >
-              {member ? <Member {...member} /> : <SkeletonMember />}
-            </motion.div>
-          ),
-        )}
-      </div>
+      <CurrentMembers members={members} />
 
       <SemiTitle text="Tidligere medlemmer" />
       <PastMembers members={pastMembers} />
