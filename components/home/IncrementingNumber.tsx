@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 export const IncrementingNumber = ({
   target,
   duration,
-  delay
+  delay,
 }: {
   target: number;
   duration: number;
@@ -34,5 +34,5 @@ export const IncrementingNumber = ({
 
   const current = Math.floor(Math.pow(progress, 2) * target);
 
-  return <>{current.toLocaleString()} kr</>;
+  return <>{current.toLocaleString('nb-NO').replace(/\s/g, '.')} kr</>;
 };
