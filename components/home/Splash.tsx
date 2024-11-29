@@ -18,7 +18,7 @@ const Splash = async () => {
       <div className="pb-48">
         <h1 className="text-6xl sm:text-8xl font-bold">Onlinefondet</h1>
         <h2 className="text-5xl sm:text-6xl text-center text-gray-200">
-          <IncrementingNumber target={performance?.value} duration={1000} />
+          <IncrementingNumber target={performance.value} duration={1000} />
         </h2>
         <p className="text-gray-500">
           Markedsverdi pr. {formatDateNorwegian(performance.date)}
