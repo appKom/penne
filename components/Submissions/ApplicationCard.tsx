@@ -58,11 +58,11 @@ const ApplicationCard = ({ application }: Props) => {
               </div>
               <div className="rounded-full">
                 <span className="font-medium">Søkt beløp:</span>{' '}
-                {application.amountApplied}kr
+                {application.amountApplied.toLocaleString('no-NO')}kr
               </div>
               <div className="rounded-full pb-2">
                 <span className="font-medium">Innvilget beløp:</span>{' '}
-                {application.grantedAmount}kr
+                {application.grantedAmount.toLocaleString('no-NO')}kr
               </div>
               {application.description && (
                 <div className="p-2 border rounded-lg border-gray-600">
