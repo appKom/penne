@@ -1,28 +1,27 @@
-'use client';
-import useSWR from 'swr';
 import ErrorPage from '../all/Error';
 import Table from '../form/Table';
 import LineChart from './LineChart';
 import PieChart from './PieChart';
+import { prisma } from '@/lib/prisma';
 
 import { CompositionType } from '@/lib/types';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const PerformanceDisplay = async () => {
+  const compositionData = await prisma.composition.findMany({
+    orderBy: {
+      date: 'desc',
+    },
+  });
 
-const PerformanceDisplay = () => {
-  const { data: osebxData, error: osebxError } = useSWR('/api/osebx', fetcher);
-  const { data: compositionData, error: compositionError } = useSWR(
-    '/api/admin/composition',
-    fetcher,
-  );
+  const onlineFondetData = await prisma.performance.findMany({
+    orderBy: {
+      date: 'desc',
+    },
+  });
 
-  const { data: onlineFondetData, error: onlineFondetError } = useSWR(
-    '/api/admin/portfolio',
-    fetcher,
-  );
-
-  if (osebxError || compositionError || onlineFondetError)
-    return <ErrorPage error="Portfølje" />;
+  if (!compositionData || !onlineFondetData) {
+    return <ErrorPage error="Data not found" />;
+  }
 
   const columns = [
     {
@@ -46,7 +45,7 @@ const PerformanceDisplay = () => {
           Denne smultringen gir en oversikt over fondets sammensetning
         </div>
         {compositionData ? (
-          <PieChart composition={compositionData.composition} />
+          <PieChart composition={compositionData} />
         ) : (
           <div className="flex flex-col items-center justify-center gap-4 text-center w-full h-full animate-pulse">
             <div className="overflow-hidden rounded-full bg-gray-700 h-56 w-56 lg:w-72 lg:h-72" />
@@ -58,10 +57,7 @@ const PerformanceDisplay = () => {
           Fondets prestasjon over tid
         </div>
         {onlineFondetData ? (
-          <LineChart
-            onlineFondet={onlineFondetData.performance}
-            osebx={osebxData.data}
-          />
+          <LineChart onlineFondet={onlineFondetData} />
         ) : (
           <div className="px-5">
             <div className="flex flex-col items-center justify-center gap-4 text-center w-full h-full animate-pulse">
@@ -76,7 +72,7 @@ const PerformanceDisplay = () => {
           Tabellen viser fond, andel og kategori
         </div>
         {compositionData ? (
-          <Table columns={columns} data={compositionData.composition} />
+          <Table columns={columns} data={compositionData} />
         ) : (
           <div className="px-5">
             <div className="flex flex-col items-center justify-center gap-4 text-center w-full h-full animate-pulse">

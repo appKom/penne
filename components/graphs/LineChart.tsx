@@ -1,6 +1,7 @@
 'use client';
-import React, { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Line } from 'react-chartjs-2';
+import useSWR from 'swr';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,7 +10,8 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend, ChartOptions,
+  Legend,
+  ChartOptions,
 } from 'chart.js';
 import { GraphType } from '@/lib/types';
 
@@ -34,12 +36,22 @@ const timeRanges = {
 
 interface Props {
   onlineFondet: GraphType[];
-  osebx: GraphType[];
 }
 
-const LineChart = ({ onlineFondet, osebx }: Props) => {
+interface OsebxResponse {
+  data: GraphType[];
+}
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+const LineChart = ({ onlineFondet }: Props) => {
   const [selectedRange, setSelectedRange] =
     useState<keyof typeof timeRanges>('5 år');
+
+  const { data: osebxData, error: osebxError } = useSWR<OsebxResponse>(
+    '/api/osebx',
+    fetcher,
+  );
 
   const filterDataByRange = (data: GraphType[], rangeDays: number) => {
     const today = new Date();
@@ -63,66 +75,96 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
     }));
   };
 
-  const filteredOnlineFondet = filterDataByRange(
-    onlineFondet,
-    timeRanges[selectedRange],
+  const filteredOnlineFondet = useMemo(
+    () => filterDataByRange(onlineFondet, timeRanges[selectedRange]),
+    [onlineFondet, selectedRange],
   );
-  const filteredOsebx = filterDataByRange(osebx, timeRanges[selectedRange]);
 
-  const normalizedOnlineFondet = normalizeData(filteredOnlineFondet);
-  const normalizedOsebx = normalizeData(filteredOsebx);
+  const filteredOsebx = useMemo(
+    () =>
+      osebxData
+        ? filterDataByRange(osebxData.data, timeRanges[selectedRange])
+        : [],
+    [osebxData, selectedRange],
+  );
 
-  const allDatesSet = new Set([
-    ...normalizedOnlineFondet.map((item) => item.date),
-    ...normalizedOsebx.map((item) => item.date),
-  ]);
-  const allDates = Array.from(allDatesSet)
-    .map((date) => new Date(date))
-    .sort((a, b) => a.getTime() - b.getTime())
-    .map((date) => date.toISOString().split('T')[0]);
+  const normalizedOnlineFondet = useMemo(
+    () => normalizeData(filteredOnlineFondet),
+    [filteredOnlineFondet],
+  );
 
-  const mergedData = allDates.map((date) => {
-    const onlineFondetItem = normalizedOnlineFondet.find(
-      (item) => (item.date as unknown as string).split('T')[0] === date,
-    );
-    const osebxItem = normalizedOsebx.find(
-      (item) => (item.date as unknown as string).split('T')[0] === date,
-    );
+  const normalizedOsebx = useMemo(
+    () => normalizeData(filteredOsebx),
+    [filteredOsebx],
+  );
 
-    return {
-      date,
-      onlineFondetValue: onlineFondetItem ? onlineFondetItem.value : null,
-      osebxValue: osebxItem ? osebxItem.value : null,
-    };
-  });
+  const allDatesSet = useMemo(
+    () =>
+      new Set([
+        ...normalizedOnlineFondet.map((item) => item.date),
+        ...normalizedOsebx.map((item) => item.date),
+      ]),
+    [normalizedOnlineFondet, normalizedOsebx],
+  );
 
-  const data = {
-    labels: mergedData.map((item) => {
-      const date = new Date(item.date);
-      return date.toLocaleDateString('nb-NO', {
-        year: 'numeric',
-        month: 'short',
-      });
+  const allDates = useMemo(
+    () =>
+      Array.from(allDatesSet)
+        .map((date) => new Date(date))
+        .sort((a, b) => a.getTime() - b.getTime())
+        .map((date) => date.toISOString().split('T')[0]),
+    [allDatesSet],
+  );
+
+  const mergedData = useMemo(
+    () =>
+      allDates.map((date) => {
+        const onlineFondetItem = normalizedOnlineFondet.find(
+          (item) => new Date(item.date).toISOString().split('T')[0] === date,
+        );
+        const osebxItem = normalizedOsebx.find(
+          (item) => new Date(item.date).toISOString().split('T')[0] === date,
+        );
+
+        return {
+          date,
+          onlineFondetValue: onlineFondetItem ? onlineFondetItem.value : null,
+          osebxValue: osebxItem ? osebxItem.value : null,
+        };
+      }),
+    [allDates, normalizedOnlineFondet, normalizedOsebx],
+  );
+
+  const chartData = useMemo(
+    () => ({
+      labels: mergedData.map((item) => {
+        const date = new Date(item.date);
+        return date.toLocaleDateString('nb-NO', {
+          year: 'numeric',
+          month: 'short',
+        });
+      }),
+      datasets: [
+        {
+          label: 'Onlinefondet',
+          data: mergedData.map((item) => item.onlineFondetValue),
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: true,
+          spanGaps: true,
+        },
+        {
+          label: 'OSEBX',
+          data: mergedData.map((item) => item.osebxValue),
+          borderColor: 'rgba(255, 99, 132, 1)',
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          fill: true,
+          spanGaps: true,
+        },
+      ],
     }),
-    datasets: [
-      {
-        label: 'Onlinefondet',
-        data: mergedData.map((item) => item.onlineFondetValue),
-        borderColor: 'rgba(75, 192, 192, 1)',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        fill: true,
-        spanGaps: true,
-      },
-      {
-        label: 'OSEBX',
-        data: mergedData.map((item) => item.osebxValue),
-        borderColor: 'rgba(255, 99, 132, 1)',
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        fill: true,
-        spanGaps: true,
-      },
-    ],
-  };
+    [mergedData],
+  );
 
   const options: ChartOptions<'line'> = {
     responsive: true,
@@ -132,8 +174,8 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
       },
       tooltip: {
         callbacks: {
-          label: (ctx) => `${Math.round(ctx.raw as number * 100) / 100}%`
-        }
+          label: (ctx) => `${Math.round((ctx.raw as number) * 100) / 100}%`,
+        },
       },
     },
     scales: {
@@ -154,10 +196,24 @@ const LineChart = ({ onlineFondet, osebx }: Props) => {
     },
   };
 
+  if (osebxError) {
+    return <div>Noe gikk galt: {osebxError.message}</div>;
+  }
+
+  if (!osebxData) {
+    return (
+      <div className="px-5">
+        <div className="flex flex-col items-center justify-center gap-4 text-center w-full h-full animate-pulse">
+          <div className="overflow-hidden bg-gray-700 h-48 w-64 lg:w-96 lg:h-64" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-x-auto w-full">
       <div className="min-w-[250px] h-64 md:h-96 lg:h-fit">
-        <Line data={data} options={options} />
+        <Line data={chartData} options={options} />
       </div>
       <div className="flex justify-center mb-4 pt-4 space-x-4 md:hidden overflow-x-auto">
         <div className="flex space-x-4 px-2">
