@@ -13,13 +13,13 @@ export type MemberType = {
 export type ApplicationType = {
   id: number;
   purpose: string;
-  description?: string;
+  description?: string | null;
   grantedAmount: number;
   amountApplied: number;
   recipient: string;
   dateApplied: Date;
   dateGranted: Date;
-  attachment: string;
+  attachment: string | null;
 };
 
 export type CompositionType = {

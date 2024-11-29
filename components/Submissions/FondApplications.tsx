@@ -1,22 +1,16 @@
-'use client';
-import useSWR from 'swr';
-import ErrorPage from '../all/Error';
 import ApplicationCard, { SkeletonApplication } from './ApplicationCard';
 import { ApplicationType } from '@/lib/types';
+import { prisma } from '@/lib/prisma';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
-const FondApplications = () => {
-  const { data, error } = useSWR('/api/admin/application', fetcher);
-
-  if (error) return <ErrorPage error="Søknader" />;
+const FondApplications = async () => {
+  const applications = await prisma.application.findMany({});
 
   return (
     <section className="flex flex-col gap-4">
       <h1 className="mb-4 text-2xl font-semibold">Søknader til fondet</h1>
 
-      {data
-        ? data.applications.map((application: ApplicationType) => (
+      {applications
+        ? applications.map((application: ApplicationType) => (
             <ApplicationCard key={application.id} application={application} />
           ))
         : Array.from({ length: 2 }).map((_, index) => (
