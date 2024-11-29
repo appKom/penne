@@ -36,6 +36,7 @@ const timeRanges = {
 
 interface Props {
   onlineFondet: GraphType[];
+  osebxData: GraphType[];
 }
 
 interface OsebxResponse {
@@ -44,14 +45,9 @@ interface OsebxResponse {
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const LineChart = ({ onlineFondet }: Props) => {
+const LineChart = ({ onlineFondet, osebxData }: Props) => {
   const [selectedRange, setSelectedRange] =
     useState<keyof typeof timeRanges>('5 år');
-
-  const { data: osebxData, error: osebxError } = useSWR<OsebxResponse>(
-    '/api/osebx',
-    fetcher,
-  );
 
   const filterDataByRange = (data: GraphType[], rangeDays: number) => {
     const today = new Date();
