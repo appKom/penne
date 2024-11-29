@@ -1,5 +1,3 @@
-'use client';
-
 import PerformanceDisplay from '@/components/graphs/PerformanceDisplay';
 import ScrollDownIcon from '@/components/home/ScrollDownIcon';
 import Splash from '@/components/home/Splash';
