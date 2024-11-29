@@ -3,7 +3,11 @@ import { ApplicationType } from '@/lib/types';
 import { prisma } from '@/lib/prisma';
 
 const FondApplications = async () => {
-  const applications = await prisma.application.findMany({});
+  const applications = await prisma.application.findMany({
+    orderBy: {
+      dateApplied: 'desc',
+    },
+  });
 
   return (
     <section className="flex flex-col gap-4">
