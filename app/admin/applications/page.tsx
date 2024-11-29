@@ -285,7 +285,7 @@ const ApplicationsPage = () => {
         />
         <TextInput
           id="recipient"
-          label="Motakker"
+          label="Mottaker"
           value={recipient}
           onChange={(e) => setRecipient(e.target.value)}
           required
