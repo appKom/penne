@@ -11,25 +11,26 @@ export const IncrementingNumber = ({
 }) => {
   const [progress, setProgress] = useState(0);
 
-  const framesPerSecond = 60;
-  const nSteps = Math.floor(duration / (1000 / framesPerSecond));
-
   useEffect(() => {
-    let frame = 0;
+    let start: number | null = null;
 
-    const interval = setInterval(() => {
-      console.log(frame);
-      frame++;
-      setProgress(Math.min(frame, nSteps));
-      if (frame >= nSteps) {
-        clearInterval(interval);
+    const animate = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+
+      const progressValue = Math.min(elapsed / duration, 1);
+      setProgress(progressValue);
+
+      if (progressValue < 1) {
+        requestAnimationFrame(animate);
       }
-    }, 1000 / framesPerSecond);
+    };
 
-    return () => clearInterval(interval);
-  }, [nSteps]);
+    const animationId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationId);
+  }, [duration]);
 
-  const current = Math.floor(Math.pow(progress / nSteps, 2) * target);
+  const current = Math.floor(Math.pow(progress, 2) * target);
 
   return <>{current.toLocaleString()} kr</>;
 };
