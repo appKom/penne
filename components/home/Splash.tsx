@@ -1,24 +1,29 @@
-import Image from 'next/image';
+import { formatDateNorwegian } from '@/lib/dateUtils';
+import { IncrementingNumber } from './IncrementingNumber';
+import { prisma } from '@/lib/prisma';
 
-const Splash = () => (
-  <div className="relative flex items-center justify-center w-full h-screen mb-32 -mt-20">
-    <Image
-      src="/realfagsbygget.png"
-      alt="Realfagsbygget"
-      // unsure what the height and width should be
-      height={683}
-      width={616}
-      className="animate-fadeIn w-[200px] sm:w-[300px] xl:w-[400px]"
-    />
-    <h1 className="text-center absolute font-playfair animate-spashSlideUp leading-tight [text-shadow:_1px_1px_2px_rgb(0_0_0_/_40%)]">
-      <span className="block text-6xl sm:text-8xl xl:text-9xl tracking-wider">
-        ONLINE
-      </span>
-      <span className="block text-6xl sm:text-8xl xl:text-9xl tracking-wider">
-        FONDET
-      </span>
-    </h1>
-  </div>
-);
+const Splash = async () => {
+  const performance = await prisma.performance.findFirst({
+    orderBy: {
+      date: 'desc',
+    },
+  });
+
+  if (!performance) {
+    return null;
+  }
+
+  return (
+    <div className="items-center justify-center w-full h-screen text-center p-20">
+      <h1 className="text-8xl font-bold">Onlinefondet</h1>
+      <h2 className="text-6xl text-center text-gray-200">
+        <IncrementingNumber target={performance?.value} duration={1000} />
+      </h2>
+      <p className="text-gray-500">
+        Markedsverdi pr. {formatDateNorwegian(performance.date)}
+      </p>
+    </div>
+  );
+};
 
 export default Splash;

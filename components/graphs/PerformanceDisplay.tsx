@@ -1,3 +1,4 @@
+'use client';
 import useSWR from 'swr';
 import ErrorPage from '../all/Error';
 import Table from '../form/Table';
