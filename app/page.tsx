@@ -12,6 +12,7 @@ const HomePage = () => (
       className="w-full py-16 text-lg bg-gray-950 border-y border-[#293046]"
     >
       <div className="max-w-3xl m-auto px-4">
+        <h1 className="text-4xl mb-2">Hva er et fond?</h1>
         {homeText.map((text, index) => (
           <p key={index} className="mb-4 text-lg leading-relaxed text-gray-200">
             {text}
