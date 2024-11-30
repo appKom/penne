@@ -1,7 +1,4 @@
-import { NextResponse } from 'next/server';
-
-export const GET = async () => {
-  const index = 'OSEBX';
+export const getMarketData = async (index: string) => {
   try {
     const data = await fetch(
       `https://api.prod.nntech.io/market-data/price-time-series/v2/period/YEAR_5/identifier/${index}?resolution=DAY`,
@@ -13,19 +10,19 @@ export const GET = async () => {
     if (data && data.pricePoints) {
       interface PricePoint {
         last: number;
-        timeStamp: string;
+        timeStamp: Date;
       }
-      const result: { value: number; date: string }[] = [];
+      const result: { value: number; date: Date}[] = [];
       data.pricePoints.forEach((element: PricePoint) => {
         result.push({
           value: element.last / 10,
-          date: new Date(element.timeStamp).toISOString(),
+          date: new Date(element.timeStamp),
         });
       });
-      return NextResponse.json({ data: result }, { status: 200 });
+      return result
     } else
-      return NextResponse.json({ error: `Data not found` }, { status: 404 });
+      throw new Error('No data found');
   } catch (error) {
-    return NextResponse.json({ error: error }, { status: 500 });
+    throw new Error(`Failed to fetch market data: ${error}`);
   }
-};
+}

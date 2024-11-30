@@ -1,3 +1,4 @@
+import { getMarketData } from '@/lib/stockApi';
 import ErrorPage from '../all/Error';
 import Table from '../form/Table';
 import LineChart from './LineChart';
@@ -18,6 +19,8 @@ const PerformanceDisplay = async () => {
       date: 'desc',
     },
   });
+
+  const osebxData = await getMarketData('OSEBX');
 
   if (!compositionData || !onlineFondetData) {
     return <ErrorPage error="Data not found" />;
@@ -57,7 +60,7 @@ const PerformanceDisplay = async () => {
           Fondets prestasjon over tid
         </div>
         {onlineFondetData ? (
-          <LineChart onlineFondet={onlineFondetData} />
+          <LineChart onlineFondet={onlineFondetData} osebxData={osebxData} />
         ) : (
           <div className="px-5">
             <div className="flex flex-col items-center justify-center gap-4 text-center w-full h-full animate-pulse">
