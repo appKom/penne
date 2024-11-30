@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/all/Navbar';
 import Footer from '@/components/all/Footer';
 import SessionWrapper from '@/lib/auth/SessionWrapper';
+import { Analytics } from "@vercel/analytics/react"
 
 // TODO: add favicon, and maybe dynamic title and description based on page
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="nb">
       <head>
         <link rel="icon" href="public/icon-256.png" sizes="any" />
+        <Analytics />
       </head>
       <body className="antialiased">
         <SessionWrapper>
