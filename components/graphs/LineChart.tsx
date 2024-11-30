@@ -38,31 +38,61 @@ interface Props {
   osebxData: GraphType[];
 }
 
+const filterDataByRange = (data: GraphType[], rangeDays: number) => {
+  const today = new Date();
+  const cutoffDate = new Date(today);
+  cutoffDate.setDate(today.getDate() - rangeDays);
+
+  return data
+    .filter((item) => {
+      const itemDate = new Date(item.date);
+      return itemDate >= cutoffDate;
+    })
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+};
+
+const normalizeData = (data: GraphType[]) => {
+  if (data.length === 0) return [];
+  const startValue = data[0].value;
+  return data.map((item) => ({
+    ...item,
+    value: (item.value / startValue) * 100,
+  }));
+};
+
+const options: ChartOptions<'line'> = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+    },
+    tooltip: {
+      callbacks: {
+        label: (ctx) => `${Math.round((ctx.raw as number) * 100) / 100}%`,
+      },
+    },
+  },
+  scales: {
+    y: {
+      title: {
+        display: true,
+        text: 'Verdi (%)',
+      },
+      ticks: {
+        callback: function (value: string | number) {
+          if (typeof value === 'number') {
+            return `${value}%`;
+          }
+          return value;
+        },
+      },
+    },
+  },
+};
+
 const LineChart = ({ onlineFondet, osebxData }: Props) => {
   const [selectedRange, setSelectedRange] =
     useState<keyof typeof timeRanges>('5 år');
-
-  const filterDataByRange = (data: GraphType[], rangeDays: number) => {
-    const today = new Date();
-    const cutoffDate = new Date(today);
-    cutoffDate.setDate(today.getDate() - rangeDays);
-
-    return data
-      .filter((item) => {
-        const itemDate = new Date(item.date);
-        return itemDate >= cutoffDate;
-      })
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  };
-
-  const normalizeData = (data: GraphType[]) => {
-    if (data.length === 0) return [];
-    const startValue = data[0].value;
-    return data.map((item) => ({
-      ...item,
-      value: (item.value / startValue) * 100,
-    }));
-  };
 
   const filteredOnlineFondet = useMemo(
     () => filterDataByRange(onlineFondet, timeRanges[selectedRange]),
@@ -85,41 +115,43 @@ const LineChart = ({ onlineFondet, osebxData }: Props) => {
     [filteredOsebx],
   );
 
-  const allDatesSet = useMemo(
-    () =>
-      new Set([
-        ...normalizedOnlineFondet.map((item) => item.date),
-        ...normalizedOsebx.map((item) => item.date),
-      ]),
-    [normalizedOnlineFondet, normalizedOsebx],
-  );
+  const normalizedOnlineFondetMap = useMemo(() => {
+    const map = new Map<string, number>();
+    normalizedOnlineFondet.forEach((item) => {
+      const date = new Date(item.date).toISOString().split('T')[0];
+      map.set(date, item.value);
+    });
+    return map;
+  }, [normalizedOnlineFondet]);
 
-  const allDates = useMemo(
-    () =>
-      Array.from(allDatesSet)
-        .map((date) => new Date(date))
-        .sort((a, b) => a.getTime() - b.getTime())
-        .map((date) => date.toISOString().split('T')[0]),
-    [allDatesSet],
-  );
+  const normalizedOsebxMap = useMemo(() => {
+    const map = new Map<string, number>();
+    normalizedOsebx.forEach((item) => {
+      const date = new Date(item.date).toISOString().split('T')[0];
+      map.set(date, item.value);
+    });
+    return map;
+  }, [normalizedOsebx]);
+
+  const allDates = useMemo(() => {
+    const dates = new Set<string>();
+    [...normalizedOnlineFondet, ...normalizedOsebx].forEach((item) => {
+      const date = new Date(item.date).toISOString().split('T')[0];
+      dates.add(date);
+    });
+    return Array.from(dates).sort(
+      (a, b) => new Date(a).getTime() - new Date(b).getTime(),
+    );
+  }, [normalizedOnlineFondet, normalizedOsebx]);
 
   const mergedData = useMemo(
     () =>
-      allDates.map((date) => {
-        const onlineFondetItem = normalizedOnlineFondet.find(
-          (item) => new Date(item.date).toISOString().split('T')[0] === date,
-        );
-        const osebxItem = normalizedOsebx.find(
-          (item) => new Date(item.date).toISOString().split('T')[0] === date,
-        );
-
-        return {
-          date,
-          onlineFondetValue: onlineFondetItem ? onlineFondetItem.value : null,
-          osebxValue: osebxItem ? osebxItem.value : null,
-        };
-      }),
-    [allDates, normalizedOnlineFondet, normalizedOsebx],
+      allDates.map((date) => ({
+        date,
+        onlineFondetValue: normalizedOnlineFondetMap.get(date) ?? null,
+        osebxValue: normalizedOsebxMap.get(date) ?? null,
+      })),
+    [allDates, normalizedOnlineFondetMap, normalizedOsebxMap],
   );
 
   const chartData = useMemo(
@@ -153,36 +185,6 @@ const LineChart = ({ onlineFondet, osebxData }: Props) => {
     [mergedData],
   );
 
-  const options: ChartOptions<'line'> = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top' as const,
-      },
-      tooltip: {
-        callbacks: {
-          label: (ctx) => `${Math.round((ctx.raw as number) * 100) / 100}%`,
-        },
-      },
-    },
-    scales: {
-      y: {
-        title: {
-          display: true,
-          text: 'Verdi (%)',
-        },
-        ticks: {
-          callback: function (value: string | number) {
-            if (typeof value === 'number') {
-              return `${value}%`;
-            }
-            return value;
-          },
-        },
-      },
-    },
-  };
-
   if (!osebxData) {
     return (
       <div className="px-5">
@@ -193,38 +195,32 @@ const LineChart = ({ onlineFondet, osebxData }: Props) => {
     );
   }
 
+  const renderRangeButtons = () => (
+    <>
+      {Object.keys(timeRanges).map((range) => (
+        <button
+          key={range}
+          onClick={() => setSelectedRange(range as keyof typeof timeRanges)}
+          className={`px-4 py-2 rounded text-gray-200 border border-gray-700 w-28 ${
+            selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'
+          }`}
+        >
+          {range}
+        </button>
+      ))}
+    </>
+  );
+
   return (
     <div className="overflow-x-auto w-full">
       <div className="min-w-[250px] h-64 md:h-96 lg:h-fit">
         <Line data={chartData} options={options} />
       </div>
       <div className="flex justify-center mb-4 pt-4 space-x-4 md:hidden overflow-x-auto">
-        <div className="flex space-x-4 px-2">
-          {Object.keys(timeRanges).map((range) => (
-            <button
-              key={range}
-              onClick={() => setSelectedRange(range as keyof typeof timeRanges)}
-              className={`px-4 py-2 rounded text-gray-200 border border-gray-700 w-28 ${
-                selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'
-              }`}
-            >
-              {range}
-            </button>
-          ))}
-        </div>
+        <div className="flex space-x-4 px-2">{renderRangeButtons()}</div>
       </div>
       <div className="hidden md:flex justify-center pt-4 mb-4 space-x-4">
-        {Object.keys(timeRanges).map((range) => (
-          <button
-            key={range}
-            onClick={() => setSelectedRange(range as keyof typeof timeRanges)}
-            className={`px-4 py-2 rounded text-gray-200 border border-gray-700 w-28 ${
-              selectedRange === range ? 'bg-blue-700' : 'bg-gray-900'
-            }`}
-          >
-            {range}
-          </button>
-        ))}
+        {renderRangeButtons()}
       </div>
     </div>
   );
