@@ -1,7 +1,6 @@
 'use client';
 import { useState, useMemo } from 'react';
 import { Line } from 'react-chartjs-2';
-import useSWR from 'swr';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -39,12 +38,6 @@ interface Props {
   osebxData: GraphType[];
 }
 
-interface OsebxResponse {
-  data: GraphType[];
-}
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 const LineChart = ({ onlineFondet, osebxData }: Props) => {
   const [selectedRange, setSelectedRange] =
     useState<keyof typeof timeRanges>('5 år');
@@ -78,9 +71,7 @@ const LineChart = ({ onlineFondet, osebxData }: Props) => {
 
   const filteredOsebx = useMemo(
     () =>
-      osebxData
-        ? filterDataByRange(osebxData.data, timeRanges[selectedRange])
-        : [],
+      osebxData ? filterDataByRange(osebxData, timeRanges[selectedRange]) : [],
     [osebxData, selectedRange],
   );
 
@@ -191,10 +182,6 @@ const LineChart = ({ onlineFondet, osebxData }: Props) => {
       },
     },
   };
-
-  if (osebxError) {
-    return <div>Noe gikk galt: {osebxError.message}</div>;
-  }
 
   if (!osebxData) {
     return (
