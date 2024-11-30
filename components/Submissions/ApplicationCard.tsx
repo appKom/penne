@@ -1,7 +1,8 @@
 'use client';
+
 import { formatDateNorwegian } from '@/lib/dateUtils';
 import { ApplicationType } from '@/lib/types';
-import { ArrowDownIcon } from 'lucide-react';
+import { ChevronDownIcon } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -13,22 +14,24 @@ const ApplicationCard = ({ application }: Props) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="bg-gray-800 border border-gray-500 rounded-lg justify-center px-6">
+    <div className="bg-gradient-to-br from-gray-800 to-gray-800/80 rounded-xl overflow-hidden shadow-lg">
       <button
-        className="flex flex-row justify-between items-center py-3 w-full"
+        className="flex flex-row justify-between items-center p-6 w-full text-left transition-colors duration-300 hover:bg-gray-800/70"
         onClick={() => setExpanded(!expanded)}
       >
-        <div className="flex flex-col gap-1 items-start">
-          <h1 className="text-2xl font-semibold">{application.recipient}</h1>
-          <p className="text-gray-400">{application.purpose}</p>
-          <p className="text-gray-400">
+        <div className="flex flex-col gap-2 items-start">
+          <h1 className="text-3xl font-bold text-white">
+            {application.recipient}
+          </h1>
+          <p className="text-slate-200 font-medium">{application.purpose}</p>
+          <p className="text-slate-200 text-sm">
             {formatDateNorwegian(application.dateApplied)}
           </p>
         </div>
-        <ArrowDownIcon
-          className={`w-6 h-6 text-gray-400 transform transition-transform duration-300 ${
+        <ChevronDownIcon
+          className={`w-8 h-8 text-white transform transition-transform duration-300 ${
             expanded ? 'rotate-180' : ''
-          } self-center`}
+          }`}
         />
       </button>
 
@@ -42,48 +45,49 @@ const ApplicationCard = ({ application }: Props) => {
               expanded: { height: 'auto', opacity: 1 },
               collapsed: { height: 0, opacity: 0 },
             }}
-            transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
-            style={{ overflow: 'hidden' }}
+            transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+            className="overflow-hidden bg-white/10 backdrop-blur-sm"
           >
-            <div className="py-2 text-white">
-              <div className="flex flex-col sm:flex-row gap-4 pb-4">
-                <div className="bg-gray-700 rounded-full px-3 py-1 text-sm">
-                  <span className="font-medium">Søkt:</span>{' '}
-                  {formatDateNorwegian(application.dateApplied)}
-                </div>
-                <div className="bg-gray-700 rounded-full px-3 py-1 text-sm">
-                  <span className="font-medium">Innvilget:</span>{' '}
-                  {formatDateNorwegian(application.dateGranted)}
-                </div>
+            <div className="p-6 text-white">
+              <div className="flex flex-wrap gap-4 mb-6">
+                <InfoBadge
+                  label="Søkt"
+                  value={formatDateNorwegian(application.dateApplied)}
+                />
+                <InfoBadge
+                  label="Innvilget"
+                  value={formatDateNorwegian(application.dateGranted)}
+                />
               </div>
-              <div className="rounded-full">
-                <span className="font-medium">Søkt beløp:</span>{' '}
-                {application.amountApplied.toLocaleString('no-NO')}kr
-              </div>
-              <div className="rounded-full pb-2">
-                <span className="font-medium">Innvilget beløp:</span>{' '}
-                {application.grantedAmount.toLocaleString('no-NO')}kr
-              </div>
+              <InfoRow
+                label="Søkt beløp"
+                value={`${application.amountApplied.toLocaleString('no-NO')} kr`}
+              />
+              <InfoRow
+                label="Innvilget beløp"
+                value={`${application.grantedAmount.toLocaleString('no-NO')} kr`}
+              />
               {application.description && (
-                <div className="p-2 border rounded-lg border-gray-600">
-                  {' '}
-                  {application.description}
+                <div className="mt-4 p-4 rounded-lg shadow-lg backdrop-blur-sm">
+                  <p className="text-white text-lg">
+                    {application.description}
+                  </p>
                 </div>
               )}
               {application.attachment && (
-                <div className="mt-4 w-full">
+                <div className="mt-6">
+                  <h3 className="text-xl font-semibold mb-2">Vedlegg</h3>
                   {application.attachment.split('.').pop() === 'pdf' ? (
                     <iframe
                       src={application.attachment}
                       title="PDF Preview"
-                      width="100%"
-                      height="500px"
+                      className="w-full h-[400px] rounded-lg border-2 border-white/30"
                     />
                   ) : (
                     <img
                       src={application.attachment}
                       alt="Preview"
-                      className="max-w-full h-auto"
+                      className="max-w-full h-auto rounded-lg border-2 border-white/30"
                     />
                   )}
                 </div>
@@ -96,12 +100,25 @@ const ApplicationCard = ({ application }: Props) => {
   );
 };
 
+const InfoBadge = ({ label, value }: { label: string; value: string }) => (
+  <div className="rounded-full bg-gray-700/80 px-4 py-2 text-md text-white backdrop-blur-sm shadow-lg">
+    <span className="font-bold">{label}:</span> {value}
+  </div>
+);
+
+const InfoRow = ({ label, value }: { label: string; value: string }) => (
+  <div className="flex justify-between items-center py-2 border-b border-white/20">
+    <span className="font-medium">{label}:</span>
+    <span>{value}</span>
+  </div>
+);
+
 export default ApplicationCard;
 
 export const SkeletonApplication = () => {
   return (
-    <div className="flex flex-col items-center justify-center gap-4 text-center w-full animate-pulse">
-      <div className="overflow-hidden rounded-lg bg-gray-700 h-16 w-full lg:h-16" />
+    <div className="bg-gradient-to-br from-purple-600/50 to-blue-500/50 rounded-xl overflow-hidden shadow-lg animate-pulse">
+      <div className="h-32 w-full" />
     </div>
   );
 };
