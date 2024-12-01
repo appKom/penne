@@ -34,5 +34,5 @@ export const IncrementingNumber = ({
 
   const current = Math.floor(Math.pow(progress, 2) * target);
 
-  return <>{current.toLocaleString('nb-NO').replace(/\s/g, '.')} kr</>;
+  return <>{current.toLocaleString('nb-NO')} kr</>;
 };
