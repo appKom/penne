@@ -46,7 +46,7 @@ const ApplicationCard = ({ application }: Props) => {
               collapsed: { height: 0, opacity: 0 },
             }}
             transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
-            className="overflow-hidden bg-white/10 backdrop-blur-sm"
+            className="overflow-hidden  backdrop-blur-sm"
           >
             <div className="p-6 text-white">
               <div className="flex flex-wrap gap-4 mb-6">
@@ -68,7 +68,7 @@ const ApplicationCard = ({ application }: Props) => {
                 value={`${application.grantedAmount.toLocaleString('no-NO')} kr`}
               />
               {application.description && (
-                <div className="mt-4 p-4 rounded-lg shadow-lg backdrop-blur-sm">
+                <div className="mt-4 p-4 rounded-lg shadow-lg bg-gray-700 backdrop-blur-sm">
                   <p className="text-white text-lg">
                     {application.description}
                   </p>
@@ -81,13 +81,13 @@ const ApplicationCard = ({ application }: Props) => {
                     <iframe
                       src={application.attachment}
                       title="PDF Preview"
-                      className="w-full h-[400px] rounded-lg border-2 border-white/30"
+                      className="w-full h-[400px] rounded-lg border-2 border-gray-600"
                     />
                   ) : (
                     <img
                       src={application.attachment}
                       alt="Preview"
-                      className="max-w-full h-auto rounded-lg border-2 border-white/30"
+                      className="max-w-full h-auto rounded-lg border-2 border-gray-600"
                     />
                   )}
                 </div>
