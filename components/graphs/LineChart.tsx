@@ -127,6 +127,7 @@ const options: ChartOptions<'line'> = {
       title: {
         display: true,
         text: 'Verdi (%)',
+        color: 'white',
       },
       ticks: {
         callback: function (value: string | number) {
@@ -135,6 +136,13 @@ const options: ChartOptions<'line'> = {
           }
           return value;
         },
+        color: 'white',
+      },
+    },
+    x: {
+      ticks: {
+        color: 'white',
+        maxTicksLimit: 12,
       },
     },
   },
