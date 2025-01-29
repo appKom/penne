@@ -25,7 +25,7 @@ ChartJS.register(
 );
 
 const timeRanges = {
-  '1 måned': 30,
+  // '1 måned': 30, TODO: add if we ever get actual data from Shareville
   '3 måneder': 90,
   '6 måneder': 180,
   '1 år': 365,
@@ -38,25 +38,75 @@ interface Props {
   osebxData: GraphType[];
 }
 
-const filterDataByRange = (data: GraphType[], rangeDays: number) => {
-  const today = new Date();
-  const cutoffDate = new Date(today);
-  cutoffDate.setDate(today.getDate() - rangeDays);
-
-  return data
-    .filter((item) => {
-      const itemDate = new Date(item.date);
-      return itemDate >= cutoffDate;
-    })
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+const sortData = (data: GraphType[]) => {
+  return data.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+  );
 };
 
-const normalizeData = (data: GraphType[]) => {
+const generateDateRange = (startDate: Date, endDate: Date) => {
+  const dates = [];
+  const currentDate = new Date(startDate);
+  while (currentDate <= endDate) {
+    dates.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+  return dates;
+};
+
+//Binary search, hvem sa jeg strøk algdat?
+const interpolateValue = (
+  data: GraphType[],
+  targetDate: Date,
+): number | null => {
+  const targetTime = targetDate.getTime();
+
+  if (data.length === 0) return null;
+
+  if (targetTime <= new Date(data[0].date).getTime()) return data[0].value;
+  if (targetTime >= new Date(data[data.length - 1].date).getTime())
+    return data[data.length - 1].value;
+
+  let left = 0;
+  let right = data.length - 1;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const midTime = new Date(data[mid].date).getTime();
+
+    if (midTime === targetTime) {
+      return data[mid].value;
+    } else if (midTime < targetTime) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  const before = data[right];
+  const after = data[left];
+
+  if (before && after) {
+    const beforeTime = new Date(before.date).getTime();
+    const afterTime = new Date(after.date).getTime();
+    const ratio = (targetTime - beforeTime) / (afterTime - beforeTime);
+    return before.value + ratio * (after.value - before.value);
+  } else {
+    return null;
+  }
+};
+
+const normalizeInterpolatedData = (
+  data: { date: Date; value: number | null }[],
+) => {
   if (data.length === 0) return [];
   const startValue = data[0].value;
   return data.map((item) => ({
     ...item,
-    value: (item.value / startValue) * 100,
+    value:
+      item.value !== null && startValue !== null
+        ? (item.value / startValue) * 100
+        : null,
   }));
 };
 
@@ -77,6 +127,7 @@ const options: ChartOptions<'line'> = {
       title: {
         display: true,
         text: 'Verdi (%)',
+        color: 'white',
       },
       ticks: {
         callback: function (value: string | number) {
@@ -85,6 +136,13 @@ const options: ChartOptions<'line'> = {
           }
           return value;
         },
+        color: 'white',
+      },
+    },
+    x: {
+      ticks: {
+        color: 'white',
+        maxTicksLimit: 12,
       },
     },
   },
@@ -94,79 +152,66 @@ const LineChart = ({ onlineFondet, osebxData }: Props) => {
   const [selectedRange, setSelectedRange] =
     useState<keyof typeof timeRanges>('5 år');
 
-  const filteredOnlineFondet = useMemo(
-    () => filterDataByRange(onlineFondet, timeRanges[selectedRange]),
-    [onlineFondet, selectedRange],
+  const sortedOnlineFondet = useMemo(
+    () => sortData(onlineFondet),
+    [onlineFondet],
+  );
+  const sortedOsebx = useMemo(() => sortData(osebxData), [osebxData]);
+
+  const today = useMemo(() => new Date(), []);
+  const cutoffDate = useMemo(() => {
+    const date = new Date(today);
+    date.setDate(today.getDate() - timeRanges[selectedRange]);
+    return date;
+  }, [today, selectedRange]);
+
+  const dateRange = useMemo(
+    () => generateDateRange(cutoffDate, today),
+    [cutoffDate, today],
   );
 
-  const filteredOsebx = useMemo(
-    () =>
-      osebxData ? filterDataByRange(osebxData, timeRanges[selectedRange]) : [],
-    [osebxData, selectedRange],
-  );
+  const interpolatedOnlineFondet = useMemo(() => {
+    return dateRange.map((date) => {
+      const value = interpolateValue(sortedOnlineFondet, date);
+      return { date, value };
+    });
+  }, [sortedOnlineFondet, dateRange]);
+
+  const interpolatedOsebx = useMemo(() => {
+    return dateRange.map((date) => {
+      const value = interpolateValue(sortedOsebx, date);
+      return { date, value };
+    });
+  }, [sortedOsebx, dateRange]);
 
   const normalizedOnlineFondet = useMemo(
-    () => normalizeData(filteredOnlineFondet),
-    [filteredOnlineFondet],
+    () => normalizeInterpolatedData(interpolatedOnlineFondet),
+    [interpolatedOnlineFondet],
   );
 
   const normalizedOsebx = useMemo(
-    () => normalizeData(filteredOsebx),
-    [filteredOsebx],
+    () => normalizeInterpolatedData(interpolatedOsebx),
+    [interpolatedOsebx],
   );
 
-  const normalizedOnlineFondetMap = useMemo(() => {
-    const map = new Map<string, number>();
-    normalizedOnlineFondet.forEach((item) => {
-      const date = new Date(item.date).toISOString().split('T')[0];
-      map.set(date, item.value);
-    });
-    return map;
-  }, [normalizedOnlineFondet]);
-
-  const normalizedOsebxMap = useMemo(() => {
-    const map = new Map<string, number>();
-    normalizedOsebx.forEach((item) => {
-      const date = new Date(item.date).toISOString().split('T')[0];
-      map.set(date, item.value);
-    });
-    return map;
-  }, [normalizedOsebx]);
-
-  const allDates = useMemo(() => {
-    const dates = new Set<string>();
-    [...normalizedOnlineFondet, ...normalizedOsebx].forEach((item) => {
-      const date = new Date(item.date).toISOString().split('T')[0];
-      dates.add(date);
-    });
-    return Array.from(dates).sort(
-      (a, b) => new Date(a).getTime() - new Date(b).getTime(),
-    );
-  }, [normalizedOnlineFondet, normalizedOsebx]);
-
-  const mergedData = useMemo(
+  const labels = useMemo(
     () =>
-      allDates.map((date) => ({
-        date,
-        onlineFondetValue: normalizedOnlineFondetMap.get(date) ?? null,
-        osebxValue: normalizedOsebxMap.get(date) ?? null,
-      })),
-    [allDates, normalizedOnlineFondetMap, normalizedOsebxMap],
+      dateRange.map((date) =>
+        date.toLocaleDateString('nb-NO', {
+          year: 'numeric',
+          month: 'short',
+        }),
+      ),
+    [dateRange],
   );
 
   const chartData = useMemo(
     () => ({
-      labels: mergedData.map((item) => {
-        const date = new Date(item.date);
-        return date.toLocaleDateString('nb-NO', {
-          year: 'numeric',
-          month: 'short',
-        });
-      }),
+      labels,
       datasets: [
         {
           label: 'Onlinefondet',
-          data: mergedData.map((item) => item.onlineFondetValue),
+          data: normalizedOnlineFondet.map((item) => item.value),
           borderColor: 'rgba(75, 192, 192, 1)',
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           fill: true,
@@ -174,7 +219,7 @@ const LineChart = ({ onlineFondet, osebxData }: Props) => {
         },
         {
           label: 'OSEBX',
-          data: mergedData.map((item) => item.osebxValue),
+          data: normalizedOsebx.map((item) => item.value),
           borderColor: 'rgba(255, 99, 132, 1)',
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           fill: true,
@@ -182,7 +227,7 @@ const LineChart = ({ onlineFondet, osebxData }: Props) => {
         },
       ],
     }),
-    [mergedData],
+    [labels, normalizedOnlineFondet, normalizedOsebx],
   );
 
   if (!osebxData) {
