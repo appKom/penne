@@ -43,6 +43,33 @@ const VedtekterPage = () => {
     fetchAndConvertVedtekter();
   }, []);
 
+  const SkeletonLoader = () => (
+    <div className="space-y-4 animate-pulse mt-8">
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-5/6"></div>
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-4/5"></div>
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-5/6"></div>
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-5/6"></div>
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-5/6"></div>
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-5/6"></div>
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+      <div className="h-4 bg-gray-700 rounded w-full"></div>
+      <div className="h-4 bg-gray-700 rounded w-5/6"></div>
+    </div>
+  );
+
   return (
     <div className="container mx-auto px-4 py-10 sm:py-20 sm:px-6 lg:px-8">
       <h1 className="mb-8 text-5xl font-extrabold tracking-tight text-center">
@@ -51,12 +78,12 @@ const VedtekterPage = () => {
       <div className="max-w-4xl mx-auto shadow-lg bg-gray-800 rounded-lg overflow-hidden">
         <div className="p-6">
           {isLoading ? (
-            <p className="text-gray-400">Laster vedtekter...</p>
+            <SkeletonLoader />
           ) : error ? (
             <p className="text-red-400">{error}</p>
           ) : (
             <div
-              className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none prose-invert  prose-headings:text-white prose-p:text-gray-300 prose-a:text-blue-400 prose-a:text-xl prose-strong:text-white prose-ul:text-gray-300 prose-ol:text-gray-300"
+              className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none prose-invert prose-headings:text-white prose-p:text-gray-300 prose-a:text-blue-400 prose-a:text-xl prose-strong:text-white prose-ul:text-gray-300 prose-ol:text-gray-300"
               dangerouslySetInnerHTML={{ __html: html }}
             />
           )}
