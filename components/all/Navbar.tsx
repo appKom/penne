@@ -14,6 +14,7 @@ const navLinks = [
   { title: 'Fondet', path: '/' },
   { title: 'Styret', path: '/styret' },
   { title: 'Søknad', path: '/soknad' },
+  { title: 'Vedtekter', path: '/vedtekter' },
 ];
 
 const Navbar = () => {
@@ -87,7 +88,7 @@ const MobileNavbar = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-between w-full md:hidden">
+    <div className="flex items-center justify-between w-full lg:hidden">
       <Link
         href="/"
         className="p-2 text-2xl font-bold transition hover:opacity-50"
@@ -129,7 +130,7 @@ interface DesktopNavbarProps {
 
 const DesktopNavbar = ({ session, handleLogout }: DesktopNavbarProps) => {
   return (
-    <div className="items-center justify-between hidden w-full md:flex">
+    <div className="items-center justify-between hidden w-full lg:flex">
       <Link
         href="/"
         className="p-2 text-2xl font-bold transition hover:opacity-50"
