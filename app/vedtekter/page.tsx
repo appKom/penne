@@ -22,9 +22,14 @@ const VedtekterPage = () => {
             toc: 'none',
             attributes: 'allow-uri-read',
           },
-        });
+        }) as string;
 
-        setHtml(convertedHtml as string);
+        const cleanedHtml = convertedHtml.replace(
+          '<div id="toctitle">Table of Contents</div>',
+          '',
+        );
+
+        setHtml(cleanedHtml);
       } catch (error) {
         console.error('Error fetching or converting vedtekter:', error);
         setError(
@@ -51,7 +56,7 @@ const VedtekterPage = () => {
             <p className="text-red-400">{error}</p>
           ) : (
             <div
-              className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none prose-invert  prose-headings:text-white prose-p:text-gray-300 prose-a:text-blue-400 prose-strong:text-white prose-ul:text-gray-300 prose-ol:text-gray-300"
+              className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none prose-invert  prose-headings:text-white prose-p:text-gray-300 prose-a:text-blue-400 prose-a:text-xl prose-strong:text-white prose-ul:text-gray-300 prose-ol:text-gray-300"
               dangerouslySetInnerHTML={{ __html: html }}
             />
           )}
