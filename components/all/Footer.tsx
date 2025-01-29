@@ -79,19 +79,7 @@ const Footer = () => (
               className="w-32 h-auto"
             />
           </Link>
-          <Link
-            href="https://www.bekk.no/"
-            className="transition hover:opacity-50"
-          >
-            <Image
-              src="bekk_white.svg"
-              alt="Bekk logo"
-              // unsure if these should the right dimensions
-              height={0}
-              width={0}
-              className="w-32 h-auto"
-            />
-          </Link>
+          {/* HSP logo */}
         </div>
         <p className="text-sm text-gray-400">
           &copy; {new Date().getFullYear()} Onlinefondet. Alle rettigheter
