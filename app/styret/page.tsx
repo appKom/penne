@@ -4,6 +4,8 @@ import { MemberType } from '@/lib/types';
 import { prisma } from '@/lib/prisma';
 import CurrentMembers from '@/components/about/CurrentMembers';
 
+export const revalidate = 36000;
+
 const AboutPage = async () => {
   const members: MemberType[] = await prisma.member.findMany({});
 

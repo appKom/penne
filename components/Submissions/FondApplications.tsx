@@ -2,6 +2,8 @@ import ApplicationCard, { SkeletonApplication } from './ApplicationCard';
 import { ApplicationType } from '@/lib/types';
 import { prisma } from '@/lib/prisma';
 
+export const revalidate = 36000;
+
 const FondApplications = async () => {
   const applications = await prisma.application.findMany({
     orderBy: {

@@ -3,6 +3,8 @@ import ScrollDownIcon from '@/components/home/ScrollDownIcon';
 import Splash from '@/components/home/Splash';
 import { homeText } from '@/lib/content';
 
+export const revalidate = 36000;
+
 const HomePage = () => (
   <div className="flex flex-col items-center justify-center">
     <Splash />
