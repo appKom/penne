@@ -1,9 +1,13 @@
+# Penne
+
+TODO: description
+
 ## Getting Started
 
 ### 1. Clone the repository
 
 ```bash
-git https://github.com/appKom/onlinefondet.git
+git https://github.com/appKom/penne.git
 cd onlinefondet
 ```
 
