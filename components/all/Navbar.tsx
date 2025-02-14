@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import Button from './Button';
 import { Session } from 'next-auth';
+import Image from 'next/image';
 
 const navLinks = [
   { title: 'Fondet', path: '/' },
@@ -129,6 +130,12 @@ interface DesktopNavbarProps {
 }
 
 const DesktopNavbar = ({ session, handleLogout }: DesktopNavbarProps) => {
+  const [showPenne, setShowPenne] = useState(false);
+
+  useEffect(() => {
+    setShowPenne(Math.random() <= 0.05);
+  }, []);
+
   return (
     <div className="items-center justify-between hidden w-full lg:flex">
       <Link
@@ -166,6 +173,22 @@ const DesktopNavbar = ({ session, handleLogout }: DesktopNavbarProps) => {
           </div>
         )}
       </div>
+      {
+        showPenne && (
+          <motion.div
+            whileHover={{ rotate: 180 }}
+            transition={{ type: "spring", stiffness: 200, damping: 10 }}
+            className='cursor-help'
+          >
+            <Image
+              src="/penne.png"
+              alt="penne"
+              width={75}
+              height={75}
+            />
+          </motion.div>
+        )
+      }
     </div>
   );
 };
