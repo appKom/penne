@@ -30,15 +30,13 @@ const ApplicationPage = () => (
 
       <section>
         <SemiTitle text="Søknader sendes til:" />
-        <div className="p-6 bg-[#1c2132] rounded-lg">
-          <a
-            href={'mailto:' + email}
-            className="flex items-center text-blue-400 transition-colors duration-200 hover:text-blue-300 group"
-          >
-            {email}
-            <ArrowRightIcon className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
-          </a>
-        </div>
+        <a
+          href={'mailto:' + email}
+          className="flex items-center text-blue-400 transition-colors duration-200 hover:text-blue-300 group p-6 bg-[#1c2132] rounded-lg"
+        >
+          {email}
+          <ArrowRightIcon className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
+        </a>
       </section>
 
       <section>
