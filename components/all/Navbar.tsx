@@ -133,7 +133,7 @@ const DesktopNavbar = ({ session, handleLogout }: DesktopNavbarProps) => {
   const [showPenne, setShowPenne] = useState(false);
 
   useEffect(() => {
-    setShowPenne(Math.random() <= 0.2);
+    setShowPenne(Math.random() <= 0.05);
   }, []);
 
   return (
