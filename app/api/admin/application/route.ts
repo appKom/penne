@@ -162,6 +162,8 @@ export const PUT = async (request: Request) => {
     const attachment = formData.get('attachment') as File | null;
     const description = formData.get('description') as string | null;
 
+    console.log(attachment);
+
     if (!id) {
       return NextResponse.json(
         { error: 'Application ID is required for updating' },
@@ -203,6 +205,14 @@ export const PUT = async (request: Request) => {
       }
 
       attachmentHref = publicData.publicUrl;
+    } else {
+      await supabase.storage.from('application').remove([attachmentHref]);
+      await prisma.application.update({
+        where: { id: Number(id) },
+        data: {
+          attachment: null,
+        },
+      });
     }
 
     interface UpdateData {
