@@ -5,6 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 import { prisma } from '@/lib/prisma';
 import { GenderType } from '@/lib/types';
 import { sanitizeFileName } from '@/lib/utilFunctions';
+import { revalidatePath } from 'next/cache';
 
 const supabaseUrl = process.env.NEXT_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
@@ -82,6 +83,8 @@ export const POST = async (request: Request) => {
         year: Number(year),
       },
     });
+
+    revalidatePath('/styret');
 
     return NextResponse.json({ member }, { status: 200 });
   } catch (error) {
@@ -180,6 +183,8 @@ export const PUT = async (request: Request) => {
       data: updateData,
     });
 
+    revalidatePath('/styret');
+
     return NextResponse.json({ member }, { status: 200 });
   } catch (error) {
     console.error('Error updating member:', error);
@@ -213,6 +218,8 @@ export const DELETE = async (request: Request) => {
         id: Number(id),
       },
     });
+
+    revalidatePath('/styret');
 
     return NextResponse.json({ member }, { status: 200 });
   } catch (error) {

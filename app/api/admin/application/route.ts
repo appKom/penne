@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { sanitizeFileName } from '@/lib/utilFunctions';
+import { revalidatePath } from 'next/cache';
 
 const supabaseUrl = process.env.NEXT_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
@@ -98,6 +99,8 @@ export const POST = async (request: Request) => {
       },
     });
 
+    revalidatePath('/soknad');
+
     return NextResponse.json({ application }, { status: 200 });
   } catch (error) {
     console.error('Error creating application:', error);
@@ -131,6 +134,8 @@ export const DELETE = async (request: Request) => {
         id: Number(id),
       },
     });
+
+    revalidatePath('/soknad');
 
     return NextResponse.json({ application }, { status: 200 });
   } catch (error) {
@@ -247,6 +252,8 @@ export const PUT = async (request: Request) => {
       where: { id: Number(id) },
       data: updateData,
     });
+
+    revalidatePath('/soknad');
 
     return NextResponse.json({ application }, { status: 200 });
   } catch (error) {

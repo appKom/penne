@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { isAdmin } from '@/lib/auth/apiChecks';
+import { revalidatePath } from 'next/cache';
 
 export const GET = async () => {
   try {
@@ -39,6 +40,8 @@ export const POST = async (request: Request) => {
       },
     });
 
+    revalidatePath('/');
+
     return NextResponse.json({ composition }, { status: 200 });
   } catch (error) {
     console.error('Error creating application:', error);
@@ -74,6 +77,7 @@ export const PUT = async (request: Request) => {
         percentage: percentage,
       },
     });
+    revalidatePath('/');
 
     return NextResponse.json({ composition }, { status: 200 });
   } catch (error) {
@@ -108,6 +112,7 @@ export const DELETE = async (request: Request) => {
         id: Number(id),
       },
     });
+    revalidatePath('/');
 
     return NextResponse.json({ composition }, { status: 200 });
   } catch (error) {
