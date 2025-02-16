@@ -172,23 +172,16 @@ const DesktopNavbar = ({ session, handleLogout }: DesktopNavbarProps) => {
             />
           </div>
         )}
-      </div>
-      {
-        showPenne && (
+        {showPenne && (
           <motion.div
             whileHover={{ rotate: 180 }}
-            transition={{ type: "spring", stiffness: 200, damping: 10 }}
-            className='cursor-help'
+            transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+            className="cursor-help"
           >
-            <Image
-              src="/penne.png"
-              alt="penne"
-              width={75}
-              height={75}
-            />
+            <Image src="/penne.png" alt="penne" width={75} height={75} />
           </motion.div>
-        )
-      }
+        )}
+      </div>
     </div>
   );
 };
