@@ -6,14 +6,14 @@ Nettsiden for Onlinefondet, er utviklet med **Next.js 15**, **App Router**, **Pr
 
 - **Admin-panel** (begrenset tilgang):
 
-  - Endre informasjon om medlemmer
-  - Administrere søknader
-  - Oppdatere og se fondets prestasjon
+  - [/admin](https://onlinefondet.no/admin) Panel for admin dashboardet
+  - [/admin/portfolio](https://onlinefondet.no/admin/portfolio) Oversikt over verdien av porteføljen over tid, samt mulighet for å lege til verdier av porteføljen på en gitt dato.
+  - [/admin/members](https://onlinefondet.no/admin/members) Oversikt over alle medlemmer, med mulighet for å legge til eller redigere info om medlemmer
+  - [/admin/applications](https://onlinefondet.no/admin/applications) Administrere søknader sendt til fond og legge til aktuelle vedlegg
+  - [/admin/composition](https://onlinefondet.no/admin/composition) Administrere fondets sammensetning
+
 ![image](https://github.com/user-attachments/assets/fbd1f016-2f5a-4a44-9ac6-e5ffa7189b4e)
 ![image](https://github.com/user-attachments/assets/71a17955-a4bf-474c-93eb-60645611f1e3)
-
-
-  
 
 - **Offentlige sider**:
   - [/](https://onlinefondet.no/) Viser fondets sammensettning, markedsverdi og prestasjon over tid
