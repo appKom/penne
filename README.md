@@ -9,6 +9,11 @@ Nettsiden for Onlinefondet, er utviklet med **Next.js 15**, **App Router**, **Pr
   - Endre informasjon om medlemmer
   - Administrere søknader
   - Oppdatere og se fondets prestasjon
+![image](https://github.com/user-attachments/assets/fbd1f016-2f5a-4a44-9ac6-e5ffa7189b4e)
+![image](https://github.com/user-attachments/assets/71a17955-a4bf-474c-93eb-60645611f1e3)
+
+
+  
 
 - **Offentlige sider**:
   - [/](https://onlinefondet.no/) Viser fondets sammensettning, markedsverdi og prestasjon over tid
