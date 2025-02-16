@@ -1,6 +1,46 @@
-# Penne
+# Onlinefondet (Penne)
 
-TODO: description
+Nettsiden for Onlinefondet, er utviklet med **Next.js 15**, **App Router**, **Prisma** for ORM, **PostgreSQL** som database og **Supabase Storage** for lagring av bilder og dokumenter
+
+## Innhold
+
+- [Funksjonalitet](#funksjonalitet)
+- [Teknisk oversikt](#teknisk-oversikt)
+- [Komme i gang](#komme-i-gang)
+  - [Krav](#krav)
+  - [Installasjon](#installasjon)
+- [Oppsett av miljøvariabler](#oppsett-av-miljøvariabler)
+- [Struktur](#struktur)
+- [Utvikling](#utvikling)
+- [Deployment](#deployment)
+- [Lisens](#lisens)
+
+---
+
+## Funksjonalitet
+
+- **Admin-panel** (begrenset tilgang):
+
+  - Endre informasjon om medlemmer
+  - Administrere søknader
+  - Oppdatere og se fondets prestasjon
+
+- **Offentlige sider**:
+  - [/](https://onlinefondet.no/) Viser fondets sammensettning, markedsverdi og prestasjon over tid
+  - [/styret](https://onlinefondet.no/) Viser fondet aktive og tidligere medlemmer
+  - [/vedteker](https://onlinefondet.no/) Viser fondets vedtekter
+  - [/soknad](https://onlinefondet.no/soknad) Se info om søknader og tidligere søknader til fondet
+
+---
+
+## Teknisk oversikt
+
+- **Next.js 15**: React-rammeverk.
+- **Prisma**: ORM (Object-Relational Mapping) for å håndtere databasen.
+- **PostgreSQL**: Databasen som lagrer data om medlemmer, søknader og fondets prestasjon.
+- **Supabase Storage**: Lagring av eventuelle filer/bilder knyttet til medlemmer eller annet innhold.
+
+---
 
 ## Getting Started
 
