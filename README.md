@@ -2,21 +2,6 @@
 
 Nettsiden for Onlinefondet, er utviklet med **Next.js 15**, **App Router**, **Prisma** for ORM, **PostgreSQL** som database og **Supabase Storage** for lagring av bilder og dokumenter
 
-## Innhold
-
-- [Funksjonalitet](#funksjonalitet)
-- [Teknisk oversikt](#teknisk-oversikt)
-- [Komme i gang](#komme-i-gang)
-  - [Krav](#krav)
-  - [Installasjon](#installasjon)
-- [Oppsett av miljøvariabler](#oppsett-av-miljøvariabler)
-- [Struktur](#struktur)
-- [Utvikling](#utvikling)
-- [Deployment](#deployment)
-- [Lisens](#lisens)
-
----
-
 ## Funksjonalitet
 
 - **Admin-panel** (begrenset tilgang):
