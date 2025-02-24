@@ -30,7 +30,7 @@ const ApplicationCard = ({ application }: Props) => {
               <X className="size-4" />
             )}
 
-            {application.approved ? 'Godkjent' : 'Ikke godkjent'}
+            {application.approved ? 'Innvilget' : 'Ikke innvilget'}
           </span>
         </div>
       </div>
