@@ -1,5 +1,4 @@
 import ApplicationCard, { SkeletonApplication } from './ApplicationCard';
-import { ApplicationType } from '@/lib/types';
 import { prisma } from '@/lib/prisma';
 
 export const revalidate = 36000;
@@ -16,7 +15,7 @@ const FondApplications = async () => {
       <h1 className="mb-4 text-2xl font-semibold">Søknader til fondet</h1>
 
       {applications
-        ? applications.map((application: ApplicationType) => (
+        ? applications.map((application) => (
             <ApplicationCard key={application.id} application={application} />
           ))
         : Array.from({ length: 2 }).map((_, index) => (
