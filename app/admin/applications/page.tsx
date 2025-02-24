@@ -13,6 +13,7 @@ import Table from '@/components/form/Table';
 
 import { ApplicationType } from '@/lib/types';
 import { formatDateNorwegian } from '@/lib/dateUtils';
+import Checkbox from '@/components/form/Checkbox';
 
 const ApplicationsPage = () => {
   const [applications, setApplications] = useState<ApplicationType[]>([]);
@@ -26,6 +27,7 @@ const ApplicationsPage = () => {
   const [recipient, setRecipient] = useState('');
   const [dateApplied, setDateApplied] = useState<Date | undefined>();
   const [dateGranted, setDateGranted] = useState<Date | undefined>();
+  const [approved, setApproved] = useState<boolean>(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [attachment, setAttachment] = useState<File | null>(null);
@@ -67,6 +69,7 @@ const ApplicationsPage = () => {
     setAttachment(null);
     setAttachmentPreview(null);
     setEditingApplication(null);
+    setApproved(false);
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -81,6 +84,7 @@ const ApplicationsPage = () => {
     formData.append('recipient', recipient);
     formData.append('dateApplied', dateApplied?.toISOString() || '');
     formData.append('dateGranted', dateGranted?.toISOString() || '');
+    formData.append('approved', approved ? 'true' : 'false');
     if (attachment) {
       formData.append('attachment', attachment);
     }
@@ -133,6 +137,7 @@ const ApplicationsPage = () => {
     setGrantedAmount(application.grantedAmount);
     setAmountApplied(application.amountApplied);
     setRecipient(application.recipient);
+    setApproved(application.approved);
     setDateApplied(
       application.dateApplied ? new Date(application.dateApplied) : undefined,
     );
@@ -218,6 +223,11 @@ const ApplicationsPage = () => {
         formatDateNorwegian(item.dateGranted),
     },
     {
+      header: 'Godkjent',
+      accessor: 'approved' as keyof ApplicationType,
+      renderCell: (item: ApplicationType) => (item.approved ? 'Ja' : 'Nei'),
+    },
+    {
       header: 'Vedlegg',
       accessor: 'attachment' as keyof ApplicationType,
       renderCell: (application: ApplicationType) => {
@@ -298,6 +308,13 @@ const ApplicationsPage = () => {
           label="Søkt Beløp"
           value={amountApplied}
           onChange={(e) => setAmountApplied(parseFloat(e.target.value))}
+        />
+
+        <Checkbox
+          id="approved"
+          label="Godkjent"
+          checked={approved}
+          onChange={(e) => setApproved(e.target.checked)}
         />
 
         {attachmentPreview && (

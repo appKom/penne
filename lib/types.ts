@@ -20,6 +20,7 @@ export type ApplicationType = {
   dateApplied: Date;
   dateGranted: Date;
   attachment: string | null;
+  approved: boolean;
 };
 
 export type CompositionType = {

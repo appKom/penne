@@ -34,6 +34,7 @@ model Application {
   dateApplied   DateTime
   dateGranted   DateTime
   attachment    String?
+  approved      Boolean  @default(true)
 }
 
 model Composition {

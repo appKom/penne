@@ -46,6 +46,8 @@ export const POST = async (request: Request) => {
     const dateGranted = new Date(formData.get('dateGranted') as string);
     const description = formData.get('description') as string;
 
+    const approved = formData.get('approved') === 'true';
+
     const attachment = formData.get('attachment') as File | null;
 
     let attachmentHref = '';
@@ -96,6 +98,7 @@ export const POST = async (request: Request) => {
         dateGranted,
         description,
         attachment: attachmentHref,
+        approved,
       },
     });
 
@@ -166,8 +169,7 @@ export const PUT = async (request: Request) => {
     const dateGranted = new Date(formData.get('dateGranted') as string);
     const attachment = formData.get('attachment') as File | null;
     const description = formData.get('description') as string | null;
-
-    console.log(attachment);
+    const approved = formData.get('approved') === 'true';
 
     if (!id) {
       return NextResponse.json(
@@ -229,6 +231,7 @@ export const PUT = async (request: Request) => {
       dateGranted: Date;
       description?: string;
       attachment?: string;
+      approved: boolean;
     }
 
     const updateData: UpdateData = {
@@ -238,6 +241,7 @@ export const PUT = async (request: Request) => {
       recipient,
       dateApplied,
       dateGranted,
+      approved,
     };
 
     if (description) {
