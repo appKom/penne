@@ -223,7 +223,7 @@ const ApplicationsPage = () => {
         formatDateNorwegian(item.dateGranted),
     },
     {
-      header: 'Godkjent',
+      header: 'Innvilget',
       accessor: 'approved' as keyof ApplicationType,
       renderCell: (item: ApplicationType) => (item.approved ? 'Ja' : 'Nei'),
     },
@@ -312,7 +312,7 @@ const ApplicationsPage = () => {
 
         <Checkbox
           id="approved"
-          label="Godkjent"
+          label="Er søknaden innvilget?"
           checked={approved}
           onChange={(e) => setApproved(e.target.checked)}
         />
