@@ -63,17 +63,6 @@ const VedtekterPage = () => {
     });
   };
 
-  const SkeletonLoader = () => (
-    <div className="space-y-4 animate-pulse mt-8">
-      {[...Array(22)].map((_, index) => (
-        <div
-          key={index}
-          className={`h-4 bg-gray-700 rounded w-${['full', '5/6', '4/5', '3/4'][index % 4]}`}
-        ></div>
-      ))}
-    </div>
-  );
-
   const replaceLinks = (content: string) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(content, 'text/html');
@@ -81,12 +70,9 @@ const VedtekterPage = () => {
 
     links.forEach((link) => {
       if (link.hash) {
-        const targetId = link.hash.slice(1);
-        const newLink = document.createElement('span');
-        newLink.innerHTML = link.innerHTML;
-        newLink.className = 'cursor-pointer text-blue-400 hover:underline';
-        newLink.setAttribute('data-target', targetId);
-        link.parentNode?.replaceChild(newLink, link);
+        const targetId = decodeURIComponent(link.hash.substring(1));
+        link.setAttribute('data-target', targetId);
+        link.classList.add('toc-link');
       }
     });
 
@@ -142,5 +128,16 @@ const VedtekterPage = () => {
     </div>
   );
 };
+
+const SkeletonLoader = () => (
+  <div className="space-y-4 animate-pulse mt-8">
+    {[...Array(22)].map((_, index) => (
+      <div
+        key={index}
+        className={`h-4 bg-gray-700 rounded w-${['full', '5/6', '4/5', '3/4'][index % 4]}`}
+      ></div>
+    ))}
+  </div>
+);
 
 export default VedtekterPage;
