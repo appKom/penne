@@ -24,16 +24,12 @@ const VedtekterPage = () => {
         const convertedHtml = asciidoctor.convert(vedtekter, {
           attributes: {
             toc: 'left',
+            'toc-title': '',
             attributes: 'allow-uri-read',
           },
         }) as string;
 
-        const cleanedHtml = convertedHtml.replace(
-          '<div id="toctitle">Table of Contents</div>',
-          '',
-        );
-
-        setHtml(cleanedHtml);
+        setHtml(convertedHtml);
       } catch (error) {
         console.error('Error fetching or converting vedtekter:', error);
         setError(
