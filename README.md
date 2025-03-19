@@ -38,7 +38,7 @@ Nettsiden for Onlinefondet, er utviklet med **Next.js 15**, **App Router**, **Pr
 
 ```bash
 git https://github.com/appKom/penne.git
-cd onlinefondet
+cd penne
 ```
 
 ### 2. Install dependencies
