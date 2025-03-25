@@ -37,7 +37,7 @@ Nettsiden for Onlinefondet, er utviklet med **Next.js 15**, **App Router**, **Pr
 ### 1. Clone the repository
 
 ```bash
-git https://github.com/appKom/penne.git
+git clone https://github.com/appKom/penne.git
 cd penne
 ```
 
