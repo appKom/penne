@@ -5,7 +5,7 @@ import { ArrowRightIcon } from 'lucide-react';
 const email = 'fond@online.ntnu.no';
 
 const applicationContent = [
-  'Beskriv dere selv',
+  'Beskrivelse av dere selv',
   'Hva midlene skal brukes til',
   'Hvordan midlene går onlinere til gode',
   'Aktivitetsplan',
