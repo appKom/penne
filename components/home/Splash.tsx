@@ -1,6 +1,7 @@
 import { formatDateNorwegian } from '@/lib/dateUtils';
 import { IncrementingNumber } from './IncrementingNumber';
 import { prisma } from '@/lib/prisma';
+import { DeadlineCountdown } from './DeadlineCountdown';
 
 const Splash = async () => {
   const performance = await prisma.performance.findFirst({
@@ -15,7 +16,7 @@ const Splash = async () => {
 
   return (
     <div className="flex items-center justify-center w-full h-screen text-center">
-      <div className="pb-48">
+      <div className="pb-48 space-y-8">
         <h1 className="text-6xl sm:text-8xl font-bold">Onlinefondet</h1>
         <h2 className="text-5xl sm:text-6xl text-center text-gray-200">
           <IncrementingNumber
@@ -27,6 +28,7 @@ const Splash = async () => {
         <p className="text-gray-500">
           Markedsverdi pr. {formatDateNorwegian(performance.date)}
         </p>
+        <DeadlineCountdown />
       </div>
     </div>
   );
