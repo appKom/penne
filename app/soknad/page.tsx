@@ -30,7 +30,7 @@ const applicationContent = {
 const ApplicationPage = () => (
   <div className="max-w-5xl px-4 py-10 mx-auto sm:py-20 sm:px-6 lg:px-8">
     <h1 className="mb-8 text-5xl font-extrabold tracking-tight text-center">
-      Søke om støtte
+      Søknader til Onlines fond
     </h1>
 
     <div className="space-y-12">
