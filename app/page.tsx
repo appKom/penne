@@ -1,7 +1,11 @@
 import PerformanceDisplay from '@/components/graphs/PerformanceDisplay';
 import ScrollDownIcon from '@/components/home/ScrollDownIcon';
 import Splash from '@/components/home/Splash';
-import { homeText } from '@/lib/content';
+
+export const homeText = [
+  'Et fond er en kollektiv investering der flere går sammen for å plassere penger i verdipapirmarkedet. Dette kalles ofte kollektiv sparing, og man kan se for seg at et fond er en kurv med investeringer. Online har et slikt fond, noe som betyr at Online investerer i ulike verdipapirer.',
+  'Under ser du en oversikt over utviklingen av Onlinefondet. Grafen inkluderer også en oversikt over OSEBX, som er hovedindeksen på Oslo Børs. Disse grafene kan sammenlignes for å se hvordan Onlines fond har utviklet seg i forhold til hovedindeksen.',
+];
 
 export const revalidate = 36000;
 
