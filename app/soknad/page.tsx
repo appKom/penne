@@ -1,18 +1,20 @@
 import FondApplications from '@/components/Submissions/FondApplications';
+import { APPLICATION_DATES } from '@/lib/constants';
 import { ArrowRightIcon } from 'lucide-react';
 
+const formatDateNorwegian = (month: number, day: number) => {
+  const date = new Date(0, month, day); // year 0 is arbitrary here
+  return date.toLocaleDateString("nb-NO", { day: "numeric", month: "long" });
+};
+
 const applicationContent = {
+  title: 'Søknader til Onlines fond',
   intro: [
     'Alle Onlines medlemmer kan søke Onlines fond om penger. Søknaden skal være velbegrunnet og ha som hensikt å komme flest mulig medlemmer av Online til gode. For at Fondstyret skal kunne ta en god avgjørelse trenger vi en helhetlig forståelse av hvem dere er og hva dere gjør. Skriv heller litt for mye enn litt for lite.',
     'Søknader fra og med 10 000 kr til og med 100 000 kr kan behandles av Fondstyret, og godkjennes med alminnelig flertall. Søknader på større beløp enn dette skal behandles på fondets generalforsamling, eventuelt på ekstraordinær generalforsamling dersom søknadens omstendigheter krever svar før neste ordinære generalforsamling.',
     'Fondstyret behandler søknader fire ganger i året. Fristene for å sende inn søknad er:',
   ],
-  deadlines: [
-    '15. september',
-    '15. november',
-    '15. februar',
-    '15. april',
-  ],
+  deadlines: APPLICATION_DATES.map(({ month, day }) => formatDateNorwegian(month, day)),
   outro: [
     'Fondstyret skal i utgangspunktet fatte vedtak innen 14 dager etter hver søknadsfrist. Dersom det foreligger særlige akutte søknader, kan Fondstyret beslutte å behandle disse fortløpende uten å avvente ordinære frister.',
     'Gjerne ta kontakt med oss i Fondstyret dersom du lurer på noe angående søknader til fondet!',
@@ -29,9 +31,7 @@ const applicationContent = {
 
 const ApplicationPage = () => (
   <div className="max-w-5xl px-4 py-10 mx-auto sm:py-20 sm:px-6 lg:px-8">
-    <h1 className="mb-8 text-5xl font-extrabold tracking-tight text-center">
-      Søknader til Onlines fond
-    </h1>
+    <h1 className="mb-8 text-5xl font-extrabold tracking-tight text-center">{applicationContent.title}</h1>
 
     <div className="space-y-12">
       <section>
