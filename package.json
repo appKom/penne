@@ -23,7 +23,7 @@
     "hamburger-react": "^2.5.1",
     "lucide-react": "^0.441.0",
     "next": "15.2.4",
-    "next-auth": "^4.24.10",
+    "next-auth": "^4.24.12",
     "prettier": "^3.3.3",
     "prisma": "^5.20.0",
     "react": "^18",
