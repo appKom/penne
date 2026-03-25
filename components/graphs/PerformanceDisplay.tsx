@@ -60,7 +60,7 @@ const PerformanceDisplay = async () => {
           Fondets prestasjon over tid
         </div>
         {onlineFondetData ? (
-          <LineChart onlineFondet={onlineFondetData} osebxData={osebxData} />
+          <LineChart onlineFondet={onlineFondetData} osebxData={osebxData ?? []} />
         ) : (
           <div className="px-5">
             <div className="flex flex-col items-center justify-center gap-4 text-center w-full h-full animate-pulse">
